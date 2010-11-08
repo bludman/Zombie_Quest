@@ -27,10 +27,8 @@ package com.zombiequest
 		{
 			_startButton = new FlxButton(50, 50, loadStartLevel);
 			var startText:FlxText = new FlxText(0, 0, 100, "Start");
-			var startHighText:FlxText = new FlxText(0, 0, 100,"Start");
 			startText.color = 0x000000;
-			startHighText.color = startText.color;
-			_startButton.loadText(startText, startHighText);
+			_startButton.loadText(startText);
 			this.add(_startButton);
 			
 		}
