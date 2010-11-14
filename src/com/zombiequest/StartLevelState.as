@@ -1,6 +1,7 @@
 package com.zombiequest 
 {
 	import org.flixel.*;
+	import org.flixel.data.FlxAnim;
 	
 	/**
 	 * ...
@@ -9,14 +10,17 @@ package com.zombiequest
 	public class StartLevelState extends FlxState 
 	{
 		private var _player:Player;
+		private var enemy:Enemy;
 		private var _healthBar:FlxSprite;
 		private var level:MapTest;
 		private var coin:Coin;
+		private var bulletGroup:FlxGroup;
 		override public function create():void
 		{
 			bgColor = 0xD3D3D3;
 			_player = new Player();
 			_player.x += 30;
+			add(_player);
 			level = new Level_LevelOne(true, onAddCoin);
 			
 			//Set up the camera
@@ -24,8 +28,17 @@ package com.zombiequest
 			FlxG.followAdjust(.5, .2);
 			FlxG.followBounds(level.mainLayer.left + 1, level.mainLayer.top + 1, level.mainLayer.right - 1, level.mainLayer.bottom - 1);
 			FlxU.setWorldBounds(level.mainLayer.left, level.mainLayer.top, level.mainLayer.width, level.mainLayer.height);
-			//Create the HUD
-			add(_player);
+			
+			//Add Enemy
+			bulletGroup = new FlxGroup();
+			
+			enemy = new Enemy(300, 300, _player, bulletGroup);
+			
+			add(enemy);
+			
+			//Add Bullet
+			add(bulletGroup);
+			
 			createHud();
 			FlxG.mouse.hide();
 			super.create();
@@ -34,10 +47,18 @@ package com.zombiequest
 		override public function update():void
 		{
 			super.update();
-			level.mainLayer.collide(_player);
 			if (FlxU.overlap(_player, coin, doNothing))
 			{
 				trace("you got the item!");
+			}
+			shoot();
+			_player.collide(enemy);
+			level.mainLayer.collide(_player);
+			level.mainLayer.collide(enemy);
+			FlxU.overlap(_player, bulletGroup, playerGotShot);
+			FlxU.overlap(bulletGroup, level.mainLayer, removeBullet);
+			if (FlxG.keys.justPressed("SPACE") ){
+				FlxU.overlap(_player.overlap, enemy, attackEnemy);
 			}
 		}
 		private function createHud():void
@@ -62,6 +83,40 @@ package com.zombiequest
 		protected function doNothing(... rest):Boolean
 		{
 			return true;
+		}
+		
+		protected function attackEnemy(overlap:Object, e:Object):void
+		{
+			var enemy:Enemy = e as Enemy;
+			enemy.health -= _player.damage;
+			if (enemy.health <= 0) {
+				enemy.kill();
+			}
+		}
+		
+		protected function playerGotShot(p:FlxObject, b:FlxObject):void
+		{
+			_healthBar.scale.x -= 30;
+			if (_healthBar.scale.x <= 0)
+			{
+				_healthBar.scale.x = 0;
+				_player.kill();
+			}
+			b.kill();
+		}
+		
+		protected function removeBullet(b:FlxObject, layer:FlxObject):void
+		{
+			b.kill();
+		}
+		
+		protected function shoot():void
+		{
+			if (enemy.lastShot < FlxG.elapsed - 1)
+			{
+				bulletGroup.add(new Bullet(enemy.x, enemy.y, enemy.angle));
+				enemy.lastShot = FlxG.elapsed
+			}
 		}
 	}
 
