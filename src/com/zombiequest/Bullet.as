@@ -10,15 +10,15 @@ package com.zombiequest
 		[Embed(source="../../../assets/png/bullet.png")]
 		private var ImgBullet:Class;
 		private var speed:Number = 25;
-		public function Bullet(X:Number, Y:Number, angle:Number) 
+		public function Bullet(p:FlxPoint, angle:Number)
 		{
-			super(x, y, ImgBullet);
+			super(p.x, p.y, ImgBullet);
 			this.angle = angle;
 		}
 		public override function update():void
 		{
-			this.x += speed * Math.cos(Main.degToRad(angle));
-			this.y += speed * Math.sin(Main.degToRad(angle));
+			velocity.x = speed * Math.cos(MathU.degToRad(angle));
+			velocity.y = speed * Math.sin(MathU.degToRad(angle));
 			super.update();
 		}
 		

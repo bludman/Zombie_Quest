@@ -32,11 +32,9 @@ package com.zombiequest
 			//Add Enemy
 			bulletGroup = new FlxGroup();
 			
-			enemy = new Enemy(300, 300, _player, bulletGroup);
+			enemy = new Enemy(300, 300, _player);
 			
 			add(enemy);
-			
-			//Add Bullet
 			add(bulletGroup);
 			
 			createHud();
@@ -46,12 +44,6 @@ package com.zombiequest
 		
 		override public function update():void
 		{
-			super.update();
-			if (FlxU.overlap(_player, coin, doNothing))
-			{
-				trace("you got the item!");
-			}
-			shoot();
 			_player.collide(enemy);
 			level.mainLayer.collide(_player);
 			level.mainLayer.collide(enemy);
@@ -59,6 +51,12 @@ package com.zombiequest
 			FlxU.overlap(bulletGroup, level.mainLayer, removeBullet);
 			if (FlxG.keys.justPressed("SPACE") ){
 				FlxU.overlap(_player.overlap, enemy, attackEnemy);
+			}
+			enemyShoot();
+			super.update();
+			if (FlxU.overlap(_player, coin, doNothing))
+			{
+				trace("you got the item!");
 			}
 		}
 		private function createHud():void
@@ -107,17 +105,24 @@ package com.zombiequest
 		
 		protected function removeBullet(b:FlxObject, layer:FlxObject):void
 		{
-			b.kill();
-		}
-		
-		protected function shoot():void
-		{
-			if (enemy.lastShot < FlxG.elapsed - 1)
-			{
-				bulletGroup.add(new Bullet(enemy.x, enemy.y, enemy.angle));
-				enemy.lastShot = FlxG.elapsed
+			if (b is Bullet && level.masterLayer.collide(b) ){
+				b.kill();
 			}
 		}
+		
+		protected function enemyShoot():void
+		{
+			//eventually should be done with all the enemies
+			
+			if (enemy.following) {
+				enemy.lastShot += FlxG.elapsed;
+				if(enemy.lastShot >= 1){
+					bulletGroup.add(new Bullet(enemy.bulletSpawn(), enemy.angle));
+					enemy.lastShot = 0;
+				}
+			}
+		}
+		
 	}
 
 }
