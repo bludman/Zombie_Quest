@@ -48,7 +48,7 @@ package com.zombiequest
 			level.mainLayer.collide(_player);
 			level.mainLayer.collide(enemy);
 			FlxU.overlap(_player, bulletGroup, playerGotShot);
-			FlxU.overlap(bulletGroup, level.mainLayer, removeBullet);
+			overlapBullets();
 			if (FlxG.keys.justPressed("SPACE") ){
 				FlxU.overlap(_player.overlap, enemy, attackEnemy);
 			}
@@ -103,10 +103,15 @@ package com.zombiequest
 			b.kill();
 		}
 		
-		protected function removeBullet(b:FlxObject, layer:FlxObject):void
+		protected function overlapBullets():void
 		{
-			if (b is Bullet && level.masterLayer.collide(b) ){
-				b.kill();
+			var bullets:Array = bulletGroup.members;
+			for (var i:Number = 0; i < bullets.length; i++)
+			{
+				var bullet:Bullet = bullets[i] as Bullet;
+				if (level.mainLayer.collide(bullet)) {
+					bullet.kill();
+				}
 			}
 		}
 		
@@ -114,10 +119,12 @@ package com.zombiequest
 		{
 			//eventually should be done with all the enemies
 			
-			if (enemy.following) {
+			if (enemy.following && !enemy.dead && !_player.dead) {
 				enemy.lastShot += FlxG.elapsed;
-				if(enemy.lastShot >= 1){
-					bulletGroup.add(new Bullet(enemy.bulletSpawn(), enemy.angle));
+				if (enemy.lastShot >= 1) {
+					var p:FlxPoint = enemy.bulletSpawn();
+					var a:Number = FlxU.getAngle(_player.x - p.x, _player.y - p.y);
+					bulletGroup.add(new Bullet(p, a));
 					enemy.lastShot = 0;
 				}
 			}
