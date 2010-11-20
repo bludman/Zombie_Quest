@@ -1,5 +1,8 @@
 package com.zombiequest 
 {
+	import com.zombiequest.power.DoubleDamage;
+	import com.zombiequest.power.DoubleSpeed;
+	import com.zombiequest.power.PowerEffect;
 	import org.flixel.*;
 	import org.flixel.data.FlxAnim;
 	
@@ -9,96 +12,119 @@ package com.zombiequest
 	 */
 	public class StartLevelState extends FlxState 
 	{
-		private var _player:Player;
-		private var enemy:Enemy;
-		private var _healthBar:FlxSprite;
-		private var level:MapTest;
-		private var coin:Coin;
+		private var player:Player;
+		private var enemyGroup:FlxGroup;
 		private var bulletGroup:FlxGroup;
+		private var healthBar:FlxSprite;
+		private var level:Map;
+		private var coin:Coin;
+		private var currentPower:PowerEffect;
+		private var statusText:FlxText;
+		private var statusTimer:Number = 0;
+		private var statusTimeout:Number = 10;
 		override public function create():void
 		{
-			bgColor = 0xD3D3D3;
-			_player = new Player();
-			_player.x += 30;
-			add(_player);
-			level = new Level_LevelOne(true, onAddCoin);
+			//Instantiate objects
+			player = new Player(80, 50);
+			bulletGroup = new FlxGroup();
+			enemyGroup = new FlxGroup();
+			level = new Level_LevelOne(true, onAddSprite);
+			
+			
+			//add player etc.
+			add(player);
+			add(bulletGroup);
+			add(enemyGroup);
+			
 			
 			//Set up the camera
-			FlxG.follow(_player, 2.5);
+			FlxG.follow(player, 2.5);
 			FlxG.followAdjust(.5, .2);
 			FlxG.followBounds(level.mainLayer.left + 1, level.mainLayer.top + 1, level.mainLayer.right - 1, level.mainLayer.bottom - 1);
 			FlxU.setWorldBounds(level.mainLayer.left, level.mainLayer.top, level.mainLayer.width, level.mainLayer.height);
-			
-			//Add Enemy
-			bulletGroup = new FlxGroup();
-			
-			enemy = new Enemy(300, 300, _player);
-			
-			add(enemy);
-			add(bulletGroup);
+			FlxG.mouse.hide();
 			
 			createHud();
-			FlxG.mouse.hide();
 			super.create();
 		}
 		
 		override public function update():void
 		{
-			_player.collide(enemy);
-			level.mainLayer.collide(_player);
-			level.mainLayer.collide(enemy);
-			FlxU.overlap(_player, bulletGroup, playerGotShot);
+			player.collide(enemyGroup);
+			level.mainLayer.collide(player);
+			level.mainLayer.collide(enemyGroup);
+			FlxU.overlap(player, bulletGroup, playerGotShot);
 			overlapBullets();
 			if (FlxG.keys.justPressed("SPACE") ){
-				FlxU.overlap(_player.overlap, enemy, attackEnemy);
+				FlxU.overlap(player.overlap, enemyGroup, attackEnemy);
 			}
 			enemyShoot();
+			updatePower();
 			super.update();
-			if (FlxU.overlap(_player, coin, doNothing))
-			{
-				trace("you got the item!");
-			}
+			FlxU.overlap(player, coin, gotTheCoin);
 		}
 		private function createHud():void
 		{
-			_healthBar = new FlxSprite(5, 5);
-			_healthBar.createGraphic(1, 8, 0xffff0000);
-			_healthBar.scrollFactor.x = _healthBar.scrollFactor.y = 0;
-			_healthBar.origin.x = _healthBar.origin.y = 0;
-			_healthBar.scale.x = 100;
+			healthBar = new FlxSprite(5, 5);
+			healthBar.createGraphic(1, 8, 0xffff0000);
+			healthBar.scrollFactor.x = healthBar.scrollFactor.y = 0;
+			healthBar.origin.x = healthBar.origin.y = 0;
+			healthBar.scale.x = 100;
 			
-			add(_healthBar);
+			add(healthBar);
+			statusText = new FlxText(0, 230, 320);
+			statusText.color = 0xff000000;
+			statusText.scrollFactor.x = statusText.scrollFactor.y = 0;
+			add(statusText);
 		}
 		
-		protected function onAddCoin(sprite:FlxSprite, group:FlxGroup):void
+		protected function onAddSprite(sprite:FlxSprite, group:FlxGroup):void
 		{
 			if (sprite is Coin)
 			{
 				coin = sprite as Coin;
 			}
+			if (sprite is Enemy)
+			{
+				var e:Enemy = sprite as Enemy;
+				e.player = player;
+				enemyGroup.add(sprite as Enemy);
+			}
+			
 		}
 		
-		protected function doNothing(... rest):Boolean
+		protected function gotTheCoin(...rest):void
 		{
-			return true;
+			FlxG.state = new EndState("You Won!");
 		}
 		
 		protected function attackEnemy(overlap:Object, e:Object):void
 		{
 			var enemy:Enemy = e as Enemy;
-			enemy.health -= _player.damage;
+			enemy.health -= player.damage;
 			if (enemy.health <= 0) {
 				enemy.kill();
+				if (enemy.hasPowerup) {
+					if (currentPower != null) {
+						currentPower.destroy();
+					}
+					currentPower = new DoubleSpeed();
+					currentPower.affect(player);
+					statusText.text = currentPower.flavorText();
+					statusTimer = 0;
+				}
 			}
 		}
 		
 		protected function playerGotShot(p:FlxObject, b:FlxObject):void
 		{
-			_healthBar.scale.x -= 30;
-			if (_healthBar.scale.x <= 0)
+			player.health -= 30;
+			healthBar.scale.x = player.health;
+			if (player.health <= 0)
 			{
-				_healthBar.scale.x = 0;
-				_player.kill();
+				healthBar.scale.x = 0;
+				player.kill();
+				FlxG.state = new EndState("You lost!");
 			}
 			b.kill();
 		}
@@ -117,17 +143,27 @@ package com.zombiequest
 		
 		protected function enemyShoot():void
 		{
-			//eventually should be done with all the enemies
-			
-			if (enemy.following && !enemy.dead && !_player.dead) {
-				enemy.lastShot += FlxG.elapsed;
-				if (enemy.lastShot >= 1) {
-					var p:FlxPoint = enemy.bulletSpawn();
-					var a:Number = FlxU.getAngle(_player.x - p.x, _player.y - p.y);
-					bulletGroup.add(new Bullet(p, a));
-					enemy.lastShot = 0;
+			var enemyA:Array = enemyGroup.members;
+			for each (var enemy:Enemy in enemyA) {
+				if (enemy.shooting && !enemy.dead && !player.dead) {
+					enemy.lastShot += FlxG.elapsed;
+					if (enemy.lastShot >= 1) {
+						var p:FlxPoint = enemy.bulletSpawn();
+						var a:Number = FlxU.getAngle(player.x - p.x, player.y - p.y);
+						bulletGroup.add(new Bullet(p, a));
+						enemy.lastShot = 0;
+					}
 				}
 			}
+		}
+		
+		protected function updatePower():void
+		{
+			if (currentPower == null)
+			{
+				return;
+			}
+			currentPower.update();
 		}
 		
 	}

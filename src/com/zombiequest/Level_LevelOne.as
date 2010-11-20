@@ -3,11 +3,11 @@
 package com.zombiequest
 {
 	import org.flixel.*;
-	public class Level_LevelOne extends MapTest
+	public class Level_LevelOne extends Map
 	{
 		//Embedded media...
 		[Embed(source="../../../assets/maps/mapCSV_Group1_Map2.csv", mimeType="application/octet-stream")] public var CSV_Group1Map2:Class;
-		[Embed(source="C:/Program Files/DAME/samples/SimpleClaws/data/maintiles.png")] public var Img_Group1Map2:Class;
+		[Embed(source="../../../../../../../../Program Files/DAME/samples/SimpleClaws/data/maintiles.png")] public var Img_Group1Map2:Class;
 
 		//Tilemaps
 		public var layerGroup1Map2:FlxTilemap;
@@ -20,7 +20,7 @@ package com.zombiequest
 		{
 			// Generate maps.
 			layerGroup1Map2 = new FlxTilemap;
-			layerGroup1Map2.loadMap( new CSV_Group1Map2, Img_Group1Map2, 25,25 );
+			layerGroup1Map2.loadMap( new CSV_Group1Map2, Img_Group1Map2, 32,32 );
 			layerGroup1Map2.x = 0.000000;
 			layerGroup1Map2.y = 0.000000;
 			layerGroup1Map2.scrollFactor.x = 1.000000;
@@ -45,14 +45,21 @@ package com.zombiequest
 
 			boundsMinX = 0;
 			boundsMinY = 0;
-			boundsMaxX = 500;
-			boundsMaxY = 500;
+			boundsMaxX = 640;
+			boundsMaxY = 3200;
 
 		}
 
 		override public function addSpritesForLayerGroup1Layer1(onAddCallback:Function = null):void
 		{
-			addSpriteToLayer(Coin, Group1Layer1Group , 441.500, 447.000, 0.000, false, onAddCallback );//"Coin"
+			addSpriteToLayer(Enemy, Group1Layer1Group , 118.500, 2785.500, 0.000, false, onAddCallback );//"enemyNoPowerup"
+			addSpriteToLayer(Enemy, Group1Layer1Group , 445.500, 2527.500, 0.000, false, onAddCallback );//"enemyNoPowerup"
+			addSpriteToLayer(Enemy, Group1Layer1Group , 138.500, 2157.500, 0.000, false, onAddCallback );//"enemyNoPowerup"
+			addSpriteToLayer(Enemy, Group1Layer1Group , 430.500, 1808.500, 0.000, false, onAddCallback );//"enemyNoPowerup"
+			addSpriteToLayer(Enemy, Group1Layer1Group , 117.500, 1409.500, 0.000, false, onAddCallback );//"enemyNoPowerup"
+			addSpriteToLayer(Enemy, Group1Layer1Group , 440.500, 998.500, 0.000, false, onAddCallback );//"enemyNoPowerup"
+			addSpriteToLayer(Enemy, Group1Layer1Group , 112.500, 512.500, 0.000, false, onAddCallback );//"enemyNoPowerup"
+			addSpriteToLayer(Enemy, Group1Layer1Group , 473.500, 205.500, 0.000, false, onAddCallback );//"enemyNoPowerup"
 		}
 
 

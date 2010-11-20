@@ -12,13 +12,14 @@ package com.zombiequest
 		private const turnSpeed:Number = 4;
 		private const shootRange:Number = 100;
 		private const followRange:Number = 150;
-		private var player:Player;
+		public var player:Player;
 		public var lastShot:Number;
 		public var following:Boolean = false;
 		public var shooting:Boolean = false;
+		public var hasPowerup:Boolean = true;
 		[Embed(source = "../../../assets/png/Enemy.png")] 
 		private var ImgEnemy:Class;
-		public function Enemy(X:Number, Y:Number, player:Player) 
+		public function Enemy(X:Number, Y:Number, player:Player = null, hasPowerup:Boolean = false) 
 		{
 			super(X, Y, ImgEnemy);
 			this.player = player;
@@ -27,6 +28,7 @@ package com.zombiequest
 			width = 20;
 			height = 20;
 			lastShot = 0;
+			this.hasPowerup = hasPowerup;
 		}
 		public override function update():void
 		{
@@ -35,15 +37,20 @@ package com.zombiequest
 				velocity.x = 0;
 				velocity.y = 0;
 				following = false;
-			} else if(distance < followRange && distance > shootRange){ 
-				this.angle = FlxU.getAngle(player.x - this.x, player.y - this.y);
-				velocity.x = speed * Math.cos(MathU.degToRad(this.angle));
-				velocity.y = speed * Math.sin(MathU.degToRad(this.angle));
-				following = true;
+				shooting = false;
 			} else {
-				shooting = true;
-				velocity.x = 0;
-				velocity.y = 0;
+				this.angle = FlxU.getAngle(player.x - this.x, player.y - this.y);
+				if(distance < followRange && distance > shootRange){ 
+					velocity.x = speed * Math.cos(MathU.degToRad(this.angle));
+					velocity.y = speed * Math.sin(MathU.degToRad(this.angle));
+					shooting = false;
+					following = true;
+				}
+				else {
+					shooting = true;
+					velocity.x = 0;
+					velocity.y = 0;
+				}
 			}
 			super.update();
 		}

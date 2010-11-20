@@ -3,7 +3,7 @@
 package com.zombiequest
 {
 	import org.flixel.*;
-	public class MapTest
+	public class Map
 	{
 		public var masterLayer:FlxGroup = new FlxGroup;
 
@@ -14,7 +14,7 @@ package com.zombiequest
 		public var boundsMaxX:int;
 		public var boundsMaxY:int;
 
-		public function MapTest() { }
+		public function Map() { }
 
 		public function addSpriteToLayer(type:Class, group:FlxGroup, x:Number, y:Number, angle:Number, flipped:Boolean, onAddCallback:Function = null):FlxSprite
 		{

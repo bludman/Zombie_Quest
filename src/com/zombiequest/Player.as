@@ -15,11 +15,12 @@ package com.zombiequest
 		private var attackDistance:Number = 10;
 		private var attackRange:FlxSprite = new FlxSprite(0, 0);
 		public var damage:Number = 50;
-		public function Player():void
+		public function Player(x:Number, y:Number):void
 		{
-			super(50, 50, ImgPlayer);
+			super(x, y, ImgPlayer);
 			attackRange.height = this.height;
 			attackRange.width = this.width;
+			health = 100;
 		}		
 		override public function update():void
 		{
@@ -65,6 +66,14 @@ package com.zombiequest
 			attackRange.angle = this.angle;
 			attackRange.x = x + 10 * Math.cos(MathU.degToRad(angle));
 			attackRange.y = y + 10 * Math.sin(MathU.degToRad(angle));
+		}
+		
+		public function set setSpeed(s:Number):void {
+			this.speed = s;
+			this.strafeSpeed = this.speed / 2;
+		}
+		public function get getSpeed():Number {
+			return this.speed;
 		}
 	}
 

@@ -1,0 +1,227 @@
+<?xml version="1.0" encoding="utf-8"?>
+<project>
+  <version>1.1.7</version>
+  <bgColor>0x000000</bgColor>
+  <spriteEntries>
+    <tileEntry name="enemyNoPowerup" idx="1" className="Enemy" image="assets/png/enemy.png" offsetX="0" offsetY="0" width="31" height="33" anchorX="0" anchorY="0" boundsX="0" boundsY="0" boundsWidth="31" boundsHeight="33" constructor="%xpos%, %ypos%, null, false" exports="true" canScale="true" canRotate="true"/>
+  </spriteEntries>
+  <layers>
+    <group name="Group1" xScroll="1" yScroll="1" visible="true" open="true" locked="false" exports="true">
+      <spritelayer name="Layer1" xScroll="1" yScroll="1" visible="true" locked="false" exports="true">
+        <sprite guid="0C546817-CF80-95E7-B174-D8CBF49F1B08" idx="1" x="118.5" y="2785.5" z="1" angle="0" scaleX="1" scaleY="1" flipped="false"/>
+        <sprite guid="3F4E4A32-785E-6F94-5509-AA642251C572" idx="1" x="445.5" y="2527.5" z="1" angle="0" scaleX="1" scaleY="1" flipped="false"/>
+        <sprite guid="320675B3-13BC-3A9B-A73C-18BEA44427B8" idx="1" x="138.5" y="2157.5" z="1" angle="0" scaleX="1" scaleY="1" flipped="false"/>
+        <sprite guid="281C3058-BE01-B236-CF45-2016079983DA" idx="1" x="430.5" y="1808.5" z="1" angle="0" scaleX="1" scaleY="1" flipped="false"/>
+        <sprite guid="46F5BBC3-8552-EB75-E95B-F46ECAC59DA6" idx="1" x="117.5" y="1409.5" z="1" angle="0" scaleX="1" scaleY="1" flipped="false"/>
+        <sprite guid="7DDA129A-AC2C-460B-C342-46426C0CF73A" idx="1" x="440.5" y="998.5" z="1" angle="0" scaleX="1" scaleY="1" flipped="false"/>
+        <sprite guid="D4FF235C-BED4-18C9-6695-1868AD3B0CA7" idx="1" x="112.5" y="512.5" z="1" angle="0" scaleX="1" scaleY="1" flipped="false"/>
+        <sprite guid="AB8FB17E-327D-536D-38A7-68CE5F4DB15C" idx="1" x="473.5" y="205.5" z="1" angle="0" scaleX="1" scaleY="1" flipped="false"/>
+      </spritelayer>
+      <maplayer name="Map2" xScroll="1" yScroll="1" x="0" y="0" width="20" height="100" tileset="../../../../../Program Files/DAME/samples/SimpleClaws/data/maintiles.png" tileWidth="32" tileHeight="32" visible="true" hasHits="false" drawIdx="1" collideIdx="1" eraseIdx="0" locked="false" exports="true">
+        <row>4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4</row>
+        <row>4,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,4</row>
+        <row>4,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,4</row>
+        <row>4,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,4</row>
+        <row>4,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,4</row>
+        <row>4,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,4</row>
+        <row>4,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,4</row>
+        <row>4,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,4</row>
+        <row>4,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,4</row>
+        <row>4,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,4</row>
+        <row>4,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,4</row>
+        <row>4,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,4</row>
+        <row>4,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,4</row>
+        <row>4,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,4</row>
+        <row>4,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,4</row>
+        <row>4,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,4</row>
+        <row>4,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,4</row>
+        <row>4,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,4</row>
+        <row>4,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,4</row>
+        <row>4,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,4</row>
+        <row>4,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,4</row>
+        <row>4,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,4</row>
+        <row>4,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,4</row>
+        <row>4,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,4</row>
+        <row>4,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,4</row>
+        <row>4,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,4</row>
+        <row>4,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,4</row>
+        <row>4,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,4</row>
+        <row>4,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,4</row>
+        <row>4,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,4</row>
+        <row>4,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,4</row>
+        <row>4,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,4</row>
+        <row>4,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,5</row>
+        <row>4,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,5</row>
+        <row>4,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,5</row>
+        <row>4,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,5</row>
+        <row>4,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,5</row>
+        <row>4,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,5</row>
+        <row>4,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,5</row>
+        <row>4,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,5</row>
+        <row>4,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,5</row>
+        <row>4,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,5</row>
+        <row>4,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,5</row>
+        <row>4,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,5</row>
+        <row>4,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,5</row>
+        <row>4,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,5</row>
+        <row>4,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,5</row>
+        <row>4,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,5</row>
+        <row>4,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,5</row>
+        <row>4,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,5</row>
+        <row>4,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,5</row>
+        <row>4,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,5</row>
+        <row>4,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,5</row>
+        <row>4,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,5</row>
+        <row>4,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,5</row>
+        <row>4,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,5</row>
+        <row>4,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,5</row>
+        <row>4,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,5</row>
+        <row>4,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,5</row>
+        <row>4,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,5</row>
+        <row>4,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,5</row>
+        <row>4,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,5</row>
+        <row>4,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,5</row>
+        <row>4,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,5</row>
+        <row>4,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,5</row>
+        <row>4,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,5</row>
+        <row>4,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,5</row>
+        <row>4,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,5</row>
+        <row>4,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,5</row>
+        <row>4,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,5</row>
+        <row>4,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,5</row>
+        <row>4,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,5</row>
+        <row>4,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,5</row>
+        <row>4,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,5</row>
+        <row>4,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,4</row>
+        <row>4,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,4</row>
+        <row>4,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,4</row>
+        <row>4,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,4</row>
+        <row>4,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,4</row>
+        <row>4,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,4</row>
+        <row>4,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,4</row>
+        <row>4,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,4</row>
+        <row>4,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,4</row>
+        <row>4,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,4</row>
+        <row>4,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,4</row>
+        <row>4,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,4</row>
+        <row>4,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,4</row>
+        <row>4,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,4</row>
+        <row>4,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,4</row>
+        <row>4,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,4</row>
+        <row>4,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,4</row>
+        <row>4,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,4</row>
+        <row>4,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,4</row>
+        <row>4,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,4</row>
+        <row>4,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,4</row>
+        <row>4,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,4</row>
+        <row>4,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,4</row>
+        <row>4,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,4</row>
+        <row>4,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,4</row>
+        <row>4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4</row>
+      </maplayer>
+    </group>
+  </layers>
+  <tileMatrix currentMatrix="0" rows="3" cols="3" randomizeMiddle="true" ignoreClear="false" ignoreMapEdges="true" allowSpecialTiles="false" tileset="">
+    <row>
+      <tile>0</tile>
+      <tile>0</tile>
+      <tile>0</tile>
+    </row>
+    <row>
+      <tile>0</tile>
+      <tile>0</tile>
+      <tile>0</tile>
+    </row>
+    <row>
+      <tile>0</tile>
+      <tile>0</tile>
+      <tile>0</tile>
+    </row>
+    <specialConnections>
+      <sets>
+        <connections name="Single Inside Corners">
+          <entry green="0x1111111" red="0x10000000"/>
+          <entry green="0x11011111" red="0x100000"/>
+          <entry green="0x11111110" red="0x1"/>
+          <entry green="0x11111011" red="0x100"/>
+        </connections>
+        <connections name="Double Inside Corners">
+          <entry green="0x1011111" red="0x10100000"/>
+          <entry green="0x11011110" red="0x100001"/>
+          <entry green="0x11111010" red="0x101"/>
+          <entry green="0x1111011" red="0x10000100"/>
+        </connections>
+        <connections name="Triple Inside Corners">
+          <entry green="0x1011011" red="0x10100100"/>
+          <entry green="0x1011110" red="0x10100001"/>
+          <entry green="0x11011010" red="0x100101"/>
+          <entry green="0x1111010" red="0x10000101"/>
+        </connections>
+        <connections name="Quad Inside Corners">
+          <entry green="0x1011010" red="0x10100101"/>
+          <entry green="0x0" red="0x0"/>
+          <entry green="0x0" red="0x0"/>
+          <entry green="0x0" red="0x0"/>
+        </connections>
+        <connections name="Double Outside Corners">
+          <entry green="0x10" red="0x1011000"/>
+          <entry green="0x1000" red="0x1010010"/>
+          <entry green="0x1000000" red="0x11010"/>
+          <entry green="0x10000" red="0x1001010"/>
+        </connections>
+        <connections name="Double Outside Edges">
+          <entry green="0x1000010" red="0x11000"/>
+          <entry green="0x11000" red="0x1000010"/>
+          <entry green="0x0" red="0x0"/>
+          <entry green="0x0" red="0x0"/>
+        </connections>
+        <connections name="Opposing Double Inside Corners">
+          <entry green="0x1111110" red="0x10000001"/>
+          <entry green="0x11011011" red="0x100100"/>
+          <entry green="0x0" red="0x0"/>
+          <entry green="0x0" red="0x0"/>
+        </connections>
+      </sets>
+      <rows>
+        <row set="0">
+          <tiles>
+            <id>0</id>
+            <id>0</id>
+            <id>0</id>
+            <id>0</id>
+          </tiles>
+        </row>
+        <row set="0">
+          <tiles>
+            <id>0</id>
+            <id>0</id>
+            <id>0</id>
+            <id>0</id>
+          </tiles>
+        </row>
+      </rows>
+    </specialConnections>
+  </tileMatrix>
+  <tileMatrixData name="matrix1" rows="3" cols="3" randomizeMiddle="true" ignoreClear="false" ignoreMapEdges="true" allowSpecialTiles="false" tileset="">
+    <tiles>0,0,0,0,0,0,0,0,0</tiles>
+    <connections set="0">
+      <tiles>0,0,0,0</tiles>
+    </connections>
+    <connections set="0">
+      <tiles>0,0,0,0</tiles>
+    </connections>
+  </tileMatrixData>
+  <tileBrushes/>
+  <colorSwatches/>
+  <bookmarks>
+    <bookmark enabled="false"/>
+    <bookmark enabled="false"/>
+    <bookmark enabled="false"/>
+    <bookmark enabled="false"/>
+    <bookmark enabled="false"/>
+    <bookmark enabled="false"/>
+    <bookmark enabled="false"/>
+    <bookmark enabled="false"/>
+    <bookmark enabled="false"/>
+  </bookmarks>
+</project>
