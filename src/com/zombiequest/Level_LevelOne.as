@@ -1,6 +1,6 @@
 //Code generated with DAME. http://www.dambots.com
 
-package com
+package com.zombiequest
 {
 	import org.flixel.*;
 	public class Level_LevelOne extends Map
