@@ -43,6 +43,11 @@ package com.zombiequest.power
 			player.damage = player.damage / 2;
 			active = false;
 		}
+		
+		public function timeRemaining():Number
+		{
+			return Math.floor(duration - time);
+		}
 	}
 
 }

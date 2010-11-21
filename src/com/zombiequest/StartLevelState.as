@@ -70,7 +70,7 @@ package com.zombiequest
 			healthBar.scale.x = 100;
 			
 			add(healthBar);
-			statusText = new FlxText(0, 230, 320);
+			statusText = new FlxText(0, 460, 320);
 			statusText.color = 0xff000000;
 			statusText.scrollFactor.x = statusText.scrollFactor.y = 0;
 			add(statusText);

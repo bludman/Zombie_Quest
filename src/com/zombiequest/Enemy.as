@@ -83,8 +83,8 @@ package com.zombiequest
 				this.health = 0;
 				this.kill();
 			}
-			healthbar.scale.x = this.health / 4;
-			healthbar.x = this.x;
+			healthbar.scale.x = this.health / 6;
+			healthbar.x = this.x - 2;
 			healthbar.y = this.y;
 		}
 	}
