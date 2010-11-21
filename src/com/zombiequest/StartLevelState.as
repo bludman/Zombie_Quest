@@ -23,7 +23,7 @@ package com.zombiequest
 		override public function create():void
 		{
 			//Instantiate objects
-			player = new Player(80, 50);
+			player = new Player(10, 280);
 			bulletGroup = new FlxGroup();
 			enemyGroup = new FlxGroup();
 			innocentGroup = new FlxGroup();
