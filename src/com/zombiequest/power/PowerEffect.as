@@ -13,6 +13,7 @@ package com.zombiequest.power
 		function flavorText():String; //Text to be displayed
 		function destroy():void;
 		function isActive():Boolean;
+		function timeRemaining():Number; //time remaining
 	}
 	
 }

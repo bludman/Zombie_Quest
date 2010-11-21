@@ -43,6 +43,10 @@ package com.zombiequest.power
 			player.setSpeed = player.getSpeed * 2;
 			active = false;
 		}
+		public function timeRemaining():Number
+		{
+			return Math.floor(duration - time);
+		}
 	}
 
 }

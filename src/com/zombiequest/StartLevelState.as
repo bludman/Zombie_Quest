@@ -17,7 +17,6 @@ package com.zombiequest
 		private var innocentGroup:FlxGroup;
 		private var healthBar:FlxSprite;
 		private var level:Map;
-		private var coin:Coin;
 		private var currentPower:PowerEffect;
 		private var statusText:FlxText;
 		override public function create():void
@@ -30,8 +29,7 @@ package com.zombiequest
 			level = new Level_LevelOne(true, onAddSprite);
 			
 			
-			//add player etc.
-			add(player);
+			
 			add(bulletGroup);
 			
 			//Set up the camera
@@ -48,6 +46,8 @@ package com.zombiequest
 		override public function update():void
 		{
 			player.collide(enemyGroup);
+			player.collide(innocentGroup);
+			enemyGroup.collide(innocentGroup);
 			level.mainLayer.collide(player);
 			level.mainLayer.collide(enemyGroup);
 			FlxU.overlap(player, bulletGroup, playerGotShot);
@@ -59,7 +59,6 @@ package com.zombiequest
 			enemyShoot();
 			updatePower();
 			super.update();
-			FlxU.overlap(player, coin, gotTheCoin);
 		}
 		private function createHud():void
 		{
@@ -70,7 +69,7 @@ package com.zombiequest
 			healthBar.scale.x = 100;
 			
 			add(healthBar);
-			statusText = new FlxText(0, 230, 320);
+			statusText = new FlxText(0, 460, 320);
 			statusText.color = 0xff000000;
 			statusText.scrollFactor.x = statusText.scrollFactor.y = 0;
 			add(statusText);
@@ -88,6 +87,9 @@ package com.zombiequest
 			{
 				innocentGroup.add(sprite);
 			}
+			if (sprite is Player) {
+				player = sprite as Player;
+			}
 			
 		}
 		
@@ -101,12 +103,13 @@ package com.zombiequest
 			var enemy:Enemy = e as Enemy;
 			enemy.health -= player.damage;
 			enemy.updateHealthbar();
-			if (enemy.dead){
-				if (enemy.hasPowerup) {
+			if (enemy.dead) {
+				//FIXME - Get rid of the !
+				if (!enemy.hasPowerup) {
 					if (currentPower != null) {
 						currentPower.destroy();
 					}
-					currentPower = new DoubleSpeed();
+					currentPower = PowerupFactory.getPowerup();
 					currentPower.affect(player);
 					statusText.text = currentPower.flavorText();
 				}
@@ -121,7 +124,7 @@ package com.zombiequest
 			if (currentPower != null) {
 				currentPower.destroy();
 			}
-			currentPower = new HalfSpeed();
+			currentPower = PowerdownFactory.getPowerdown();
 			currentPower.affect(player);
 			statusText.text = currentPower.flavorText();
 		}
