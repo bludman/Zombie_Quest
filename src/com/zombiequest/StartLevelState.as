@@ -1,5 +1,6 @@
 package com.zombiequest 
 {
+	import adobe.utils.CustomActions;
 	import com.zombiequest.power.*;
 	
 	import org.flixel.*;
@@ -29,7 +30,8 @@ package com.zombiequest
 			innocentGroup = new FlxGroup();
 			level = new Level_LevelOne(true, onAddSprite);
 			
-			
+			//give enemies reference to player
+			updateEnemyPlayerRef();
 			
 			add(bulletGroup);
 			
@@ -66,9 +68,7 @@ package com.zombiequest
 		{
 			if (sprite is Enemy)
 			{
-				var e:Enemy = sprite as Enemy;
-				e.player = player;
-				enemyGroup.add(e);
+				enemyGroup.add(sprite as Enemy);
 			}
 			if (sprite is Innocent)
 			{
@@ -177,6 +177,15 @@ package com.zombiequest
 				FlxG.state = new EndState("You Lost!");
 			}
 			hudManager.setHealth(player.health);
+		}
+		
+		public function updateEnemyPlayerRef():void
+		{
+			var enemyA:Array = enemyGroup.members;
+			for (var i:Number = 0; i < enemyA.length; i++) {
+				var enemy:Enemy = enemyA[i] as Enemy;
+				enemy.player = player;
+			}
 		}
 		
 	}
