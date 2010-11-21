@@ -10,6 +10,7 @@ package com.zombiequest
 	 */
 	public class StartLevelState extends FlxState 
 	{
+		private const maxHealth:Number = 100;
 		private var player:Player;
 		private var enemyGroup:FlxGroup;
 		private var bulletGroup:FlxGroup;
@@ -99,8 +100,8 @@ package com.zombiequest
 		{
 			var enemy:Enemy = e as Enemy;
 			enemy.health -= player.damage;
-			if (enemy.health <= 0) {
-				enemy.kill();
+			enemy.updateHealthbar();
+			if (enemy.dead){
 				if (enemy.hasPowerup) {
 					if (currentPower != null) {
 						currentPower.destroy();
@@ -116,6 +117,7 @@ package com.zombiequest
 			var innocent:Innocent = i as Innocent;
 			innocent.kill();
 			player.health += 50;
+			updateHealthBar();
 			if (currentPower != null) {
 				currentPower.destroy();
 			}
@@ -127,14 +129,8 @@ package com.zombiequest
 		protected function playerGotShot(p:FlxObject, b:FlxObject):void
 		{
 			player.health -= 30;
-			healthBar.scale.x = player.health;
-			if (player.health <= 0)
-			{
-				healthBar.scale.x = 0;
-				player.kill();
-				FlxG.state = new EndState("You lost!");
-			}
 			b.kill();
+			updateHealthBar();
 		}
 		
 		protected function overlapBullets():void
@@ -175,6 +171,22 @@ package com.zombiequest
 			if (!currentPower.isActive()) {
 				statusText.text = "";
 			}
+		}
+		/**
+		 * Call whenever the player's health is changed
+		 */
+		protected function updateHealthBar():void
+		{
+			if (player.health > maxHealth) {
+				player.health = maxHealth;
+			}
+			trace(player.health);
+			if (player.health <= 0) {
+				player.kill();
+				healthBar.scale.x = 0;
+				FlxG.state = new EndState("You Lost!");
+			}
+			healthBar.scale.x = player.health;
 		}
 		
 	}

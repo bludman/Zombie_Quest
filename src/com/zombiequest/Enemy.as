@@ -12,6 +12,7 @@ package com.zombiequest
 		private const turnSpeed:Number = 4;
 		private const shootRange:Number = 100;
 		private const followRange:Number = 150;
+		private var healthbar:FlxSprite;
 		public var player:Player;
 		public var lastShot:Number;
 		public var shotTimeout:Number = 2;
@@ -24,12 +25,13 @@ package com.zombiequest
 		{
 			super(X, Y, ImgEnemy);
 			this.player = player;
-			this.health = 100;
+			health = 100;
 			scale = new FlxPoint(20 / width, 20 / height);
 			width = 20;
 			height = 20;
 			lastShot = 0;
 			this.hasPowerup = hasPowerup;
+			createHealthbar();
 		}
 		public override function update():void
 		{
@@ -42,7 +44,6 @@ package com.zombiequest
 			} else {
 				this.angle = FlxU.getAngle(player.x - this.x, player.y - this.y);
 				if (distance < followRange && distance > shootRange) { 
-					trace("Enemy speed [", speed, "]");
 					velocity.x = speed * Math.cos(MathU.degToRad(this.angle));
 					velocity.y = speed * Math.sin(MathU.degToRad(this.angle));
 					shooting = false;
@@ -55,6 +56,7 @@ package com.zombiequest
 				}
 			}
 			super.update();
+			updateHealthbar();
 		}
 		
 		public function bulletSpawn():FlxPoint
@@ -65,6 +67,26 @@ package com.zombiequest
 			return ret;
 		}
 		
+		private function createHealthbar():void
+		{
+			healthbar = new FlxSprite(this.x, this.y);
+			healthbar.createGraphic(2, 1, 0xffff0000);
+			healthbar.origin.x = healthbar.origin.y = 0;
+			healthbar.scale.x = this.health / 4;
+			FlxG.state.add(healthbar);
+		}
+		
+		public function updateHealthbar():void
+		{
+			if (this.health <= 0)
+			{
+				this.health = 0;
+				this.kill();
+			}
+			healthbar.scale.x = this.health / 4;
+			healthbar.x = this.x;
+			healthbar.y = this.y;
+		}
 	}
 
 }

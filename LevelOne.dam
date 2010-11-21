@@ -4,6 +4,7 @@
   <bgColor>0x000000</bgColor>
   <spriteEntries>
     <tileEntry name="enemyNoPowerup" idx="1" className="Enemy" image="assets/png/enemy.png" offsetX="0" offsetY="0" width="31" height="33" anchorX="0" anchorY="0" boundsX="0" boundsY="0" boundsWidth="31" boundsHeight="33" constructor="%xpos%, %ypos%, null, false" exports="true" canScale="true" canRotate="true"/>
+    <tileEntry name="Innocent" idx="3" className="Innocent" image="assets/png/oldinnocent.png" offsetX="0" offsetY="0" width="23" height="23" anchorX="0" anchorY="0" boundsX="0" boundsY="0" boundsWidth="23" boundsHeight="23" constructor="%xpos%, %ypos%" exports="true" canScale="true" canRotate="true"/>
   </spriteEntries>
   <layers>
     <group name="Group1" xScroll="1" yScroll="1" visible="true" open="true" locked="false" exports="true">
@@ -16,8 +17,15 @@
         <sprite guid="7DDA129A-AC2C-460B-C342-46426C0CF73A" idx="1" x="440.5" y="998.5" z="1" angle="0" scaleX="1" scaleY="1" flipped="false"/>
         <sprite guid="D4FF235C-BED4-18C9-6695-1868AD3B0CA7" idx="1" x="112.5" y="512.5" z="1" angle="0" scaleX="1" scaleY="1" flipped="false"/>
         <sprite guid="AB8FB17E-327D-536D-38A7-68CE5F4DB15C" idx="1" x="473.5" y="205.5" z="1" angle="0" scaleX="1" scaleY="1" flipped="false"/>
+        <sprite guid="5F7ACBB4-EC1E-6287-9476-2EAD84B591C2" idx="3" x="128.5" y="162.5" z="1" angle="0" scaleX="1" scaleY="1" flipped="false"/>
+        <sprite guid="4071EC38-F53F-DFE6-09B1-BD6BEC81819D" idx="3" x="365.5" y="396.5" z="1" angle="0" scaleX="1" scaleY="1" flipped="false"/>
+        <sprite guid="7E9E1FDB-D58E-0979-3194-C95A4920BA7E" idx="3" x="169.5" y="430.5" z="1" angle="0" scaleX="1" scaleY="1" flipped="false"/>
+        <sprite guid="432C5536-ABD8-2DCD-3350-F06C0998BD0C" idx="3" x="189.5" y="723.5" z="1" angle="0" scaleX="1" scaleY="1" flipped="false"/>
+        <sprite guid="F7026F35-ADEE-8948-C9B9-44C98D787CCA" idx="3" x="469.5" y="641.5" z="1" angle="0" scaleX="1" scaleY="1" flipped="false"/>
+        <sprite guid="CA636EEC-A992-9F5A-3CD9-18E964F55325" idx="3" x="98.5" y="996.5" z="1" angle="0" scaleX="1" scaleY="1" flipped="false"/>
+        <sprite guid="CA14F772-E1EF-1D22-8568-FD7A0F62FFBA" idx="3" x="347.5" y="1202.5" z="1" angle="0" scaleX="1" scaleY="1" flipped="false"/>
       </spritelayer>
-      <maplayer name="Map2" xScroll="1" yScroll="1" x="0" y="0" width="20" height="100" tileset="../../../../../Program Files/DAME/samples/SimpleClaws/data/maintiles.png" tileWidth="32" tileHeight="32" visible="true" hasHits="false" drawIdx="1" collideIdx="1" eraseIdx="0" locked="false" exports="true">
+      <maplayer name="Map2" xScroll="1" yScroll="1" x="0" y="0" width="20" height="100" tileset="../../../../Program Files/DAME/samples/SimpleClaws/data/maintiles.png" tileWidth="32" tileHeight="32" visible="true" hasHits="false" drawIdx="1" collideIdx="1" eraseIdx="0" locked="false" exports="true">
         <row>4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4</row>
         <row>4,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,4</row>
         <row>4,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,4</row>

@@ -7,7 +7,7 @@ package com.zombiequest
 	{
 		//Embedded media...
 		[Embed(source="../../../assets/maps/mapCSV_Group1_Map2.csv", mimeType="application/octet-stream")] public var CSV_Group1Map2:Class;
-		[Embed(source="../../../assets/png/maintiles.png")] public var Img_Group1Map2:Class;
+		[Embed(source="../../../../../../../Program Files/DAME/samples/SimpleClaws/data/maintiles.png")] public var Img_Group1Map2:Class;
 
 		//Tilemaps
 		public var layerGroup1Map2:FlxTilemap;
@@ -60,6 +60,13 @@ package com.zombiequest
 			addSpriteToLayer(Enemy, Group1Layer1Group , 440.500, 998.500, 0.000, false, onAddCallback );//"enemyNoPowerup"
 			addSpriteToLayer(Enemy, Group1Layer1Group , 112.500, 512.500, 0.000, false, onAddCallback );//"enemyNoPowerup"
 			addSpriteToLayer(Enemy, Group1Layer1Group , 473.500, 205.500, 0.000, false, onAddCallback );//"enemyNoPowerup"
+			addSpriteToLayer(Innocent, Group1Layer1Group , 128.500, 162.500, 0.000, false, onAddCallback );//"Innocent"
+			addSpriteToLayer(Innocent, Group1Layer1Group , 365.500, 396.500, 0.000, false, onAddCallback );//"Innocent"
+			addSpriteToLayer(Innocent, Group1Layer1Group , 169.500, 430.500, 0.000, false, onAddCallback );//"Innocent"
+			addSpriteToLayer(Innocent, Group1Layer1Group , 189.500, 723.500, 0.000, false, onAddCallback );//"Innocent"
+			addSpriteToLayer(Innocent, Group1Layer1Group , 469.500, 641.500, 0.000, false, onAddCallback );//"Innocent"
+			addSpriteToLayer(Innocent, Group1Layer1Group , 98.500, 996.500, 0.000, false, onAddCallback );//"Innocent"
+			addSpriteToLayer(Innocent, Group1Layer1Group , 347.500, 1202.500, 0.000, false, onAddCallback );//"Innocent"
 		}
 
 

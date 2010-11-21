@@ -26,7 +26,6 @@ package com.zombiequest
 		{
 			velocity.x = 0;
 			velocity.y = 0;
-			trace("Player speed [", speed, "]");
 			if (FlxG.keys.W) {
 				velocity.x = speed * Math.cos(MathU.degToRad(angle));
 				velocity.y = speed * Math.sin(MathU.degToRad(angle));
