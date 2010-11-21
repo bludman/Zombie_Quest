@@ -13,7 +13,7 @@ package
 		[Frame(factoryClass="Preloader")]
 		public function Main():void 
 		{
-			super(320, 240, MenuState, 2);
+			super(640, 480, MenuState, 1);
 		}
 		public static function degToRad(degree:Number):Number
 		{
