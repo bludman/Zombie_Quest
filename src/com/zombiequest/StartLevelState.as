@@ -101,12 +101,13 @@ package com.zombiequest
 			var enemy:Enemy = e as Enemy;
 			enemy.health -= player.damage;
 			enemy.updateHealthbar();
-			if (enemy.dead){
-				if (enemy.hasPowerup) {
+			if (enemy.dead) {
+				//FIXME - Get rid of the !
+				if (!enemy.hasPowerup) {
 					if (currentPower != null) {
 						currentPower.destroy();
 					}
-					currentPower = new DoubleSpeed();
+					currentPower = PowerupFactory.getPowerup();
 					currentPower.affect(player);
 					statusText.text = currentPower.flavorText();
 				}
