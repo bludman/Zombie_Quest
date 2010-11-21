@@ -1,6 +1,7 @@
 package com.zombiequest 
 {
 	import com.zombiequest.power.*;
+	
 	import org.flixel.*;
 	import org.flixel.data.FlxAnim;
 	
@@ -15,11 +16,11 @@ package com.zombiequest
 		private var enemyGroup:FlxGroup;
 		private var bulletGroup:FlxGroup;
 		private var innocentGroup:FlxGroup;
-		private var healthBar:FlxSprite;
 		private var level:Map;
 		private var coin:Coin;
 		private var currentPower:PowerEffect;
-		private var statusText:FlxText;
+		private var hudManager:HUDMaker;
+		
 		override public function create():void
 		{
 			//Instantiate objects
@@ -41,7 +42,7 @@ package com.zombiequest
 			FlxU.setWorldBounds(level.mainLayer.left, level.mainLayer.top, level.mainLayer.width, level.mainLayer.height);
 			FlxG.mouse.hide();
 			
-			createHud();
+			hudManager = new HUDMaker();
 			super.create();
 		}
 		
@@ -60,20 +61,6 @@ package com.zombiequest
 			updatePower();
 			super.update();
 			FlxU.overlap(player, coin, gotTheCoin);
-		}
-		private function createHud():void
-		{
-			healthBar = new FlxSprite(5, 5);
-			healthBar.createGraphic(1, 8, 0xffff0000);
-			healthBar.scrollFactor.x = healthBar.scrollFactor.y = 0;
-			healthBar.origin.x = healthBar.origin.y = 0;
-			healthBar.scale.x = 100;
-			
-			add(healthBar);
-			statusText = new FlxText(0, 460, 320);
-			statusText.color = 0xff000000;
-			statusText.scrollFactor.x = statusText.scrollFactor.y = 0;
-			add(statusText);
 		}
 		
 		protected function onAddSprite(sprite:FlxSprite, group:FlxGroup):void
@@ -109,7 +96,7 @@ package com.zombiequest
 					}
 					currentPower = PowerupFactory.getPowerup();
 					currentPower.affect(player);
-					statusText.text = currentPower.flavorText();
+					hudManager.pushStatusText(currentPower.flavorText());
 				}
 			}
 		}
@@ -124,7 +111,7 @@ package com.zombiequest
 			}
 			currentPower = new HalfSpeed();
 			currentPower.affect(player);
-			statusText.text = currentPower.flavorText();
+			hudManager.pushStatusText(currentPower.flavorText());
 		}
 		
 		protected function playerGotShot(p:FlxObject, b:FlxObject):void
@@ -170,7 +157,7 @@ package com.zombiequest
 			}
 			currentPower.update();
 			if (!currentPower.isActive()) {
-				statusText.text = "";
+				hudManager.clearStatusText();
 			}
 		}
 		/**
@@ -184,10 +171,10 @@ package com.zombiequest
 			trace(player.health);
 			if (player.health <= 0) {
 				player.kill();
-				healthBar.scale.x = 0;
+				hudManager.setHealth(0);
 				FlxG.state = new EndState("You Lost!");
 			}
-			healthBar.scale.x = player.health;
+			hudManager.setHealth(player.health);
 		}
 		
 	}
