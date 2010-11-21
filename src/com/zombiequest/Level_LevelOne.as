@@ -77,6 +77,8 @@ package com.zombiequest
 			addSpriteToLayer(Innocent, Group1Layer1Group , 1181.500, 15851.500, 0.000, false, onAddCallback );//"Innocent"
 			addSpriteToLayer(Innocent, Group1Layer1Group , 1241.500, 15851.500, 0.000, false, onAddCallback );//"Innocent"
 			addSpriteToLayer(Innocent, Group1Layer1Group , 1271.500, 15881.500, 0.000, false, onAddCallback );//"Innocent"
+			addSpriteToLayer(Enemy, Group1Layer1Group , 1335.500, 15376.500, 156.020, false, onAddCallback );//"enemyNoPowerup"
+			addSpriteToLayer(Player, Group1Layer1Group , 700.000, 19000.000, 0.000, false, onAddCallback );//"Player"
 		}
 
 
