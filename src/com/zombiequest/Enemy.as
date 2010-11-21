@@ -8,14 +8,14 @@ package com.zombiequest
 	 */
 	public class Enemy extends FlxSprite 
 	{
-		private const speed:Number = 50;
-		private const turnSpeed:Number = 4;
-		private const shootRange:Number = 100;
-		private const followRange:Number = 150;
+		private const speed:Number = 75;
+		private const turnSpeed:Number = 3;
+		private const shootRange:Number = 500;
+		private const followRange:Number = 400;
 		private var healthbar:FlxSprite;
 		public var player:Player;
 		public var lastShot:Number;
-		public var shotTimeout:Number = 2;
+		public var shotTimeout:Number = 1.5;
 		public var following:Boolean = false;
 		public var shooting:Boolean = false;
 		public var hasPowerup:Boolean = true;
@@ -29,7 +29,7 @@ package com.zombiequest
 			scale = new FlxPoint(20 / width, 20 / height);
 			width = 20;
 			height = 20;
-			lastShot = 0;
+			lastShot = (Math.random() * 2);
 			this.hasPowerup = hasPowerup;
 			createHealthbar();
 		}
@@ -43,10 +43,10 @@ package com.zombiequest
 				shooting = false;
 			} else {
 				this.angle = FlxU.getAngle(player.x - this.x, player.y - this.y);
-				if (distance < followRange && distance > shootRange) { 
+				if (distance < followRange) { 
 					velocity.x = speed * Math.cos(MathU.degToRad(this.angle));
 					velocity.y = speed * Math.sin(MathU.degToRad(this.angle));
-					shooting = false;
+					shooting = true;
 					following = true;
 				}
 				else {

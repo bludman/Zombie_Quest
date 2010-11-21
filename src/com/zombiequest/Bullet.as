@@ -9,7 +9,7 @@ package com.zombiequest
 	{
 		[Embed(source="../../../assets/png/bullet.png")]
 		private var ImgBullet:Class;
-		private var speed:Number = 100;
+		private var speed:Number = 200;
 		public function Bullet(p:FlxPoint, angle:Number)
 		{
 			super(p.x, p.y, ImgBullet);
