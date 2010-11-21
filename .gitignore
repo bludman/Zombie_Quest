@@ -1,1 +1,6 @@
 foundationGameDesign.pdf
+.DS_Store
+bin/history
+bin/org
+bin/playerProductInstall.swf
+bin/swfobject.js
