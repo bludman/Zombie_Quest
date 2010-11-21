@@ -25,7 +25,7 @@ package com.zombiequest.power
 			this.player = p;
 			player.setSpeed = player.getSpeed / 2;
 		}
-		public function update():void
+		public function updateTime():void
 		{
 			time += FlxG.elapsed;
 			if (time >= duration && active) {

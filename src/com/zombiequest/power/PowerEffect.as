@@ -9,7 +9,7 @@ package com.zombiequest.power
 	public interface PowerEffect
 	{
 		function affect(p:Player):void; //Start effects
-		function update():void; //Update time
+		function updateTime():void; //Update time
 		function flavorText():String; //Text to be displayed
 		function destroy():void;
 		function isActive():Boolean;

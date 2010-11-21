@@ -6,7 +6,7 @@ package com.zombiequest.power
 	 */
 	public class PowerdownFactory 
 	{
-		private var numPowerdowns:Number = 2;
+		private static var numPowerdowns:Number = 2;
 		public function PowerdownFactory() 
 		{
 			
@@ -14,11 +14,14 @@ package com.zombiequest.power
 		public static function getPowerdown():PowerEffect
 		{
 			var random:Number = Math.floor(Math.random() * numPowerdowns + 1);
+			var powerup:PowerEffect;
 			switch(random)
 			{
 				case 1:
 				powerup = new HalfSpeed();
 				break;
+				case 2:
+				powerup = new LimitedVision();
 				default:
 				powerup = new HalfSpeed();
 				break;
