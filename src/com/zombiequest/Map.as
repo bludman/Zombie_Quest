@@ -1,6 +1,6 @@
 //Code generated with DAME. http://www.dambots.com
 
-package com.zombiequest
+package com
 {
 	import org.flixel.*;
 	public class Map

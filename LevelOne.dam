@@ -25,7 +25,7 @@
         <sprite guid="CA636EEC-A992-9F5A-3CD9-18E964F55325" idx="3" x="98.5" y="996.5" z="1" angle="0" scaleX="1" scaleY="1" flipped="false"/>
         <sprite guid="CA14F772-E1EF-1D22-8568-FD7A0F62FFBA" idx="3" x="347.5" y="1202.5" z="1" angle="0" scaleX="1" scaleY="1" flipped="false"/>
       </spritelayer>
-      <maplayer name="Map2" xScroll="1" yScroll="1" x="0" y="0" width="20" height="100" tileset="../../../../Program Files/DAME/samples/SimpleClaws/data/maintiles.png" tileWidth="32" tileHeight="32" visible="true" hasHits="false" drawIdx="1" collideIdx="1" eraseIdx="0" locked="false" exports="true">
+      <maplayer name="Map2" xScroll="1" yScroll="1" x="0" y="0" width="20" height="100" tileset="assets/png/maintiles.png" tileWidth="32" tileHeight="32" visible="true" hasHits="false" drawIdx="1" collideIdx="1" eraseIdx="0" locked="false" exports="true">
         <row>4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4</row>
         <row>4,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,4</row>
         <row>4,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,4</row>

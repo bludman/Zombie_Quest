@@ -1,13 +1,13 @@
 //Code generated with DAME. http://www.dambots.com
 
-package com.zombiequest
+package com
 {
 	import org.flixel.*;
 	public class Level_LevelOne extends Map
 	{
 		//Embedded media...
 		[Embed(source="../../../assets/maps/mapCSV_Group1_Map2.csv", mimeType="application/octet-stream")] public var CSV_Group1Map2:Class;
-		[Embed(source="../../../../../../../Program Files/DAME/samples/SimpleClaws/data/maintiles.png")] public var Img_Group1Map2:Class;
+		[Embed(source="../../../assets/png/maintiles.png")] public var Img_Group1Map2:Class;
 
 		//Tilemaps
 		public var layerGroup1Map2:FlxTilemap;
