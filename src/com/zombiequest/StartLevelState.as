@@ -32,9 +32,6 @@ package com.zombiequest
 			//add player etc.
 			add(player);
 			add(bulletGroup);
-			add(enemyGroup);
-			add(innocentGroup);
-			
 			
 			//Set up the camera
 			FlxG.follow(player, 2.5);
@@ -158,7 +155,7 @@ package com.zombiequest
 			for each (var enemy:Enemy in enemyA) {
 				if (enemy.shooting && !enemy.dead && !player.dead) {
 					enemy.lastShot += FlxG.elapsed;
-					if (enemy.lastShot >= 1) {
+					if (enemy.lastShot >= enemy.shotTimeout) {
 						var p:FlxPoint = enemy.bulletSpawn();
 						var a:Number = FlxU.getAngle(player.x - p.x, player.y - p.y);
 						bulletGroup.add(new Bullet(p, a));

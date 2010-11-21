@@ -14,6 +14,7 @@ package com.zombiequest
 		private const followRange:Number = 150;
 		public var player:Player;
 		public var lastShot:Number;
+		public var shotTimeout:Number = 2;
 		public var following:Boolean = false;
 		public var shooting:Boolean = false;
 		public var hasPowerup:Boolean = true;
@@ -41,7 +42,7 @@ package com.zombiequest
 			} else {
 				this.angle = FlxU.getAngle(player.x - this.x, player.y - this.y);
 				if (distance < followRange && distance > shootRange) { 
-					trace(speed);
+					trace("Enemy speed [", speed, "]");
 					velocity.x = speed * Math.cos(MathU.degToRad(this.angle));
 					velocity.y = speed * Math.sin(MathU.degToRad(this.angle));
 					shooting = false;

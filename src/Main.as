@@ -15,6 +15,10 @@ package
 		{
 			super(320, 240, MenuState, 2);
 		}
+		public static function degToRad(degree:Number):Number
+		{
+			return degree * Math.PI / 180;
+		}
 	}
 	
 }

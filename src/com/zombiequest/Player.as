@@ -10,7 +10,7 @@ package com.zombiequest
 	{
 		[Embed(source="../../../assets/jpeg/PlayerTopDown.jpg")]
 		private var ImgPlayer:Class;
-		private var speed:Number = 200;
+		private var speed:Number = 100;
 		private var strafeSpeed:Number = speed / 2 ;
 		private var attackDistance:Number = 10;
 		private var attackRange:FlxSprite = new FlxSprite(0, 0);
@@ -26,6 +26,7 @@ package com.zombiequest
 		{
 			velocity.x = 0;
 			velocity.y = 0;
+			trace("Player speed [", speed, "]");
 			if (FlxG.keys.W) {
 				velocity.x = speed * Math.cos(MathU.degToRad(angle));
 				velocity.y = speed * Math.sin(MathU.degToRad(angle));
