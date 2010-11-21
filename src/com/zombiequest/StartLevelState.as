@@ -17,21 +17,18 @@ package com.zombiequest
 		private var innocentGroup:FlxGroup;
 		private var healthBar:FlxSprite;
 		private var level:Map;
-		private var coin:Coin;
 		private var currentPower:PowerEffect;
 		private var statusText:FlxText;
 		override public function create():void
 		{
 			//Instantiate objects
-			player = new Player(80, 50);
 			bulletGroup = new FlxGroup();
 			enemyGroup = new FlxGroup();
 			innocentGroup = new FlxGroup();
 			level = new Level_LevelOne(true, onAddSprite);
 			
 			
-			//add player etc.
-			add(player);
+			
 			add(bulletGroup);
 			
 			//Set up the camera
@@ -48,6 +45,8 @@ package com.zombiequest
 		override public function update():void
 		{
 			player.collide(enemyGroup);
+			player.collide(innocentGroup);
+			enemyGroup.collide(innocentGroup);
 			level.mainLayer.collide(player);
 			level.mainLayer.collide(enemyGroup);
 			FlxU.overlap(player, bulletGroup, playerGotShot);
@@ -59,7 +58,6 @@ package com.zombiequest
 			enemyShoot();
 			updatePower();
 			super.update();
-			FlxU.overlap(player, coin, gotTheCoin);
 		}
 		private function createHud():void
 		{
@@ -87,6 +85,9 @@ package com.zombiequest
 			if (sprite is Innocent)
 			{
 				innocentGroup.add(sprite);
+			}
+			if (sprite is Player) {
+				player = sprite as Player;
 			}
 			
 		}
@@ -122,7 +123,7 @@ package com.zombiequest
 			if (currentPower != null) {
 				currentPower.destroy();
 			}
-			currentPower = new HalfSpeed();
+			currentPower = PowerdownFactory.getPowerdown();
 			currentPower.affect(player);
 			statusText.text = currentPower.flavorText();
 		}
