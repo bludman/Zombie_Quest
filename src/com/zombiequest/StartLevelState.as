@@ -51,8 +51,10 @@ package com.zombiequest
 			player.collide(enemyGroup);
 			player.collide(innocentGroup);
 			enemyGroup.collide(innocentGroup);
-			level.mainLayer.collide(player);
+			enemyGroup.collide(enemyGroup);
+			//level.mainLayer.collide(player);
 			level.mainLayer.collide(enemyGroup);
+			FlxU.collide(level.mainLayer, player);
 			FlxU.overlap(player, bulletGroup, playerGotShot);
 			overlapBullets();
 			if (FlxG.keys.justPressed("SPACE") ){
@@ -91,8 +93,7 @@ package com.zombiequest
 			enemy.health -= player.damage;
 			enemy.updateHealthbar();
 			if (enemy.dead) {
-				//FIXME - Get rid of the !
-				if (!enemy.hasPowerup) {
+				if (enemy.hasPowerup) {
 					if (currentPower != null) {
 						currentPower.destroy();
 					}
