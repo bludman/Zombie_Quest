@@ -170,7 +170,7 @@ package com.zombiequest
 			{
 				return;
 			}
-			currentPower.update();
+			currentPower.updateTime();
 			if (!currentPower.isActive()) {
 				statusText.text = "";
 			}

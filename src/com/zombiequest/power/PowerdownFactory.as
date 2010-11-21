@@ -6,7 +6,7 @@ package com.zombiequest.power
 	 */
 	public class PowerdownFactory 
 	{
-		private var numPowerdowns:Number = 2;
+		private static var numPowerdowns:Number = 2;
 		public function PowerdownFactory() 
 		{
 			
