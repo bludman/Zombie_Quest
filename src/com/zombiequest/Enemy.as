@@ -8,7 +8,7 @@ package com.zombiequest
 	 */
 	public class Enemy extends FlxSprite 
 	{
-		private const speed:Number = 75;
+		private const speed:Number = 50;
 		private const turnSpeed:Number = 4;
 		private const shootRange:Number = 100;
 		private const followRange:Number = 150;
@@ -40,7 +40,8 @@ package com.zombiequest
 				shooting = false;
 			} else {
 				this.angle = FlxU.getAngle(player.x - this.x, player.y - this.y);
-				if(distance < followRange && distance > shootRange){ 
+				if (distance < followRange && distance > shootRange) { 
+					trace(speed);
 					velocity.x = speed * Math.cos(MathU.degToRad(this.angle));
 					velocity.y = speed * Math.sin(MathU.degToRad(this.angle));
 					shooting = false;

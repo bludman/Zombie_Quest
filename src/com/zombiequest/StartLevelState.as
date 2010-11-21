@@ -1,8 +1,6 @@
 package com.zombiequest 
 {
-	import com.zombiequest.power.DoubleDamage;
-	import com.zombiequest.power.DoubleSpeed;
-	import com.zombiequest.power.PowerEffect;
+	import com.zombiequest.power.*;
 	import org.flixel.*;
 	import org.flixel.data.FlxAnim;
 	
@@ -15,19 +13,19 @@ package com.zombiequest
 		private var player:Player;
 		private var enemyGroup:FlxGroup;
 		private var bulletGroup:FlxGroup;
+		private var innocentGroup:FlxGroup;
 		private var healthBar:FlxSprite;
 		private var level:Map;
 		private var coin:Coin;
 		private var currentPower:PowerEffect;
 		private var statusText:FlxText;
-		private var statusTimer:Number = 0;
-		private var statusTimeout:Number = 10;
 		override public function create():void
 		{
 			//Instantiate objects
 			player = new Player(80, 50);
 			bulletGroup = new FlxGroup();
 			enemyGroup = new FlxGroup();
+			innocentGroup = new FlxGroup();
 			level = new Level_LevelOne(true, onAddSprite);
 			
 			
@@ -35,6 +33,7 @@ package com.zombiequest
 			add(player);
 			add(bulletGroup);
 			add(enemyGroup);
+			add(innocentGroup);
 			
 			
 			//Set up the camera
@@ -57,6 +56,7 @@ package com.zombiequest
 			overlapBullets();
 			if (FlxG.keys.justPressed("SPACE") ){
 				FlxU.overlap(player.overlap, enemyGroup, attackEnemy);
+				FlxU.overlap(player.overlap, innocentGroup, attackInnocent);
 			}
 			enemyShoot();
 			updatePower();
@@ -80,15 +80,15 @@ package com.zombiequest
 		
 		protected function onAddSprite(sprite:FlxSprite, group:FlxGroup):void
 		{
-			if (sprite is Coin)
-			{
-				coin = sprite as Coin;
-			}
 			if (sprite is Enemy)
 			{
 				var e:Enemy = sprite as Enemy;
 				e.player = player;
-				enemyGroup.add(sprite as Enemy);
+				enemyGroup.add(e);
+			}
+			if (sprite is Innocent)
+			{
+				innocentGroup.add(sprite);
 			}
 			
 		}
@@ -111,9 +111,20 @@ package com.zombiequest
 					currentPower = new DoubleSpeed();
 					currentPower.affect(player);
 					statusText.text = currentPower.flavorText();
-					statusTimer = 0;
 				}
 			}
+		}
+		protected function attackInnocent(overlap:Object, i:Object):void
+		{
+			var innocent:Innocent = i as Innocent;
+			innocent.kill();
+			player.health += 50;
+			if (currentPower != null) {
+				currentPower.destroy();
+			}
+			currentPower = new HalfSpeed();
+			currentPower.affect(player);
+			statusText.text = currentPower.flavorText();
 		}
 		
 		protected function playerGotShot(p:FlxObject, b:FlxObject):void
@@ -164,6 +175,9 @@ package com.zombiequest
 				return;
 			}
 			currentPower.update();
+			if (!currentPower.isActive()) {
+				statusText.text = "";
+			}
 		}
 		
 	}
