@@ -1,12 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <project>
-  <version>1.1.7</version>
+  <version>1.1.8</version>
   <bgColor>0x000000</bgColor>
   <spriteEntries>
     <tileEntry name="enemyNoPowerup" idx="1" className="Enemy" image="assets/png/temp_person.png" offsetX="128" offsetY="0" width="32" height="32" anchorX="0" anchorY="0" boundsX="0" boundsY="0" boundsWidth="32" boundsHeight="32" constructor="%xpos%, %ypos%, null, false" exports="true" canScale="true" canRotate="true"/>
     <tileEntry name="Innocent" idx="2" className="Innocent" image="assets/png/oldinnocent.png" offsetX="0" offsetY="0" width="23" height="23" anchorX="0" anchorY="0" boundsX="0" boundsY="0" boundsWidth="23" boundsHeight="23" constructor="%xpos%, %ypos%" exports="true" canScale="true" canRotate="true"/>
     <tileEntry name="enemyWithPowerup" idx="3" className="Enemy" image="assets/png/temp_person.png" offsetX="0" offsetY="0" width="32" height="32" anchorX="0" anchorY="0" boundsX="0" boundsY="0" boundsWidth="32" boundsHeight="32" constructor="%xpos%, %ypos%, null, true" exports="true" canScale="true" canRotate="true"/>
     <tileEntry name="Player" idx="4" className="Player" image="assets/jpeg/PlayerTopDown.jpg" offsetX="0" offsetY="0" width="20" height="20" anchorX="0" anchorY="0" boundsX="0" boundsY="0" boundsWidth="20" boundsHeight="20" constructor="%xpos%, %ypos%" exports="true" canScale="true" canRotate="true"/>
+    <sprite name="enemyNoPowerup" idx="5" className="Enemy" image="assets/png/temp_person.png" width="32" height="32" preview="0" anchorX="0" anchorY="0" boundsX="0" boundsY="0" boundsWidth="32" boundsHeight="32" constructor="%xpos%, %ypos%, null, false" exports="true" canScale="true" canRotate="true"/>
   </spriteEntries>
   <layers>
     <group name="Group1" xScroll="1" yScroll="1" visible="true" open="true" locked="false" exports="true">
