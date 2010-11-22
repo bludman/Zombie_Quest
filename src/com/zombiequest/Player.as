@@ -24,14 +24,16 @@
 			loadGraphic(ImgPlayer, true, true, 64, 64);
 			//scale.x = scale.x / 2;
 			//scale.y = scale.y / 2;
-			addAnimation("walk", [0, 1, 2, 3, 4], 5);
-			play("walk");
+			addAnimation("walk", [1, 2, 3, 4, 0], 5);
+			addAnimation("idle",[0]);
+			//play("walk");
 			calcFrame();
 		}		
 		override public function update():void
 		{
 			velocity.x = 0;
 			velocity.y = 0;
+			
 			if (FlxG.keys.W) {
 				velocity.x = speed * Math.cos(MathU.degToRad(angle));
 				velocity.y = speed * Math.sin(MathU.degToRad(angle));
@@ -56,12 +58,17 @@
 			if (FlxG.keys.A) {
 				angle -= 6;
 			}
-			if (FlxG.keys.D) {
+			else if (FlxG.keys.D) {
 				angle += 6;
 			}
-			else if (velocity.x == 0 && velocity.y == 0) {
-				//TODO add stop standing animation
+			
+			if(velocity.x == 0 && velocity.y == 0) {
+				play("idle");
 			}
+			else {
+				play("walk");
+			}
+			
 			super.update();
 			updateOverlap();
 		}
