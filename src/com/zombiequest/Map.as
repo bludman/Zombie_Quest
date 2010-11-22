@@ -31,6 +31,6 @@ package com.zombiequest
 			return obj;
 		}
 
-		virtual public function addSpritesForLayerGroup1Layer1(onAddCallback:Function = null):void { }
+		virtual public function addSpritesForLayerGroup1Layer3(onAddCallback:Function = null):void { }
 	}
 }
