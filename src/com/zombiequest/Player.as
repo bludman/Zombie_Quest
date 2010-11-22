@@ -1,4 +1,4 @@
-package com.zombiequest 
+ package com.zombiequest 
 {
 	import flash.text.Font;
 	import org.flixel.*;
@@ -8,7 +8,7 @@ package com.zombiequest
 	 */
 	public class Player extends FlxSprite
 	{
-		[Embed(source="../../../assets/jpeg/PlayerTopDown.jpg")]
+		[Embed(source="../../../assets/png/ZombieTILES_WALK.png")]
 		private var ImgPlayer:Class;
 		private var speed:Number = 100;
 		private var strafeSpeed:Number = speed / 2 ;
@@ -21,11 +21,19 @@ package com.zombiequest
 			attackRange.height = this.height;
 			attackRange.width = this.width;
 			health = 100;
+			loadGraphic(ImgPlayer, true, true, 64, 64);
+			//scale.x = scale.x / 2;
+			//scale.y = scale.y / 2;
+			addAnimation("walk", [1, 2, 3, 4, 0], 5);
+			addAnimation("idle",[0]);
+			//play("walk");
+			calcFrame();
 		}		
 		override public function update():void
 		{
 			velocity.x = 0;
 			velocity.y = 0;
+			
 			if (FlxG.keys.W) {
 				velocity.x = speed * Math.cos(MathU.degToRad(angle));
 				velocity.y = speed * Math.sin(MathU.degToRad(angle));
@@ -53,6 +61,14 @@ package com.zombiequest
 			else if (FlxG.keys.D) {
 				angle += 6;
 			}
+			
+			if(velocity.x == 0 && velocity.y == 0) {
+				play("idle");
+			}
+			else {
+				play("walk");
+			}
+			
 			super.update();
 			updateOverlap();
 		}
