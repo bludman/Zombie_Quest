@@ -8,7 +8,7 @@ package com.zombiequest.power
 	 */
 	public class HalfSpeed implements PowerEffect
 	{
-		private const duration:Number = 30;
+		private const duration:Number = 15;
 		private var time:Number = 0;
 		private var player:Player;
 		private var active:Boolean = false;

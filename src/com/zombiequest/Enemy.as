@@ -8,10 +8,10 @@ package com.zombiequest
 	 */
 	public class Enemy extends FlxSprite 
 	{
-		private const speed:Number = 75;
+		private const speed:Number = 55;
 		private const turnSpeed:Number = 3;
 		private const shootRange:Number = 500;
-		private const followRange:Number = 400;
+		private const followRange:Number = 5;
 		private var healthbar:FlxSprite;
 		public var player:Player;
 		public var lastShot:Number;
@@ -19,11 +19,11 @@ package com.zombiequest
 		public var following:Boolean = false;
 		public var shooting:Boolean = false;
 		public var hasPowerup:Boolean = true;
-		[Embed(source = "../../../assets/png/Enemy.png")] 
+		[Embed(source = "../../../assets/png/temp_person.png")] 
 		private var ImgEnemy:Class;
 		public function Enemy(X:Number, Y:Number, player:Player = null, hasPowerup:Boolean = false) 
 		{
-			super(X, Y, ImgEnemy);
+			super(X, Y);
 			this.player = player;
 			health = 100;
 			scale = new FlxPoint(20 / width, 20 / height);
@@ -32,6 +32,12 @@ package com.zombiequest
 			lastShot = (Math.random() * 2);
 			this.hasPowerup = hasPowerup;
 			createHealthbar();
+			loadGraphic(ImgEnemy, true, true, 32, 32);
+			scale.x = scale.x / 2;
+			scale.y = scale.y / 2;
+			addAnimation("walk", [0, 1, 2], 10);
+			play("walk");
+			calcFrame();
 		}
 		public override function update():void
 		{
@@ -54,6 +60,9 @@ package com.zombiequest
 					velocity.x = 0;
 					velocity.y = 0;
 				}
+			}
+			if (!following) {
+				_curFrame = 1;
 			}
 			super.update();
 			updateHealthbar();
