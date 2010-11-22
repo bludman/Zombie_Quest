@@ -17,6 +17,7 @@ package com.zombiequest
 		private var enemyGroup:FlxGroup;
 		private var bulletGroup:FlxGroup;
 		private var innocentGroup:FlxGroup;
+		private var collideGroup:FlxGroup;
 		private var level:Map;
 		private var currentPower:PowerEffect;
 		private var hudManager:HUDMaker;
@@ -28,33 +29,32 @@ package com.zombiequest
 			bulletGroup = new FlxGroup();
 			enemyGroup = new FlxGroup();
 			innocentGroup = new FlxGroup();
+			collideGroup = new FlxGroup();
 			level = new Level_LevelOne(true, onAddSprite);
 			
 			//give enemies reference to player
 			updateEnemyPlayerRef();
 			
 			add(bulletGroup);
+			collideGroup.add(enemyGroup);
+			collideGroup.add(innocentGroup);
+			collideGroup.add(player);
 			
 			//Set up the camera
 			FlxG.follow(player, 2.5);
 			FlxG.followAdjust(.5, .2);
-			FlxG.followBounds(level.mainLayer.left + 1, level.mainLayer.top + 1, level.mainLayer.right - 1, level.mainLayer.bottom - 1);
-			FlxU.setWorldBounds(level.mainLayer.left, level.mainLayer.top, level.mainLayer.width, level.mainLayer.height);
+			FlxG.followBounds(level.boundsMinX, level.boundsMinY, level.boundsMaxX, level.boundsMaxY);
+			FlxG.showBounds = true;
 			FlxG.mouse.hide();
-			
+			player.x += 192;
+			player.y -= 192;
 			hudManager = new HUDMaker();
-			super.create();
 		}
 		
 		override public function update():void
 		{
-			player.collide(enemyGroup);
-			player.collide(innocentGroup);
-			enemyGroup.collide(innocentGroup);
-			enemyGroup.collide(enemyGroup);
-			//level.mainLayer.collide(player);
-			level.mainLayer.collide(enemyGroup);
-			FlxU.collide(level.mainLayer, player);
+			collideGroup.collide();
+			FlxU.collide(level.mainLayer, collideGroup);
 			FlxU.overlap(player, bulletGroup, playerGotShot);
 			overlapBullets();
 			if (FlxG.keys.justPressed("SPACE") ){
@@ -171,7 +171,6 @@ package com.zombiequest
 			if (player.health > maxHealth) {
 				player.health = maxHealth;
 			}
-			trace(player.health);
 			if (player.health <= 0) {
 				player.kill();
 				hudManager.setHealth(0);

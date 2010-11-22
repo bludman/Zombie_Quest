@@ -24,16 +24,16 @@ package com.zombiequest
 			// Generate maps.
 			layerGroup1bg = new FlxTilemap;
 			layerGroup1bg.loadMap( new CSV_Group1bg, Img_Group1bg, 64,64 );
-			layerGroup1bg.x = -192.000000;
-			layerGroup1bg.y = 192.000000;
+			layerGroup1bg.x = 0;
+			layerGroup1bg.y = 0.000000;
 			layerGroup1bg.scrollFactor.x = 1.000000;
 			layerGroup1bg.scrollFactor.y = 1.000000;
 			layerGroup1bg.collideIndex = 1;
-			layerGroup1bg.drawIndex = 1;
 			layerGroup1Map1 = new FlxTilemap;
+			layerGroup1bg.drawIndex = 1;
 			layerGroup1Map1.loadMap( new CSV_Group1Map1, Img_Group1Map1, 64,64 );
-			layerGroup1Map1.x = -192.000000;
-			layerGroup1Map1.y = 192.000000;
+			layerGroup1Map1.x = 0.000000;
+			layerGroup1Map1.y = 0.000000;
 			layerGroup1Map1.scrollFactor.x = 1.000000;
 			layerGroup1Map1.scrollFactor.y = 1.000000;
 			layerGroup1Map1.collideIndex = 1;
@@ -55,8 +55,8 @@ package com.zombiequest
 
 			mainLayer = layerGroup1Map1;
 
-			boundsMinX = -192;
-			boundsMinY = 192;
+			boundsMinX = 0;
+			boundsMinY = 0;
 			boundsMaxX = 1728;
 			boundsMaxY = 4352;
 
