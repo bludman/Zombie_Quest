@@ -11,7 +11,7 @@ package com.zombiequest
 		private const speed:Number = 55;
 		private const turnSpeed:Number = 3;
 		private const shootRange:Number = 500;
-		private const followRange:Number = 5;
+		private const followRange:Number = 300;
 		private var healthbar:FlxSprite;
 		public var player:Player;
 		public var lastShot:Number;
