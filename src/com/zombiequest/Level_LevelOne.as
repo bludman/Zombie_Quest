@@ -90,8 +90,6 @@ package com.zombiequest
 			addSpriteToLayer(Innocent, Group1Layer1Group , 1271.500, 15881.500, 0.000, false, onAddCallback );//"Innocent"
 			addSpriteToLayer(Enemy, Group1Layer1Group , 1335.500, 15376.500, 156.020, false, onAddCallback );//"enemyNoPowerup"
 			addSpriteToLayer(Player, Group1Layer1Group , 700.000, 19000.000, 271.460, false, onAddCallback );//"Player"
-			addSpriteToLayer(Enemy, Group1Layer1Group , 585.500, 18406.500, 0.000, false, onAddCallback );//"enemyNoPowerup"
-			addSpriteToLayer(Enemy, Group1Layer1Group , 855.500, 18406.500, 0.000, false, onAddCallback );//"enemyNoPowerup"
 			addSpriteToLayer(Enemy, Group1Layer1Group , 795.500, 16846.500, 0.000, false, onAddCallback );//"enemyNoPowerup"
 			addSpriteToLayer(Enemy, Group1Layer1Group , 645.500, 16426.500, 0.000, false, onAddCallback );//"enemyNoPowerup"
 			addSpriteToLayer(Enemy, Group1Layer1Group , 645.500, 16276.500, 0.000, false, onAddCallback );//"enemyNoPowerup"
@@ -99,8 +97,9 @@ package com.zombiequest
 			addSpriteToLayer(Enemy, Group1Layer1Group , 165.500, 15346.500, 0.000, false, onAddCallback );//"enemyNoPowerup"
 			addSpriteToLayer(Enemy, Group1Layer1Group , 405.500, 15466.500, 0.000, false, onAddCallback );//"enemyNoPowerup"
 			addSpriteToLayer(Enemy, Group1Layer1Group , 1335.500, 15316.500, 0.000, false, onAddCallback );//"enemyNoPowerup"
-			addSpriteToLayer(Innocent, Group1Layer1Group , 791.500, 17501.500, 0.000, false, onAddCallback );//"Innocent"
-			addSpriteToLayer(Innocent, Group1Layer1Group , 581.500, 17771.500, 0.000, false, onAddCallback );//"Innocent"
+			addSpriteToLayer(Enemy, Group1Layer1Group , 525.500, 18406.500, 0.000, false, onAddCallback );//"enemyNoPowerup"
+			addSpriteToLayer(Enemy, Group1Layer1Group , 915.500, 18406.500, 0.000, false, onAddCallback );//"enemyNoPowerup"
+			addSpriteToLayer(Innocent, Group1Layer1Group , 581.500, 17681.500, 0.000, false, onAddCallback );//"Innocent"
 		}
 
 

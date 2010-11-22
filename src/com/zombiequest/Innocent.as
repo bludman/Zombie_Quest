@@ -9,6 +9,8 @@ package com.zombiequest
 	{
 		[Embed(source = "../../../assets/png/oldinnocent.png")]
 		private var ImgInnocent:Class;
+		private var speed:Number = 20;
+		
 		public function Innocent(x:Number, y:Number) 
 		{
 			super(x, y, ImgInnocent);
