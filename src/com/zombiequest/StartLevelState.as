@@ -44,7 +44,6 @@ package com.zombiequest
 			FlxG.follow(player, 2.5);
 			FlxG.followAdjust(.5, .2);
 			FlxG.followBounds(level.boundsMinX, level.boundsMinY, level.boundsMaxX, level.boundsMaxY);
-			FlxG.showBounds = true;
 			FlxG.mouse.hide();
 			player.x += 192;
 			player.y -= 192;
