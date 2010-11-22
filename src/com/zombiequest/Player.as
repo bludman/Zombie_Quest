@@ -8,7 +8,7 @@ package com.zombiequest
 	 */
 	public class Player extends FlxSprite
 	{
-		[Embed(source="../../../assets/jpeg/PlayerTopDown.jpg")]
+		[Embed(source="../../../assets/png/ZombieTILES_WALK.png")]
 		private var ImgPlayer:Class;
 		private var speed:Number = 100;
 		private var strafeSpeed:Number = speed / 2 ;
@@ -21,6 +21,12 @@ package com.zombiequest
 			attackRange.height = this.height;
 			attackRange.width = this.width;
 			health = 100;
+			loadGraphic(ImgPlayer, true, true, 64, 64);
+			//scale.x = scale.x / 2;
+			//scale.y = scale.y / 2;
+			addAnimation("walk", [0, 1, 2, 3, 4], 5);
+			play("walk");
+			calcFrame();
 		}		
 		override public function update():void
 		{
@@ -50,8 +56,11 @@ package com.zombiequest
 			if (FlxG.keys.A) {
 				angle -= 6;
 			}
-			else if (FlxG.keys.D) {
+			if (FlxG.keys.D) {
 				angle += 6;
+			}
+			else if (velocity.x == 0 && velocity.y == 0) {
+				//TODO add stop standing animation
 			}
 			super.update();
 			updateOverlap();
