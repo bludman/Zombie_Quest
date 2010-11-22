@@ -119,7 +119,7 @@ package com.zombiequest
 		
 		protected function playerGotShot(p:FlxObject, b:FlxObject):void
 		{
-			player.health -= 30;
+			player.health -= 10;
 			b.kill();
 			updateHealthBar();
 		}
