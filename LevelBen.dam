@@ -1,0 +1,199 @@
+<?xml version="1.0" encoding="utf-8"?>
+<project>
+  <version>1.1.8</version>
+  <bgColor>0x000000</bgColor>
+  <spriteEntries>
+    <tileEntry name="Innocent" idx="1" className="Innocent" image="assets/png/oldinnocent.png" offsetX="0" offsetY="0" width="23" height="23" anchorX="0" anchorY="0" boundsX="0" boundsY="0" boundsWidth="23" boundsHeight="23" constructor="%xpos%, %ypos%" exports="true" canScale="true" canRotate="true"/>
+    <tileEntry name="enemyNoPowerup" idx="2" className="Enemy" image="assets/png/temp_person.png" offsetX="128" offsetY="0" width="32" height="32" anchorX="0" anchorY="0" boundsX="0" boundsY="0" boundsWidth="32" boundsHeight="32" constructor="%xpos%, %ypos%, null, false" exports="true" canScale="true" canRotate="true"/>
+    <tileEntry name="enemyWithPowerup" idx="3" className="Enemy" image="assets/png/temp_person.png" offsetX="0" offsetY="0" width="32" height="32" anchorX="0" anchorY="0" boundsX="0" boundsY="0" boundsWidth="32" boundsHeight="32" constructor="%xpos%, %ypos%, null, true" exports="true" canScale="true" canRotate="true"/>
+    <tileEntry name="Player" idx="4" className="Player" image="assets/jpeg/PlayerTopDown.jpg" offsetX="0" offsetY="0" width="20" height="20" anchorX="0" anchorY="0" boundsX="0" boundsY="0" boundsWidth="20" boundsHeight="20" constructor="%xpos%, %ypos%" exports="true" canScale="true" canRotate="true"/>
+    <sprite name="enemyNoPowerup" idx="5" className="Enemy" image="assets/png/temp_person.png" width="32" height="32" preview="0" anchorX="0" anchorY="0" boundsX="0" boundsY="0" boundsWidth="32" boundsHeight="32" constructor="%xpos%, %ypos%, null, false" exports="true" canScale="true" canRotate="true"/>
+  </spriteEntries>
+  <layers>
+    <group name="Group2" xScroll="1" yScroll="1" visible="true" open="true" locked="false" exports="true">
+      <maplayer name="Map1" xScroll="1" yScroll="1" x="-126" y="-379" width="57" height="54" tileset="assets/jpeg/temp_tiles.jpg" tileWidth="64" tileHeight="64" visible="true" hasHits="false" drawIdx="1" collideIdx="1" eraseIdx="0" locked="false" exports="true">
+        <row>0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0</row>
+        <row>0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0</row>
+        <row>0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0</row>
+        <row>0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0</row>
+        <row>0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,10,10,10,10,10,10,10,10,10,10,10,10,10,0,0,0,10,10,10,10,10,10,10,10,10,10,10,10,10,0,0,0,10,0,0,0,0,0,0</row>
+        <row>0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,10,0,0,0,46,0,23,0,0,47,0,0,10,0,0,0,10,0,0,0,46,0,23,0,0,47,0,0,10,0,0,0,10,0,0,0,0,0,0</row>
+        <row>0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,10,0,0,0,46,0,23,0,0,47,0,0,10,0,0,0,10,0,0,0,46,0,23,0,0,47,0,0,10,0,0,0,10,0,0,0,0,0,0</row>
+        <row>0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,23,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,23,0,0,0,0,0,10,0,0,0,10,0,0,0,0,0,0</row>
+        <row>0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,23,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,23,0,0,0,0,0,10,0,0,0,10,0,0,0,0,0,0</row>
+        <row>0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,10,0,0,0,0,0,0,0,0,0,0,0,10,0,0,0,10,0,0,0,0,0,0,0,0,0,0,0,10,0,0,0,10,0,0,0,0,0,0</row>
+        <row>0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,10,0,0,0,0,0,0,0,0,0,0,0,10,0,0,0,10,0,0,0,0,0,0,0,0,0,0,0,10,0,0,0,10,0,0,0,0,0,0</row>
+        <row>0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,10,0,0,10,10,0,0,0,0,0,0,0,10,0,0,0,10,0,0,68,69,0,0,0,68,69,0,0,10,0,0,0,10,0,0,0,0,0,0</row>
+        <row>0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,10,0,0,10,10,0,0,0,0,0,0,0,10,0,0,0,10,0,0,82,83,0,0,0,82,83,0,0,10,0,0,0,10,0,0,0,0,0,0</row>
+        <row>0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,10,10,10,10,10,10,10,10,0,0,10,10,10,0,0,0,10,10,10,10,10,10,10,10,10,10,10,10,10,0,0,0,10,0,0,0,0,0,0</row>
+        <row>0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,10,0,0,0,0,0,0,0,0,0,0,0,10,0,0,0,10,0,0,0,46,0,23,0,0,47,0,0,10,0,0,0,10,0,0,0,0,0,0</row>
+        <row>0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,10,0,0,0,0,0,0,0,0,0,0,0,10,0,0,0,10,0,0,0,46,0,23,0,0,47,0,0,10,0,0,0,10,0,0,0,0,0,0</row>
+        <row>0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,10,0,0,0,0,0,0,0,0,0,0,0,10,0,0,0,0,0,0,0,0,0,23,0,0,0,0,0,10,0,0,0,10,0,0,0,0,0,0</row>
+        <row>0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,10,0,0,0,0,10,10,10,10,10,10,10,10,0,0,0,0,0,0,0,0,0,23,0,0,0,0,0,10,0,0,0,10,0,0,0,0,0,0</row>
+        <row>0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,10,0,0,0,0,0,0,0,0,0,0,0,10,0,0,0,10,0,0,0,0,0,0,0,0,0,0,0,10,0,0,0,10,0,0,0,0,0,0</row>
+        <row>0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,10,0,0,0,0,0,0,0,0,0,0,0,10,0,0,0,10,0,0,0,0,0,0,0,0,0,0,0,10,0,0,0,10,0,0,0,0,0,0</row>
+        <row>0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,10,10,10,10,10,10,10,10,0,0,0,0,10,0,0,0,10,0,0,68,69,0,0,0,68,69,0,0,10,0,0,0,10,0,0,0,0,0,0</row>
+        <row>0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,10,0,0,0,0,0,0,0,0,0,0,0,10,0,0,0,10,0,0,82,83,0,0,0,82,83,0,0,10,0,0,0,10,0,0,0,0,0,0</row>
+        <row>0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,10,0,0,0,0,0,0,0,0,0,0,0,10,0,0,0,10,10,10,10,10,10,10,10,10,10,10,10,10,0,0,0,10,0,0,0,0,0,0</row>
+        <row>0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,10,0,0,0,10,0,0,0,46,0,23,0,0,47,0,0,10,0,0,0,10,0,0,0,0,0,0</row>
+        <row>0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,10,0,0,0,10,0,0,0,46,0,23,0,0,47,0,0,10,0,0,0,10,0,0,0,0,0,0</row>
+        <row>0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,10,0,0,0,0,0,0,0,0,0,0,0,10,0,0,0,0,0,0,0,0,0,23,0,0,0,0,0,10,0,0,0,10,0,0,0,0,0,0</row>
+        <row>0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,10,10,10,10,10,10,10,10,10,10,10,10,10,0,0,0,0,0,0,0,0,0,23,0,0,0,0,0,10,0,0,0,10,0,0,0,0,0,0</row>
+        <row>0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,10,0,0,0,0,0,0,0,0,0,10,0,0,0,10,0,0,0,0,0,0,0,0,0,0,0,10,0,0,0,10,0,0,0,0,0,0</row>
+        <row>0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,10,0,0,0,0,0,0,0,0,0,10,0,0,0,10,0,0,0,0,0,0,0,0,0,0,0,10,0,0,0,10,0,0,0,0,0,0</row>
+        <row>0,0,0,0,0,0,0,10,10,10,10,10,10,10,10,10,10,0,0,0,10,0,0,0,0,0,0,0,0,0,10,0,0,0,10,0,0,68,69,0,0,0,68,69,0,0,10,0,0,0,10,0,0,0,0,0,0</row>
+        <row>0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,10,0,0,0,10,0,0,0,0,0,0,0,0,0,10,0,0,0,10,0,0,82,83,0,0,0,82,83,0,0,10,0,0,0,10,0,0,0,0,0,0</row>
+        <row>0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,10,0,0,0,10,0,0,0,0,0,0,0,0,0,10,0,0,0,10,10,10,10,10,10,10,10,10,10,10,10,10,0,0,0,10,0,0,0,0,0,0</row>
+        <row>0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,10,0,0,0,10,0,0,0,0,0,0,0,0,0,10,0,0,0,10,0,0,0,46,0,23,0,0,47,0,0,10,0,0,0,10,0,0,0,0,0,0</row>
+        <row>0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,10,0,0,0,10,0,0,0,0,0,0,0,0,0,10,0,0,0,10,0,0,0,46,0,23,0,0,47,0,0,10,0,0,0,10,0,0,0,0,0,0</row>
+        <row>0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,10,0,0,0,10,10,10,10,10,10,10,10,0,0,10,0,0,0,0,0,0,0,0,0,23,0,0,0,0,0,10,0,0,0,10,0,0,0,0,0,0</row>
+        <row>0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,10,0,0,0,10,0,0,0,0,0,0,0,0,0,10,0,0,0,0,0,0,0,0,0,23,0,0,0,0,0,10,0,0,0,10,0,0,0,0,0,0</row>
+        <row>0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,10,0,0,0,0,0,0,0,0,0,0,0,0,0,10,0,0,0,10,0,0,0,0,0,0,0,0,0,0,0,10,0,0,0,10,0,0,0,0,0,0</row>
+        <row>0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,10,0,0,0,0,0,0,0,0,0,0,0,0,0,10,0,0,0,10,0,0,0,0,0,0,0,0,0,0,0,10,0,0,0,10,0,0,0,0,0,0</row>
+        <row>0,0,0,0,0,0,0,10,10,10,10,10,10,10,10,10,10,0,0,0,10,0,0,0,0,0,0,0,0,0,10,0,0,0,10,0,0,68,69,0,0,0,68,69,0,0,10,0,0,0,10,0,0,0,0,0,0</row>
+        <row>0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,10,0,0,0,10,0,0,0,0,0,0,0,0,0,10,0,0,0,10,0,0,82,83,0,0,0,82,83,0,0,10,0,0,0,10,0,0,0,0,0,0</row>
+        <row>0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,10,0,0,0,10,0,0,0,0,0,0,0,0,0,10,0,0,0,10,10,10,10,10,10,10,10,10,10,10,10,10,0,0,0,10,0,0,0,0,0,0</row>
+        <row>0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,10,45,45,45,10,10,10,10,10,10,0,0,10,10,10,0,0,0,10,0,0,0,46,0,23,0,0,47,0,0,10,0,0,0,10,0,0,0,0,0,0</row>
+        <row>0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,10,0,0,0,0,0,0,0,0,0,0,0,0,0,10,0,0,0,10,0,0,0,46,0,23,0,0,47,0,0,10,0,0,0,10,0,0,0,0,0,0</row>
+        <row>0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,10,0,0,0,0,0,0,0,50,0,0,0,0,0,10,0,0,0,0,0,0,0,0,0,23,0,0,0,0,0,10,0,0,0,10,0,0,0,0,0,0</row>
+        <row>0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,10,0,0,0,0,0,0,0,50,0,0,0,0,0,10,0,0,0,0,0,0,0,0,0,23,0,0,0,0,0,10,0,0,0,10,0,0,0,0,0,0</row>
+        <row>0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,10,0,0,0,0,0,0,0,50,50,50,50,50,50,10,0,0,0,10,0,0,0,0,0,0,0,0,0,0,0,10,0,0,0,10,0,0,0,0,0,0</row>
+        <row>0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,10,0,0,0,0,0,0,0,0,0,0,0,0,0,10,0,0,0,10,0,0,0,0,0,0,0,0,0,0,0,10,0,0,0,10,0,0,0,0,0,0</row>
+        <row>0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,10,0,0,0,0,0,0,0,0,0,0,0,0,0,10,0,0,0,10,0,0,68,69,0,0,0,68,69,0,0,10,0,0,0,10,0,0,0,0,0,0</row>
+        <row>0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,10,0,0,0,0,0,0,0,0,0,0,0,0,0,10,0,0,0,10,0,0,82,83,0,0,0,82,83,0,0,10,0,0,0,10,0,0,0,0,0,0</row>
+        <row>0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,10,0,0,0,0,0,0,0,0,0,0,0,0,0,10,0,0,0,10,10,10,10,10,10,10,10,10,10,10,10,10,0,0,0,10,0,0,0,0,0,0</row>
+        <row>0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,10,0,0,0,0,0,0,0,0,0,0,0,0,0,10,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0</row>
+        <row>0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,10,0,0,0,0,0,0,0,0,0,0,0,0,0,10,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0</row>
+        <row>0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,10,0,0,0,0,0,0,0,0,0,0,0,0,0,10,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0</row>
+        <row>0,0,0,0,0,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,0,0,0,0,0</row>
+      </maplayer>
+    </group>
+    <group name="Group1" xScroll="1" yScroll="1" visible="true" open="true" locked="false" exports="true">
+      <spritelayer name="Layer1" xScroll="1" yScroll="1" visible="true" locked="false" exports="true">
+        <sprite guid="5776518B-B234-8555-F4B4-FFB408BDE3BF" idx="4" x="1296" y="2951" z="1" angle="0" scaleX="1" scaleY="1" flipped="false"/>
+        <sprite guid="394F33EE-C738-AD1B-01A9-822538772CD3" idx="2" x="1613" y="2410" z="1" angle="0" scaleX="1" scaleY="1" flipped="false"/>
+        <sprite guid="D94515EC-7BB5-B4BA-D6AA-949547F306CF" idx="2" x="1365" y="1964" z="1" angle="0" scaleX="1" scaleY="1" flipped="false"/>
+        <sprite guid="E1D96AF0-6603-B56F-3CF0-77DD2B532A6F" idx="2" x="1559" y="2010" z="1" angle="0" scaleX="1" scaleY="1" flipped="false"/>
+        <sprite guid="882F3E34-1CA5-072B-96B5-4D0166BFACE6" idx="2" x="1541" y="1560" z="1" angle="0" scaleX="1" scaleY="1" flipped="false"/>
+        <sprite guid="4416AAB8-9132-13EC-75DA-D995B51AC0E4" idx="1" x="2701.5" y="60.5" z="1" angle="0" scaleX="1" scaleY="1" flipped="false"/>
+        <sprite guid="C4C09447-06BE-BD91-83F3-D664C9F5E936" idx="1" x="2396.5" y="305.5" z="1" angle="0" scaleX="1" scaleY="1" flipped="false"/>
+        <sprite guid="0CFF91A1-54EA-65DD-E27D-C9F822437728" idx="1" x="2348.5" y="2499.5" z="1" angle="0" scaleX="1" scaleY="1" flipped="false"/>
+        <sprite guid="BBE7F3CA-E02C-61E5-3133-7913DF878071" idx="1" x="2608.5" y="2404.5" z="1" angle="0" scaleX="1" scaleY="1" flipped="false"/>
+        <sprite guid="12957FCF-B230-EDA4-A6D7-5F69098342E1" idx="3" x="2615" y="1825" z="1" angle="0" scaleX="1" scaleY="1" flipped="false"/>
+        <sprite guid="2D64809E-E1BE-8F1D-2B18-AE774BB4B52C" idx="2" x="2303" y="1946" z="1" angle="0" scaleX="1" scaleY="1" flipped="false"/>
+        <sprite guid="FC83EB67-EBB1-D602-0301-D0F8B5A4EE83" idx="2" x="2533" y="2021" z="1" angle="0" scaleX="1" scaleY="1" flipped="false"/>
+        <sprite guid="42C30401-5389-DBE0-E75F-71EEA70F304B" idx="2" x="2611" y="1288" z="1" angle="0" scaleX="1" scaleY="1" flipped="false"/>
+        <sprite guid="7CF1840A-EF49-CAF5-1B42-B5FD1AECD1B7" idx="2" x="2401" y="1309" z="1" angle="0" scaleX="1" scaleY="1" flipped="false"/>
+        <sprite guid="57D49DB1-740F-D5E6-E8D9-BC9DB65E94AF" idx="2" x="2000" y="2746" z="1" angle="0" scaleX="1" scaleY="1" flipped="false"/>
+        <sprite guid="E2C388F8-0CC2-391F-8200-9103852DF593" idx="2" x="1894" y="2865" z="1" angle="0" scaleX="1" scaleY="1" flipped="false"/>
+        <sprite guid="3FD82954-F939-F826-E7A5-0D0AA46FF24C" idx="2" x="2906" y="2159" z="1" angle="0" scaleX="1" scaleY="1" flipped="false"/>
+        <sprite guid="8EC9F725-CC49-B44A-DA14-FF18130908EC" idx="3" x="2987" y="2237" z="1" angle="0" scaleX="1" scaleY="1" flipped="false"/>
+        <sprite guid="1C9BF503-9678-E06D-3DE3-158AA797BE36" idx="2" x="2950" y="2093" z="1" angle="0" scaleX="1" scaleY="1" flipped="false"/>
+        <sprite guid="6867851F-0311-C099-5643-E0BCC3EE727E" idx="2" x="2434" y="2556" z="1" angle="0" scaleX="1" scaleY="1" flipped="false"/>
+      </spritelayer>
+    </group>
+  </layers>
+  <tileMatrix currentMatrix="0" rows="3" cols="3" randomizeMiddle="true" ignoreClear="false" ignoreMapEdges="true" allowSpecialTiles="false" tileset="assets/jpeg/temp_tiles.jpg">
+    <row>
+      <tile>0</tile>
+      <tile>0</tile>
+      <tile>0</tile>
+    </row>
+    <row>
+      <tile>0</tile>
+      <tile>0</tile>
+      <tile>0</tile>
+    </row>
+    <row>
+      <tile>0</tile>
+      <tile>0</tile>
+      <tile>0</tile>
+    </row>
+    <specialConnections>
+      <sets>
+        <connections name="Single Inside Corners">
+          <entry green="0x1111111" red="0x10000000"/>
+          <entry green="0x11011111" red="0x100000"/>
+          <entry green="0x11111110" red="0x1"/>
+          <entry green="0x11111011" red="0x100"/>
+        </connections>
+        <connections name="Double Inside Corners">
+          <entry green="0x1011111" red="0x10100000"/>
+          <entry green="0x11011110" red="0x100001"/>
+          <entry green="0x11111010" red="0x101"/>
+          <entry green="0x1111011" red="0x10000100"/>
+        </connections>
+        <connections name="Triple Inside Corners">
+          <entry green="0x1011011" red="0x10100100"/>
+          <entry green="0x1011110" red="0x10100001"/>
+          <entry green="0x11011010" red="0x100101"/>
+          <entry green="0x1111010" red="0x10000101"/>
+        </connections>
+        <connections name="Quad Inside Corners">
+          <entry green="0x1011010" red="0x10100101"/>
+          <entry green="0x0" red="0x0"/>
+          <entry green="0x0" red="0x0"/>
+          <entry green="0x0" red="0x0"/>
+        </connections>
+        <connections name="Double Outside Corners">
+          <entry green="0x10" red="0x1011000"/>
+          <entry green="0x1000" red="0x1010010"/>
+          <entry green="0x1000000" red="0x11010"/>
+          <entry green="0x10000" red="0x1001010"/>
+        </connections>
+        <connections name="Double Outside Edges">
+          <entry green="0x1000010" red="0x11000"/>
+          <entry green="0x11000" red="0x1000010"/>
+          <entry green="0x0" red="0x0"/>
+          <entry green="0x0" red="0x0"/>
+        </connections>
+        <connections name="Opposing Double Inside Corners">
+          <entry green="0x1111110" red="0x10000001"/>
+          <entry green="0x11011011" red="0x100100"/>
+          <entry green="0x0" red="0x0"/>
+          <entry green="0x0" red="0x0"/>
+        </connections>
+      </sets>
+      <rows>
+        <row set="0">
+          <tiles>
+            <id>0</id>
+            <id>0</id>
+            <id>0</id>
+            <id>0</id>
+          </tiles>
+        </row>
+        <row set="0">
+          <tiles>
+            <id>0</id>
+            <id>0</id>
+            <id>0</id>
+            <id>0</id>
+          </tiles>
+        </row>
+      </rows>
+    </specialConnections>
+  </tileMatrix>
+  <tileMatrixData name="matrix1" rows="3" cols="3" randomizeMiddle="true" ignoreClear="false" ignoreMapEdges="true" allowSpecialTiles="false" tileset="assets/jpeg/temp_tiles.jpg">
+    <tiles>0,0,0,0,0,0,0,0,0</tiles>
+    <connections set="0">
+      <tiles>0,0,0,0</tiles>
+    </connections>
+    <connections set="0">
+      <tiles>0,0,0,0</tiles>
+    </connections>
+  </tileMatrixData>
+  <tileBrushes/>
+  <colorSwatches/>
+  <bookmarks>
+    <bookmark enabled="false"/>
+    <bookmark enabled="false"/>
+    <bookmark enabled="false"/>
+    <bookmark enabled="false"/>
+    <bookmark enabled="false"/>
+    <bookmark enabled="false"/>
+    <bookmark enabled="false"/>
+    <bookmark enabled="false"/>
+    <bookmark enabled="false"/>
+  </bookmarks>
+</project>
