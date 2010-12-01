@@ -48,12 +48,14 @@ package com.zombiequest
 			/* In the future, make this function "push" a statusText to
 			 * an array of status texts that scroll with time */
 			statusText.text = text;
+			//create a new graphic with 100 alpha
 			statusBox.createGraphic(statusText.width, statusText.height, 0xffffffff);
 		}
 		
 		public function clearStatusText():void
 		{
 			statusText.text = "";
+			//create a new graphic with 0 alpha
 			statusBox.createGraphic(statusText.width, statusText.height, 0x00ffffff);
 		}
 		

@@ -18,8 +18,6 @@
 		public function Player(x:Number, y:Number):void
 		{
 			super(x, y, ImgPlayer);
-			attackRange.height = this.height;
-			attackRange.width = this.width;
 			health = 100;
 			loadGraphic(ImgPlayer, true, true, 64, 64);
 			scale.x = scale.x * (2/3);
@@ -27,7 +25,9 @@
 			width = width  * (2 / 3);
 			height = height  * (2/3);
 			addAnimation("walk", [1, 2, 3, 4, 0], 5);
-			addAnimation("idle",[0]);
+			addAnimation("idle", [0]);
+			attackRange.height = this.height;
+			attackRange.width = this.width;
 			//play("walk");
 			calcFrame();
 		}		
