@@ -31,8 +31,7 @@ package com.zombiequest
 			enemyGroup = new FlxGroup();
 			innocentGroup = new FlxGroup();
 			collideGroup = new FlxGroup();
-			level = new Level_LevelOne(true, onAddSprite);
-			
+			level = new Level_Group1(true, onAddSprite);			
 			//give enemies reference to player
 			updateEnemyPlayerRef();
 			
@@ -44,7 +43,7 @@ package com.zombiequest
 			//Set up the camera
 			FlxG.follow(player, 2.5);
 			FlxG.followAdjust(.5, .2);
-			FlxG.followBounds(level.boundsMinX, level.boundsMinY, level.boundsMaxX, level.boundsMaxY);
+			FlxG.followBounds(Map.boundsMinX, Map.boundsMinY, Map.boundsMaxX, Map.boundsMaxY);
 			FlxG.mouse.hide();
 			hudManager = new HUDMaker();
 		}
@@ -52,7 +51,7 @@ package com.zombiequest
 		override public function update():void
 		{
 			collideGroup.collide();
-			FlxU.collide(level.mainLayer, collideGroup);
+			FlxU.collide(level.hitTilemaps, collideGroup);
 			FlxU.overlap(player, bulletGroup, playerGotShot);
 			FlxU.overlap(player, coin, gotTheCoin);
 			overlapBullets();
@@ -65,23 +64,32 @@ package com.zombiequest
 			super.update();
 		}
 		
-		protected function onAddSprite(sprite:FlxSprite, group:FlxGroup):void
+		protected function onAddSprite(obj:Object, layer:FlxGroup, level:Map, properties:Array):Object
 		{
-			if (sprite is Enemy)
+			if (obj is Enemy)
 			{
-				enemyGroup.add(sprite as Enemy);
+				enemyGroup.add(obj as Enemy);
 			}
-			if (sprite is Innocent)
+			else if (obj is Innocent)
 			{
-				innocentGroup.add(sprite);
+				innocentGroup.add(obj as Innocent);
 			}
-			if (sprite is Player) {
-				player = sprite as Player;
+			else if (obj is Player) {
+				player = obj as Player;
 			}
-			if (sprite is Coin) {
-				coin = sprite as Coin;
+			else if (obj is Coin) {
+				coin = obj as Coin;
 			}
-			
+			else if ( obj is TextData )
+			{
+				var tData:TextData = obj as TextData;
+				if ( tData.fontName != "" && tData.fontName != "system" )
+				{
+					tData.fontName += "Font";
+				}
+				return level.addTextToLayer(tData, layer, true, properties, onAddSprite );
+			}
+			return obj;
 		}
 		
 		protected function gotTheCoin(...rest):void
@@ -132,7 +140,7 @@ package com.zombiequest
 			for (var i:Number = 0; i < bullets.length; i++)
 			{
 				var bullet:Bullet = bullets[i] as Bullet;
-				if (level.mainLayer.collide(bullet)) {
+				if (level.hitTilemaps.collide(bullet)) {
 					bullet.kill();
 				}
 			}

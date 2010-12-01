@@ -9,6 +9,7 @@ package com.zombiequest
 		private var healthBar:FlxSprite;
 		private var healthAnim:FlxSprite;
 		private var statusText:FlxText;
+		private var statusBox:FlxSprite;
 		
 		[Embed(source="../../../assets/png/healthempty.png")]
 		private var ImgHealth:Class;
@@ -31,10 +32,15 @@ package com.zombiequest
 				healthAnim.addAnimation(""+i, [i], 0);				
 			}
 			
+			statusBox = new FlxSprite(0, 460);
+			statusBox.scrollFactor.x = statusBox.scrollFactor.y = 0;
+			FlxG.state.add(statusBox);
 			statusText = new FlxText(0, 460, 320);
 			statusText.color = 0xff000000;
 			statusText.scrollFactor.x = statusText.scrollFactor.y = 0;
+			statusBox.createGraphic(statusText.width, statusText.height, 0x00ffffff);
 			FlxG.state.add(statusText);
+			
 		}
 		
 		public function pushStatusText(text:String):void
@@ -42,11 +48,13 @@ package com.zombiequest
 			/* In the future, make this function "push" a statusText to
 			 * an array of status texts that scroll with time */
 			statusText.text = text;
+			statusBox.createGraphic(statusText.width, statusText.height, 0xffffffff);
 		}
 		
 		public function clearStatusText():void
 		{
 			statusText.text = "";
+			statusBox.createGraphic(statusText.width, statusText.height, 0x00ffffff);
 		}
 		
 		public function setHealth(amount:Number):void

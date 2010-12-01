@@ -21,10 +21,9 @@ package com.zombiequest
 		public var hasPowerup:Boolean = false;
 		[Embed(source = "../../../assets/png/temp_person.png")]
 		private var ImgEnemy:Class;
-		public function Enemy(X:Number, Y:Number, player:Player = null, hasPowerup:Boolean = false) 
+		public function Enemy(X:Number, Y:Number, hasPowerup:Boolean = false) 
 		{
 			super(X, Y);
-			this.player = player;
 			health = 100;
 			scale = new FlxPoint(20 / width, 20 / height);
 			width = 20;
