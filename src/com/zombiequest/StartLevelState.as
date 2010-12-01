@@ -123,6 +123,7 @@ package com.zombiequest
 				currentPower.destroy();
 			}
 			currentPower = PowerdownFactory.getPowerdown();
+			//currentPower = new LimitedVision();
 			currentPower.affect(player);
 			hudManager.pushStatusText(currentPower.flavorText());
 		}
@@ -171,6 +172,10 @@ package com.zombiequest
 			currentPower.updateTime();
 			if (!currentPower.isActive()) {
 				hudManager.clearStatusText();
+			}
+			else
+			{
+				hudManager.updatePowerTimer(currentPower.timeRemaining());
 			}
 		}
 		/**

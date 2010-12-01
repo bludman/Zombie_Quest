@@ -6,46 +6,28 @@ package com.zombiequest.power
 	 * ...
 	 * @author Team Zombie Quest
 	 */
-	public class DoubleSpeed implements PowerEffect
+	public class DoubleSpeed extends PowerEffect
 	{
-		private const duration:Number = 30;
-		private var time:Number = 0;
-		private var player:Player;
-		private var active:Boolean = false;
-		public function isActive():Boolean 
-		{
-			return active;
-		}
 		public function DoubleSpeed() 
 		{
+			duration = 30;
 			active = true;
 		}
-		public function affect(p:Player):void
+		public override function affect(p:Player):void
 		{
 			this.player = p;
 			player.setSpeed = player.getSpeed * 2;
 		}
-		public function updateTime():void
-		{
-			time += FlxG.elapsed;
-			if (time >= duration && active) {
-				destroy();
-			}
-		}
 		
-		public function flavorText():String
+		public override function flavorText():String
 		{
 			return "You just ate Usain Bolt! You got double speed";
 		}
 		
-		public function destroy():void
+		public override function destroy():void
 		{
 			player.setSpeed = player.getSpeed / 2;
 			active = false;
-		}
-		public function timeRemaining():Number
-		{
-			return Math.floor(duration - time);
 		}
 	}
 

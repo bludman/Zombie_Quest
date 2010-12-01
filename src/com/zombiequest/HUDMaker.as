@@ -10,6 +10,8 @@ package com.zombiequest
 		private var healthAnim:FlxSprite;
 		private var statusText:FlxText;
 		private var statusBox:FlxSprite;
+		private var timer:FlxText;
+		private var timerOffset:Number = 25;
 		
 		[Embed(source="../../../assets/png/healthempty.png")]
 		private var ImgHealth:Class;
@@ -38,8 +40,12 @@ package com.zombiequest
 			statusText = new FlxText(0, 460, 320);
 			statusText.color = 0xff000000;
 			statusText.scrollFactor.x = statusText.scrollFactor.y = 0;
-			statusBox.createGraphic(statusText.width, statusText.height, 0x00ffffff);
+			statusBox.createGraphic(statusText.width+timerOffset, statusText.height, 0x00ffffff);
 			FlxG.state.add(statusText);
+			timer = new FlxText(325, 460, 20);
+			timer.color = 0xff000000;
+			timer.scrollFactor.x = timer.scrollFactor.y = 0;
+			FlxG.state.add(timer);
 			
 		}
 		
@@ -49,14 +55,15 @@ package com.zombiequest
 			 * an array of status texts that scroll with time */
 			statusText.text = text;
 			//create a new graphic with 100 alpha
-			statusBox.createGraphic(statusText.width, statusText.height, 0xffffffff);
+			statusBox.createGraphic(statusText.width+timerOffset, statusText.height, 0xffffffff);
 		}
 		
 		public function clearStatusText():void
 		{
 			statusText.text = "";
 			//create a new graphic with 0 alpha
-			statusBox.createGraphic(statusText.width, statusText.height, 0x00ffffff);
+			statusBox.createGraphic(statusText.width+timerOffset, statusText.height, 0x00ffffff);
+			timer.text = "";
 		}
 		
 		public function setHealth(amount:Number):void
@@ -67,6 +74,14 @@ package com.zombiequest
 				healthAnim.visible=true;
 			
 			healthAnim.play(""+(20-Math.round(amount*0.2)));
+		}
+		
+		public function updatePowerTimer(amount:Number):void
+		{
+			if (statusText.text == "") {
+				return;
+			}
+			timer.text = amount.toString();
 		}
 	}
 }

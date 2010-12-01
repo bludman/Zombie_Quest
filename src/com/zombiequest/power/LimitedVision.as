@@ -6,49 +6,31 @@ package com.zombiequest.power
 	 * ...
 	 * @author Team Zombie Quest
 	 */
-	public class LimitedVision implements PowerEffect 
+	public class LimitedVision extends PowerEffect 
  	{
 		[Embed(source = "../../../../assets/png/fog.png")]
 		private var img:Class;
-		private const duration:Number = 30;
-		private var time:Number = 0;
-		private var player:Player;
-		private var active:Boolean = false;
-		private var overlay:FlxSprite;
+		private var overlay:FlxSprite
 		public function LimitedVision() 
 		{
 			overlay = new FlxSprite(0, 0, img);
+			active = true;
+			duration = 30;
 		}
 		
-		public function affect(p:Player):void
+		public override function affect(p:Player):void
 		{
 			FlxG.state.add(overlay);
-			active = true;
 		}
 		
-		public function updateTime():void
-		{
-			time += FlxG.elapsed;
-			if (time >= duration) {
-				this.destroy();
-			}
-		}
-		public function flavorText():String
+		public override function flavorText():String
 		{
 			return "You just ate a grandma with caracts!";
 		}
-		public function destroy():void
+		public override function destroy():void
 		{
 			overlay.kill();
 			active = false;
-		}
-		public function isActive():Boolean
-		{
-			return active;
-		}
-		public function timeRemaining():Number
-		{
-			return duration - time;
 		}
 	}
 
