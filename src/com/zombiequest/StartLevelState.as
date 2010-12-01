@@ -14,6 +14,7 @@ package com.zombiequest
 	{
 		private const maxHealth:Number = 100;
 		private var player:Player;
+		private var coin:Coin;
 		private var enemyGroup:FlxGroup;
 		private var bulletGroup:FlxGroup;
 		private var innocentGroup:FlxGroup;
@@ -45,8 +46,6 @@ package com.zombiequest
 			FlxG.followAdjust(.5, .2);
 			FlxG.followBounds(level.boundsMinX, level.boundsMinY, level.boundsMaxX, level.boundsMaxY);
 			FlxG.mouse.hide();
-			player.x += 192;
-			player.y -= 192;
 			hudManager = new HUDMaker();
 		}
 		
@@ -55,6 +54,7 @@ package com.zombiequest
 			collideGroup.collide();
 			FlxU.collide(level.mainLayer, collideGroup);
 			FlxU.overlap(player, bulletGroup, playerGotShot);
+			FlxU.overlap(player, coin, gotTheCoin);
 			overlapBullets();
 			if (FlxG.keys.justPressed("SPACE") ){
 				FlxU.overlap(player.overlap, enemyGroup, attackEnemy);
@@ -77,6 +77,9 @@ package com.zombiequest
 			}
 			if (sprite is Player) {
 				player = sprite as Player;
+			}
+			if (sprite is Coin) {
+				coin = sprite as Coin;
 			}
 			
 		}

@@ -34,11 +34,11 @@
 			velocity.x = 0;
 			velocity.y = 0;
 			
-			if (FlxG.keys.W) {
+			if (FlxG.keys.W || FlxG.keys.UP) {
 				velocity.x = speed * Math.cos(MathU.degToRad(angle));
 				velocity.y = speed * Math.sin(MathU.degToRad(angle));
 			}
-			else if (FlxG.keys.S)
+			else if (FlxG.keys.S || FlxG.keys.DOWN)
 			{
 				velocity.x = -1 * speed * Math.cos(MathU.degToRad(angle));
 				velocity.y = -1 * speed * Math.sin(MathU.degToRad(angle));
@@ -55,10 +55,10 @@
 				velocity.x = strafeSpeed * Math.cos(rAngle);
 				velocity.y = strafeSpeed * Math.sin(rAngle);
 			}
-			if (FlxG.keys.A) {
+			if (FlxG.keys.A || FlxG.keys.LEFT) {
 				angle -= 6;
 			}
-			else if (FlxG.keys.D) {
+			else if (FlxG.keys.D || FlxG.keys.RIGHT) {
 				angle += 6;
 			}
 			
