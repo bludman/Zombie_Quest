@@ -24,13 +24,13 @@ package com.zombiequest
 			// Generate maps.
 			layerGroup1bg = new FlxTilemap;
 			layerGroup1bg.loadMap( new CSV_Group1bg, Img_Group1bg, 64,64 );
-			layerGroup1bg.x = 0;
+			layerGroup1bg.x = 0.000000;
 			layerGroup1bg.y = 0.000000;
 			layerGroup1bg.scrollFactor.x = 1.000000;
 			layerGroup1bg.scrollFactor.y = 1.000000;
 			layerGroup1bg.collideIndex = 1;
-			layerGroup1Map1 = new FlxTilemap;
 			layerGroup1bg.drawIndex = 1;
+			layerGroup1Map1 = new FlxTilemap;
 			layerGroup1Map1.loadMap( new CSV_Group1Map1, Img_Group1Map1, 64,64 );
 			layerGroup1Map1.x = 0.000000;
 			layerGroup1Map1.y = 0.000000;
@@ -57,20 +57,39 @@ package com.zombiequest
 
 			boundsMinX = 0;
 			boundsMinY = 0;
-			boundsMaxX = 1728;
-			boundsMaxY = 4352;
+			boundsMaxX = 1920;
+			boundsMaxY = 4160;
 
 		}
 
 		override public function addSpritesForLayerGroup1Layer3(onAddCallback:Function = null):void
 		{
-			addSpriteToLayer(Player, Group1Layer3Group , 700.000, 4150.000, 268.980, false, onAddCallback );//"Player"
-			addSpriteToLayer(Enemy, Group1Layer3Group , 675.520, 3345.520, 356.410, false, onAddCallback );//"enemyNoPowerup"
-			addSpriteToLayer(Enemy, Group1Layer3Group , 736.000, 3346.000, 357.180, false, onAddCallback );//"enemyNoPowerup"
-			addSpriteToLayer(Innocent, Group1Layer3Group , 671.500, 2591.500, 0.000, false, onAddCallback );//"Innocent"
-			addSpriteToLayer(Enemy, Group1Layer3Group , 676.000, 1756.000, 359.940, false, onAddCallback );//"enemyWithPowerup"
-			addSpriteToLayer(Enemy, Group1Layer3Group , 466.000, 1906.000, 90.820, false, onAddCallback );//"enemyNoPowerup"
-			addSpriteToLayer(Enemy, Group1Layer3Group , 856.000, 1906.000, 91.300, false, onAddCallback );//"enemyNoPowerup"
+			addSpriteToLayer(Player, Group1Layer3Group , 880.000, 4000.000, 268.980, false, onAddCallback );//"Player"
+			addSpriteToLayer(Innocent, Group1Layer3Group , 881.500, 2561.500, 0.000, false, onAddCallback );//"Innocent"
+			addSpriteToLayer(Enemy, Group1Layer3Group , 856.000, 3346.000, 0.000, false, onAddCallback );//"enemyNoPowerup"
+			addSpriteToLayer(Enemy, Group1Layer3Group , 916.000, 3346.000, 0.000, false, onAddCallback );//"enemyNoPowerup"
+			addSpriteToLayer(EnemyPowerup, Group1Layer3Group , 856.000, 1696.000, 0.000, false, onAddCallback );//"enemyPowerup"
+			addSpriteToLayer(Enemy, Group1Layer3Group , 736.000, 1576.000, 0.000, false, onAddCallback );//"enemyNoPowerup"
+			addSpriteToLayer(Enemy, Group1Layer3Group , 946.000, 1576.000, 0.000, false, onAddCallback );//"enemyNoPowerup"
+			addSpriteToLayer(EnemyPowerup, Group1Layer3Group , 196.000, 676.000, 0.000, false, onAddCallback );//"enemyPowerup"
+			addSpriteToLayer(EnemyPowerup, Group1Layer3Group , 346.000, 796.000, 0.000, false, onAddCallback );//"enemyPowerup"
+			addSpriteToLayer(Enemy, Group1Layer3Group , 196.000, 436.000, 0.000, false, onAddCallback );//"enemyNoPowerup"
+			addSpriteToLayer(Enemy, Group1Layer3Group , 346.000, 556.000, 0.000, false, onAddCallback );//"enemyNoPowerup"
+			addSpriteToLayer(Enemy, Group1Layer3Group , 466.000, 676.000, 0.000, false, onAddCallback );//"enemyNoPowerup"
+			addSpriteToLayer(Innocent, Group1Layer3Group , 161.500, 761.500, 0.000, false, onAddCallback );//"Innocent"
+			addSpriteToLayer(Innocent, Group1Layer3Group , 521.500, 581.500, 0.000, false, onAddCallback );//"Innocent"
+			addSpriteToLayer(Innocent, Group1Layer3Group , 401.500, 281.500, 0.000, false, onAddCallback );//"Innocent"
+			addSpriteToLayer(Innocent, Group1Layer3Group , 1001.500, 191.500, 0.000, false, onAddCallback );//"Innocent"
+			addSpriteToLayer(Coin, Group1Layer3Group , 1448.000, 158.000, 0.000, false, onAddCallback );//"Coin"
+			addSpriteToLayer(Innocent, Group1Layer3Group , 1151.500, 551.500, 0.000, false, onAddCallback );//"Innocent"
+			addSpriteToLayer(Innocent, Group1Layer3Group , 1121.500, 701.500, 0.000, false, onAddCallback );//"Innocent"
+			addSpriteToLayer(Innocent, Group1Layer3Group , 1241.500, 761.500, 0.000, false, onAddCallback );//"Innocent"
+			addSpriteToLayer(Innocent, Group1Layer3Group , 1391.500, 701.500, 0.000, false, onAddCallback );//"Innocent"
+			addSpriteToLayer(Innocent, Group1Layer3Group , 1391.500, 551.500, 0.000, false, onAddCallback );//"Innocent"
+			addSpriteToLayer(Innocent, Group1Layer3Group , 1271.500, 551.500, 0.000, false, onAddCallback );//"Innocent"
+			addSpriteToLayer(Innocent, Group1Layer3Group , 1571.500, 611.500, 0.000, false, onAddCallback );//"Innocent"
+			addSpriteToLayer(Innocent, Group1Layer3Group , 1511.500, 731.500, 0.000, false, onAddCallback );//"Innocent"
+			addSpriteToLayer(EnemyPowerup, Group1Layer3Group , 1366.000, 166.000, 92.078, false, onAddCallback );//"enemyPowerup"
 		}
 
 

@@ -86,7 +86,7 @@ package com.zombiequest
 		
 		protected function gotTheCoin(...rest):void
 		{
-			FlxG.state = new EndState("You Won!");
+			FlxG.state = new EndState("You Won, fuck yeah!!");
 		}
 		
 		protected function attackEnemy(overlap:Object, e:Object):void

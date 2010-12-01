@@ -18,7 +18,7 @@ package com.zombiequest
 		public var shotTimeout:Number = 1.5;
 		public var following:Boolean = false;
 		public var shooting:Boolean = false;
-		public var hasPowerup:Boolean = true;
+		public var hasPowerup:Boolean = false;
 		[Embed(source = "../../../assets/png/temp_person.png")]
 		private var ImgEnemy:Class;
 		public function Enemy(X:Number, Y:Number, player:Player = null, hasPowerup:Boolean = false) 
@@ -36,9 +36,9 @@ package com.zombiequest
 			scale.x = scale.x / 2;
 			scale.y = scale.y / 2;
 			if (this.hasPowerup == true) {
-				addAnimation("walk", [3, 4, 5], 10);
-			} else {
 				addAnimation("walk", [0, 1, 2], 10);
+			} else {
+				addAnimation("walk", [3, 4, 5], 10);
 			}
 			
 			play("walk");

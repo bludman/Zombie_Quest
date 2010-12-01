@@ -14,6 +14,8 @@ package com.zombiequest
 		public function Innocent(x:Number, y:Number) 
 		{
 			super(x, y, ImgInnocent);
+			loadGraphic(ImgInnocent, true, true, 24, 24);
+			calcFrame();
 		}
 		public override function update():void
 		{
@@ -23,4 +25,4 @@ package com.zombiequest
 		}
 	}
 
-}
+	}

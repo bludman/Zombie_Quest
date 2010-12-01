@@ -10,7 +10,7 @@
 	{
 		[Embed(source="../../../assets/png/ZombieTILES_WALK.png")]
 		private var ImgPlayer:Class;
-		private var speed:Number = 100;
+		private var speed:Number = 120;
 		private var strafeSpeed:Number = speed / 2 ;
 		private var attackDistance:Number = 10;
 		private var attackRange:FlxSprite = new FlxSprite(0, 0);
@@ -22,8 +22,10 @@
 			attackRange.width = this.width;
 			health = 100;
 			loadGraphic(ImgPlayer, true, true, 64, 64);
-			//scale.x = scale.x / 2;
-			//scale.y = scale.y / 2;
+			scale.x = scale.x * (2/3);
+			scale.y = scale.y * (2 / 3);
+			width = width  * (2 / 3);
+			height = height  * (2/3);
 			addAnimation("walk", [1, 2, 3, 4, 0], 5);
 			addAnimation("idle",[0]);
 			//play("walk");
