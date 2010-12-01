@@ -66,11 +66,10 @@ package com.zombiequest
 		{
 			var obj:Object;
 
-			callbackNewData(new TextData(844.000, 3657.000, 100.000, 50.000, 0.900, "Zombie Killers closing in!  Beware!  (press space to attack)","system", 8, 0x0, "center"), onAddCallback, textGroup, generateProperties( null ) ) ;
+			callbackNewData(new TextData(840.000, 3900.000, 100.000, 50.000, 0.900, "Zombie Killers closing in!  Beware!  (press space to attack)","system", 8, 0x0, "center"), onAddCallback, textGroup, generateProperties( null ) ) ;
 			callbackNewData(new TextData(828.000, 2429.000, 100.000, 58.820, 0.000, "This is an innocent bystander. You can eat him to regain health, but beware the consequences.","system", 8, 0x0, "center"), onAddCallback, textGroup, generateProperties( null ) ) ;
 			callbackNewData(new TextData(830.000, 1793.000, 100.000, 50.000, 0.000, "The enemy in red will give you a powerup once you defeat him.","system", 8, 0x0, "center"), onAddCallback, textGroup, generateProperties( null ) ) ;
 			callbackNewData(new TextData(1398.000, 212.000, 100.000, 50.000, 0.000, "Grab the coin to finish the level.","system", 8, 0x0, "center"), onAddCallback, textGroup, generateProperties( null ) ) ;
-			callbackNewData(new TextData(836.879, 3889.000, 112.121, 68.000, 0.000, "Controls:\nW - Move Forwards\nD - Move Backwards\nA - Turn Left\nD - Turn Right","system", 8, 0x0, "center"), onAddCallback, textGroup, generateProperties( null ) ) ;
 		}
 
 		public function addSpritesForLayerLayer3(onAddCallback:Function = null):void

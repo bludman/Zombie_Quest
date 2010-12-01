@@ -25,9 +25,6 @@ package com.zombiequest.power
 			if (time >= duration && active) {
 				destroy();
 			}
-			try {
-				
-			}
 		}
 		public function flavorText():String
 		{
