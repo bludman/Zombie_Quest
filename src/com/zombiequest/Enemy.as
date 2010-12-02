@@ -45,7 +45,7 @@ package com.zombiequest
 		}
 		public override function update():void
 		{
-			var distance:Number = Math.sqrt(Math.pow(this.x - player.x, 2) + Math.pow(this.y - player.y, 2));
+			var distance:Number = MathU.distance(player.x - x, player.y - y);
 			if (distance > followRange) {
 				velocity.x = 0;
 				velocity.y = 0;

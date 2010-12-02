@@ -22,6 +22,8 @@ package com.zombiequest
 		private var level:Map;
 		private var currentPower:PowerEffect;
 		private var hudManager:HUDMaker;
+		private const attackTimeout:Number = 1;
+		private var attackTimer:Number = attackTimeout;
 		
 		override public function create():void
 		{
@@ -53,11 +55,9 @@ package com.zombiequest
 			collideGroup.collide();
 			FlxU.collide(level.hitTilemaps, collideGroup);
 			FlxU.overlap(player, bulletGroup, playerGotShot);
-			FlxU.overlap(player, coin, gotTheCoin);
 			overlapBullets();
-			if (FlxG.keys.justPressed("SPACE") ){
-				FlxU.overlap(player.overlap, enemyGroup, attackEnemy);
-				FlxU.overlap(player.overlap, innocentGroup, attackInnocent);
+			if (FlxG.keys.justPressed("SPACE") ) {
+				playerAttack();
 			}
 			enemyShoot();
 			updatePower();
@@ -66,29 +66,10 @@ package com.zombiequest
 		
 		protected function onAddSprite(obj:Object, layer:FlxGroup, level:Map, properties:Array):Object
 		{
-			if (obj is Enemy)
-			{
-				enemyGroup.add(obj as Enemy);
-			}
-			else if (obj is Innocent)
-			{
-				innocentGroup.add(obj as Innocent);
-			}
-			else if (obj is Player) {
+			if (obj is Player) {
 				player = obj as Player;
 			}
-			else if (obj is Coin) {
-				coin = obj as Coin;
-			}
-			else if ( obj is TextData )
-			{
-				var tData:TextData = obj as TextData;
-				if ( tData.fontName != "" && tData.fontName != "system" )
-				{
-					tData.fontName += "Font";
-				}
-				return level.addTextToLayer(tData, layer, true, properties, onAddSprite );
-			}
+			
 			return obj;
 		}
 		
@@ -200,6 +181,16 @@ package com.zombiequest
 			for (var i:Number = 0; i < enemyA.length; i++) {
 				var enemy:Enemy = enemyA[i] as Enemy;
 				enemy.player = player;
+			}
+		}
+		
+		protected function playerAttack():void
+		{
+			attackTimer += FlxG.elapsed;
+			if (attackTimer >= attackTimeout) {
+				FlxU.overlap(player, enemyGroup, attackEnemy);
+				FlxU.overlap(player, innocentGroup, attackInnocent);
+				attackTimer = 0;
 			}
 		}
 		
