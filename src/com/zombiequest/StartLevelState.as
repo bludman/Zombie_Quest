@@ -18,7 +18,9 @@ package com.zombiequest
 		private var enemyGroup:FlxGroup;
 		private var bulletGroup:FlxGroup;
 		private var innocentGroup:FlxGroup;
+		private var minionGroup:FlxGroup;
 		private var collideGroup:FlxGroup;
+		private var minionFactory:MinionFactory;
 		private var level:Map;
 		private var currentPower:PowerEffect;
 		private var hudManager:HUDMaker;
@@ -28,12 +30,13 @@ package com.zombiequest
 		override public function create():void
 		{
 			//Instantiate objects
-			player = new Player(10, 280);
 			bulletGroup = new FlxGroup();
 			enemyGroup = new FlxGroup();
 			innocentGroup = new FlxGroup();
+			minionGroup = new FlxGroup();
 			collideGroup = new FlxGroup();
-			level = new Level_Group1(true, onAddSprite);			
+			level = new Level_Group1(true, onAddSprite);
+			minionFactory = new MinionFactory(enemyGroup, innocentGroup, player);
 			//give enemies reference to player
 			updateEnemyPlayerRef();
 			
@@ -41,6 +44,16 @@ package com.zombiequest
 			collideGroup.add(enemyGroup);
 			collideGroup.add(innocentGroup);
 			collideGroup.add(player);
+			collideGroup.add(minionGroup);
+			
+			//TODO Remove
+			var minion:Minion = minionFactory.getMinion(640, 480);
+			minionGroup.add(minion);
+			add(minion);
+			var enemy:Enemy = new Enemy(320, 240, false);
+			enemy.player = player;
+			add(enemy);
+			enemyGroup.add(enemy);
 			
 			//Set up the camera
 			FlxG.follow(player, 2.5);

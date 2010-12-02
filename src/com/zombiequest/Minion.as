@@ -9,6 +9,8 @@ package com.zombiequest
 	{
 		private var speed:Number = 90;
 		private var attackRange:Number = 20;
+		private var followRange:Number = 50;
+		private var playerFollowMin:Number = 20;
 		private var damage:Number = 25;
 		private var enemyGroup:FlxGroup;
 		private var innocentGroup:FlxGroup;
@@ -28,17 +30,48 @@ package com.zombiequest
 		
 		public override function update():void
 		{
-			if (chasing) {
-				var angle:Number = FlxU.getAngle(chaseTarget.x - x, chaseTarget.y - y);
-				this.angle = angle;
-				var dist:Number = MathU.dist(chaseTarget.x - x, chaseTarget.y - y);
-				if (dist <= attackRange) {
-					
+			var angle:Number;
+			var dist:Number;
+			velocity.x = 0;
+			velocity.y = 0;
+			if (!chasing || chaseTarget.dead) {
+				var targets:Array = enemyGroup.members;
+				targets = targets.concat(innocentGroup.members);
+				for (var i:Number = 0; i < targets.length; i++ && !chasing) {
+					if (MathU.dist(x - FlxSprite(targets[i]).x, y - FlxSprite(targets[i]).y) < followRange)
+					{
+						if(!FlxSprite(targets[i]).dead){
+							chasing = true;
+							chaseTarget = targets[i] as FlxSprite;
+						}
+					}
 				}
-				
-				
+				if (!chasing) {
+					angle = FlxU.getAngle(player.x - x, player.y - y);
+					dist = MathU.dist(player.x - x, player.y - y);
+					if (dist > playerFollowMin) 
+					{
+						velocity.x = speed * Math.cos(MathU.degToRad(angle));
+						velocity.y = speed * Math.sin(MathU.degToRad(angle));
+					}
+				}
+			}
+			if (chasing && !chaseTarget.dead) {
+				angle = FlxU.getAngle(chaseTarget.x - x, chaseTarget.y - y);
+				this.angle = angle;
+				dist = MathU.dist(chaseTarget.x - x, chaseTarget.y - y);
+				if (dist <= attackRange) {
+					attack(chaseTarget);
+				}
+				velocity.x = speed * Math.cos(MathU.degToRad(angle));
+				velocity.y = speed * Math.sin(MathU.degToRad(angle));
 			}
 			super.update();
+		}
+		
+		private function attack(target:FlxSprite):void
+		{
+			
 		}
 	}
 }
