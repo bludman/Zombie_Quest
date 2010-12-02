@@ -10,7 +10,8 @@
 	{
 		[Embed(source="../../../assets/png/ZombieTILES_WALK.png")]
 		private var ImgPlayer:Class;
-		private var speed:Number = 120;
+		public const origSpeed:Number = 120;
+		private var speed:Number = origSpeed;
 		private var strafeSpeed:Number = speed / 2 ;
 		private var attackDistance:Number = 10;
 		private var attackRange:FlxSprite = new FlxSprite(0, 0);

@@ -17,7 +17,7 @@ package com.zombiequest.power
 		public override function affect(p:Player):void
 		{
 			this.player = p;
-			player.setSpeed = player.getSpeed / 2;
+			player.setSpeed = player.origSpeed / 2;
 		}
 		
 		public override function flavorText():String
@@ -27,7 +27,7 @@ package com.zombiequest.power
 		
 		public override function destroy():void
 		{
-			player.setSpeed = player.getSpeed * 2;
+			player.setSpeed = player.origSpeed * 2;
 			active = false;
 		}
 	}

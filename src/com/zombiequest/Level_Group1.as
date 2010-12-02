@@ -100,6 +100,8 @@ package com.zombiequest
 			addSpriteToLayer(null, Innocent, Layer3Group , 1560.000, 600.000, 0.000, false, 1.000, 1.000, generateProperties( null ), onAddCallback );//"Innocent"
 			addSpriteToLayer(null, Innocent, Layer3Group , 1500.000, 720.000, 0.000, false, 1.000, 1.000, generateProperties( null ), onAddCallback );//"Innocent"
 			addSpriteToLayer(new Enemy(1350.000, 150.000, true), Enemy, Layer3Group , 1350.000, 150.000, 92.080, false, 1.000, 1.000, generateProperties( null ), onAddCallback );//"enemyPowerup"
+			addSpriteToLayer(new Enemy(687.000, 3771.000, true), Enemy, Layer3Group , 687.000, 3771.000, 0.000, false, 1.000, 1.000, generateProperties( null ), onAddCallback );//"enemyPowerup"
+			addSpriteToLayer(new Enemy(1074.000, 3735.000, true), Enemy, Layer3Group , 1074.000, 3735.000, 0.000, false, 1.000, 1.000, generateProperties( null ), onAddCallback );//"enemyPowerup"
 		}
 
 		public function generateObjectLinks(onAddCallback:Function = null):void

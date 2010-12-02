@@ -107,7 +107,8 @@ package com.zombiequest
 					if (currentPower != null) {
 						currentPower.destroy();
 					}
-					currentPower = PowerupFactory.getPowerup();
+					//currentPower = PowerupFactory.getPowerup();
+					currentPower = new DoubleSpeed();
 					currentPower.affect(player);
 					hudManager.pushStatusText(currentPower.flavorText());
 				}
