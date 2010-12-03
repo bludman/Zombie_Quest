@@ -24,7 +24,7 @@ package com.zombiequest
 		private var level:Map;
 		private var currentPower:PowerEffect;
 		private var hudManager:HUDMaker;
-		private const attackTimeout:Number = 1;
+		private const attackTimeout:Number = 0.5;
 		private var attackTimer:Number = attackTimeout;
 		
 		override public function create():void
@@ -54,7 +54,9 @@ package com.zombiequest
 			enemy.player = player;
 			add(enemy);
 			enemyGroup.add(enemy);
-			
+			var innocent:Innocent = new Innocent(480, 400, 0);
+			add(innocent);
+			innocentGroup.add(innocent);
 			//Set up the camera
 			FlxG.follow(player, 2.5);
 			FlxG.followAdjust(.5, .2);
@@ -69,11 +71,8 @@ package com.zombiequest
 			FlxU.collide(level.hitTilemaps, collideGroup);
 			FlxU.overlap(player, bulletGroup, playerGotShot);
 			overlapBullets();
-			if (FlxG.keys.justPressed("SPACE") ) {
-				playerAttack();
-			}
+			playerAttack();
 			enemyShoot();
-			updatePower();
 			super.update();
 		}
 		
@@ -97,14 +96,17 @@ package com.zombiequest
 			enemy.health -= player.damage;
 			enemy.updateHealthbar();
 			if (enemy.dead) {
-				if (enemy.hasPowerup) {
+				var minion:Minion = minionFactory.getMinion(enemy.x, enemy.y);
+				add(minion);
+				minionGroup.add(minion);
+				/*if (enemy.hasPowerup) {
 					if (currentPower != null) {
 						currentPower.destroy();
 					}
 					currentPower = PowerupFactory.getPowerup();
 					currentPower.affect(player);
 					hudManager.pushStatusText(currentPower.flavorText());
-				}
+				}*/
 			}
 		}
 		protected function attackInnocent(overlap:Object, i:Object):void
@@ -113,13 +115,17 @@ package com.zombiequest
 			innocent.kill();
 			player.health += 50;
 			updateHealthBar();
+			var minion:Minion = minionFactory.getMinion(innocent.x, innocent.y);
+			add(minion);
+			minionGroup.add(minion);
+			/*
 			if (currentPower != null) {
 				currentPower.destroy();
 			}
 			currentPower = PowerdownFactory.getPowerdown();
 			//currentPower = new LimitedVision();
 			currentPower.affect(player);
-			hudManager.pushStatusText(currentPower.flavorText());
+			hudManager.pushStatusText(currentPower.flavorText());*/
 		}
 		
 		protected function playerGotShot(p:FlxObject, b:FlxObject):void
@@ -200,10 +206,14 @@ package com.zombiequest
 		protected function playerAttack():void
 		{
 			attackTimer += FlxG.elapsed;
-			if (attackTimer >= attackTimeout) {
-				FlxU.overlap(player, enemyGroup, attackEnemy);
-				FlxU.overlap(player, innocentGroup, attackInnocent);
-				attackTimer = 0;
+			if (FlxG.keys.justPressed("SPACE"))
+			{
+				if (attackTimer >= attackTimeout) 
+				{
+					FlxU.overlap(player.overlap, enemyGroup, attackEnemy);
+					FlxU.overlap(player.overlap, innocentGroup, attackInnocent);
+					attackTimer = 0;
+				}
 			}
 		}
 		
