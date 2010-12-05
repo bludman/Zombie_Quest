@@ -13,8 +13,10 @@ package com.zombiequest
 		private const shootRange:Number = 500; //Ben: What is this for?
 		
 		private const RETREAT_RANGE:Number = 100;
+		private const HOLD_RANGE:Number = 50;
 		private const ATTACK_RANGE:Number = 2*RETREAT_RANGE;
 		private const FOLLOW_RANGE:Number = 3*ATTACK_RANGE;
+		
 		
 		private var healthbar:FlxSprite;
 		public var player:Player;
@@ -51,70 +53,87 @@ package com.zombiequest
 		
 		public function pickTarget():FlxSprite
 		{
-			//This should be overridden in the subclass
+			//TODO: This should be overridden in the subclass to find 
+			//closest not following minion or player 
 			return player;
+		}
+		
+		/**
+		 * Hold position
+		 */
+		private function holdPosition(attack:Boolean = false):void
+		{
+			velocity.x = 0;
+			velocity.y = 0;
+			following = false;
+			shooting = attack;
+		}
+		
+		/**
+		 * Retreat from a target
+		 */
+		private function retreat(target:FlxSprite):void
+		{
+			this.angle= -1* FlxU.getAngle(target.x - this.x, target.y - this.y);
+			velocity.x = speed * Math.cos(MathU.degToRad(this.angle));
+			velocity.y = speed * Math.sin(MathU.degToRad(this.angle));
+			shooting = false;
+			following = false;
+		}
+		
+		/**
+		 * Chase a target
+		 */
+		private function chase(target:FlxSprite,attack:Boolean = false):void
+		{
+			this.angle= FlxU.getAngle(target.x - this.x, target.y - this.y);
+			velocity.x = speed * Math.cos(MathU.degToRad(this.angle));
+			velocity.y = speed * Math.sin(MathU.degToRad(this.angle));
+			shooting = attack;
+			following = true;
 		}
 		
 		
 		public override function update():void
 		{
 			var target:FlxSprite = this.pickTarget();
-			
 			var distance:Number = MathU.dist(target.x - x, target.y - y);
-			if (distance >= FOLLOW_RANGE) {
-				velocity.x = 0;
-				velocity.y = 0;
-				following = false;
-				shooting = false;
-			} else {
-				//face away from target
-				if (distance<= RETREAT_RANGE)
+			
+			if(distance<=FOLLOW_RANGE)
+			{
+				if(distance <= ATTACK_RANGE)
 				{
-					this.angle= -1* FlxU.getAngle(target.x - this.x, target.y - this.y);
-					shooting = false;
-					following = false;
-					//velocity.x = 0;
-					//velocity.y = 0;
-				}else if (distance <= ATTACK_RANGE) { 
-					this.angle = FlxU.getAngle(target.x - this.x, target.y - this.y);
-					shooting = true;
-					following = true;
+					if(distance <= ATTACK_RANGE - HOLD_RANGE)
+					{
+						if(distance<= RETREAT_RANGE)
+						{
+							retreat(target);
+						}
+						else
+						{
+							holdPosition(true);
+						}
+					}
+					else
+					{
+						chase(target,true);	
+					}
 				}
-				velocity.x = speed * Math.cos(MathU.degToRad(this.angle));
-				velocity.y = speed * Math.sin(MathU.degToRad(this.angle));
+				else{
+					chase(target,false);
+				}
 			}
+			else
+			{
+				holdPosition(false);
+			}
+			
 			if (!following) {
 				_curFrame = 1;
 			}
 			super.update();
 			updateHealthbar();
-			
-			
-//			var distance:Number = MathU.dist(player.x - x, player.y - y);
-//			if (distance > followRange) {
-//				velocity.x = 0;
-//				velocity.y = 0;
-//				following = false;
-//				shooting = false;
-//			} else {
-//				this.angle = FlxU.getAngle(player.x - this.x, player.y - this.y);
-//				if (distance < followRange) { 
-//					velocity.x = speed * Math.cos(MathU.degToRad(this.angle));
-//					velocity.y = speed * Math.sin(MathU.degToRad(this.angle));
-//					shooting = true;
-//					following = true;
-//				}
-//				else {
-//					shooting = true;
-//					velocity.x = 0;
-//					velocity.y = 0;
-//				}
-//			}
-//			if (!following) {
-//				_curFrame = 1;
-//			}
-//			super.update();
-//			updateHealthbar();
+
 		}
 		
 		public function bulletSpawn():FlxPoint
