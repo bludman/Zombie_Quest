@@ -100,6 +100,12 @@ package com.zombiequest
 			healthbar.x = this.x - 2;
 			healthbar.y = this.y;
 		}
+		
+		public override function kill():void
+		{
+			super.kill();
+			healthbar.kill();
+		}
 	}
 
 }

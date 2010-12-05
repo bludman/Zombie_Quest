@@ -67,11 +67,12 @@ package com.zombiequest
 		
 		override public function update():void
 		{
-			collideGroup.collide();
 			FlxU.collide(level.hitTilemaps, collideGroup);
+			collideGroup.collide();
 			FlxU.overlap(player, bulletGroup, playerGotShot);
 			overlapBullets();
 			playerAttack();
+			minionAttack();
 			enemyShoot();
 			super.update();
 		}
@@ -216,6 +217,11 @@ package com.zombiequest
 					attackTimer = 0;
 				}
 			}
+		}
+		
+		protected function minionAttack():void
+		{
+		
 		}
 		
 	}
