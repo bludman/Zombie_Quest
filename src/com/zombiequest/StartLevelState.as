@@ -1,6 +1,7 @@
 package com.zombiequest 
 {
 	import adobe.utils.CustomActions;
+	
 	import com.zombiequest.power.*;
 	
 	import org.flixel.*;
@@ -21,6 +22,7 @@ package com.zombiequest
 		private var minionGroup:FlxGroup;
 		private var collideGroup:FlxGroup;
 		private var minionFactory:MinionFactory;
+		private var enemyFactory:EnemyFactory;
 		private var level:Map;
 		private var currentPower:PowerEffect;
 		private var hudManager:HUDMaker;
@@ -37,6 +39,7 @@ package com.zombiequest
 			collideGroup = new FlxGroup();
 			level = new Level_Group1(true, onAddSprite);
 			minionFactory = new MinionFactory(enemyGroup, innocentGroup, player);
+			enemyFactory = new EnemyFactory(minionGroup, player);
 			//give enemies reference to player
 			updateEnemyPlayerRef();
 			
@@ -50,8 +53,7 @@ package com.zombiequest
 			var minion:Minion = minionFactory.getMinion(640, 480);
 			minionGroup.add(minion);
 			add(minion);
-			var enemy:Enemy = new Enemy(320, 240, false);
-			enemy.player = player;
+			var enemy:Enemy = enemyFactory.getEnemy(320, 240);
 			add(enemy);
 			enemyGroup.add(enemy);
 			var innocent:Innocent = new Innocent(480, 400, 0);
