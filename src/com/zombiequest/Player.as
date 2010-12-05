@@ -8,6 +8,9 @@
 	 */
 	public class Player extends FlxSprite
 	{
+		[Embed(source="../../../assets/sound/footsteps.mp3")] 
+		protected var FootSteps:Class;
+		
 		[Embed(source="../../../assets/png/ZombieTILES_WALK.png")]
 		private var ImgPlayer:Class;
 		public const origSpeed:Number = 120;
@@ -31,6 +34,8 @@
 			attackRange.width = this.width;
 			//play("walk");
 			calcFrame();
+			
+			FlxG.play(FootSteps, 1.0, true);
 		}		
 		override public function update():void
 		{

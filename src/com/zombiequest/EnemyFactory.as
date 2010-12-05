@@ -22,6 +22,7 @@ package com.zombiequest
 		
 		public override function update():void
 		{
+			//THIS DOES NOT WORK!!!!
 			if(hordeOn)
 			{
 				timeElapsed += FlxG.elapsed;
