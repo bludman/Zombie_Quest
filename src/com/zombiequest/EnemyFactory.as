@@ -23,7 +23,33 @@ package com.zombiequest
 			FlxG.state.add(enemy);
 		}
 		
-		//public function 
+		public function startHorde():void
+		{
+			spawnUp();
+			spawnDown();
+			spawnLeft();
+			spawnRight();
+		}
+		
+		public function spawnUp(hasPowerup:Boolean = false):void
+		{
+			getEnemy(640, 0, hasPowerup);
+		}
+		
+		public function spawnDown(hasPowerup:Boolean = false):void
+		{
+			getEnemy(640, 1024, hasPowerup);
+		}
+		
+		public function spawnLeft(hasPowerup:Boolean = false):void
+		{
+			getEnemy(0, 512, hasPowerup);
+		}
+		
+		public function spawnRight(hasPowerup:Boolean = false):void
+		{
+			getEnemy(1280, 512, hasPowerup);
+		}
 	}
 	
 }

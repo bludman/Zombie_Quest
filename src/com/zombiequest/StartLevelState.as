@@ -46,11 +46,10 @@ package com.zombiequest
 			add(bulletGroup);
 			collideGroup.add(enemyGroup);
 			collideGroup.add(innocentGroup);
-			collideGroup.add(player);
 			collideGroup.add(minionGroup);
 			
 			minionFactory.getMinion(640, 480);
-			enemyFactory.getEnemy(320, 240);
+			enemyFactory.startHorde();
 			
 			var innocent:Innocent = new Innocent(480, 400, 0);
 			add(innocent);
@@ -67,11 +66,13 @@ package com.zombiequest
 		override public function update():void
 		{
 			FlxU.collide(level.hitTilemaps, collideGroup);
+			FlxU.collide(level.hitTilemaps, player);
 			collideGroup.collide();
+			player.collide(enemyGroup);
+			player.collide(innocentGroup);
 			FlxU.overlap(player, bulletGroup, playerGotShot);
 			overlapBullets();
 			playerAttack();
-			minionAttack();
 			enemyShoot();
 			super.update();
 		}
@@ -81,7 +82,6 @@ package com.zombiequest
 			if (obj is Player) {
 				player = obj as Player;
 			}
-			
 			return obj;
 		}
 		
@@ -176,6 +176,8 @@ package com.zombiequest
 			}
 		}
 		/**
+		 * 
+		 *
 		 * Call whenever the player's health is changed
 		 */
 		protected function updateHealthBar():void
@@ -212,11 +214,6 @@ package com.zombiequest
 					attackTimer = 0;
 				}
 			}
-		}
-		
-		protected function minionAttack():void
-		{
-		
 		}
 		
 	}

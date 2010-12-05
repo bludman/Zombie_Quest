@@ -44,7 +44,7 @@ package com.zombiequest
 			boundsMinX = 0;
 			boundsMinY = 0;
 			boundsMaxX = 1280;
-			boundsMaxY = 960;
+			boundsMaxY = 1024;
 			bgColor = 0xff000000;
 		}
 
@@ -57,7 +57,7 @@ package com.zombiequest
 
 		public function addSpritesForLayerLayer3(onAddCallback:Function = null):void
 		{
-			addSpriteToLayer(new Player(627.000, 500.000), Player, Layer3Group , 627.000, 500.000, 0.000, false, 1.000, 1.000, generateProperties( null ), onAddCallback );//"Player"
+			addSpriteToLayer(new Player(640.000, 730.000), Player, Layer3Group , 640.000, 730.000, 0.000, false, 1.000, 1.000, generateProperties( null ), onAddCallback );//"Player"
 		}
 
 		public function generateObjectLinks(onAddCallback:Function = null):void
