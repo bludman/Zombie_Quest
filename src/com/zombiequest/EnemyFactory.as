@@ -6,14 +6,40 @@ package com.zombiequest
 	 * ...
 	 * @author Team Zombie Quest
 	 */
-	public class EnemyFactory 
+	public class EnemyFactory extends FlxObject
 	{
 		private var minionGroup:FlxGroup;
 		private var player:Player;
+		
+		private var hordeOn:Boolean = false;
+		private var timeElapsed:Number = 0;
+		
 		public function EnemyFactory(minionGroup:FlxGroup, player:Player) 
 		{
 			this.minionGroup = minionGroup;
 			this.player = player;
+		}
+		
+		public override function update():void
+		{
+			if(hordeOn)
+			{
+				timeElapsed += FlxG.elapsed;
+				if(timeElapsed > .1) {
+					if(Math.random() > 0.7) {
+						spawnUp();
+					}
+					if(Math.random() > 0.7) {
+						spawnDown();
+					}
+					if(Math.random() > 0.7) {
+						spawnLeft();
+					}
+					if(Math.random() > 0.7) {
+						spawnRight();
+					}
+				}
+			}
 		}
 		
 		public function getEnemy(x:Number, y:Number, hasPowerup:Boolean = false):void
@@ -23,12 +49,10 @@ package com.zombiequest
 			FlxG.state.add(enemy);
 		}
 		
+		
 		public function startHorde():void
 		{
-			spawnUp();
-			spawnDown();
-			spawnLeft();
-			spawnRight();
+			hordeOn = true;
 		}
 		
 		public function spawnUp(hasPowerup:Boolean = false):void
