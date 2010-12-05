@@ -1,6 +1,7 @@
 package com.zombiequest 
 {
 	import adobe.utils.CustomActions;
+	
 	import com.zombiequest.power.*;
 	
 	import org.flixel.*;
@@ -15,12 +16,13 @@ package com.zombiequest
 		private const maxHealth:Number = 100;
 		private var player:Player;
 		private var coin:Coin;
-		private var enemyGroup:FlxGroup;
-		private var bulletGroup:FlxGroup;
-		private var innocentGroup:FlxGroup;
-		private var minionGroup:FlxGroup;
+		public static var enemyGroup:FlxGroup;
+		public static var bulletGroup:FlxGroup;
+		public static var innocentGroup:FlxGroup;
+		public static var minionGroup:FlxGroup;
 		private var collideGroup:FlxGroup;
 		private var minionFactory:MinionFactory;
+		private var enemyFactory:EnemyFactory;
 		private var level:Map;
 		private var currentPower:PowerEffect;
 		private var hudManager:HUDMaker;
@@ -37,21 +39,19 @@ package com.zombiequest
 			collideGroup = new FlxGroup();
 			level = new Level_Group1(true, onAddSprite);
 			minionFactory = new MinionFactory(enemyGroup, innocentGroup, player);
+			enemyFactory = new EnemyFactory(minionGroup, player);
 			//give enemies reference to player
 			updateEnemyPlayerRef();
 			
 			add(bulletGroup);
 			collideGroup.add(enemyGroup);
 			collideGroup.add(innocentGroup);
-			collideGroup.add(player);
 			collideGroup.add(minionGroup);
 			
-			//TODO Remove
 			var minion:Minion = minionFactory.getMinion(640, 480);
 			minionGroup.add(minion);
 			add(minion);
-			var enemy:Enemy = new Enemy(320, 240, false);
-			enemy.player = player;
+			var enemy:Enemy = enemyFactory.getEnemy(320, 240);
 			add(enemy);
 			enemyGroup.add(enemy);
 			var innocent:Innocent = new Innocent(480, 400, 0);
@@ -67,8 +67,11 @@ package com.zombiequest
 		
 		override public function update():void
 		{
-			collideGroup.collide();
 			FlxU.collide(level.hitTilemaps, collideGroup);
+			FlxU.collide(level.hitTilemaps, player);
+			collideGroup.collide();
+			player.collide(enemyGroup);
+			player.collide(innocentGroup);
 			FlxU.overlap(player, bulletGroup, playerGotShot);
 			overlapBullets();
 			playerAttack();
@@ -81,7 +84,6 @@ package com.zombiequest
 			if (obj is Player) {
 				player = obj as Player;
 			}
-			
 			return obj;
 		}
 		
@@ -180,6 +182,8 @@ package com.zombiequest
 			}
 		}
 		/**
+		 * 
+		 *
 		 * Call whenever the player's health is changed
 		 */
 		protected function updateHealthBar():void

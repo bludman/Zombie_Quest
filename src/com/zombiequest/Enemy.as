@@ -11,9 +11,11 @@ package com.zombiequest
 		private const speed:Number = 55;
 		private const turnSpeed:Number = 3;
 		private const shootRange:Number = 500; //Ben: What is this for?
-		private const followRange:Number = 300;
-		private const attackRange:Number = 100;
-		private const retreatRange:Number = 50;
+		
+		private const RETREAT_RANGE:Number = 100;
+		private const ATTACK_RANGE:Number = 2*RETREAT_RANGE;
+		private const FOLLOW_RANGE:Number = 3*ATTACK_RANGE;
+		
 		private var healthbar:FlxSprite;
 		public var player:Player;
 		public var lastShot:Number;
@@ -23,9 +25,10 @@ package com.zombiequest
 		public var hasPowerup:Boolean = false;
 		[Embed(source = "../../../assets/png/temp_person.png")]
 		private var ImgEnemy:Class;
-		public function Enemy(X:Number, Y:Number, hasPowerup:Boolean = false) 
+		public function Enemy(X:Number, Y:Number, player:Player, hasPowerup:Boolean = false) 
 		{
 			super(X, Y);
+			this.player = player;
 			health = 100;
 			scale = new FlxPoint(20 / width, 20 / height);
 			width = 20;
@@ -58,29 +61,25 @@ package com.zombiequest
 			var target:FlxSprite = this.pickTarget();
 			
 			var distance:Number = MathU.dist(target.x - x, target.y - y);
-			if (distance > followRange) {
+			if (distance >= FOLLOW_RANGE) {
 				velocity.x = 0;
 				velocity.y = 0;
 				following = false;
 				shooting = false;
 			} else {
-				//face target
-				this.angle = FlxU.getAngle(target.x - this.x, target.y - this.y);
-				
-				
-				if (distance < attackRange) { 
+				//face away from target
+				if (distance<= RETREAT_RANGE)
+				{
+					this.angle= -1* FlxU.getAngle(target.x - this.x, target.y - this.y);
+					shooting = false;
+					following = false;
+					//velocity.x = 0;
+					//velocity.y = 0;
+				}else if (distance <= ATTACK_RANGE) { 
+					this.angle = FlxU.getAngle(target.x - this.x, target.y - this.y);
 					shooting = true;
 					following = true;
 				}
-				
-				if (distance<retreatRange)
-				{
-					this.angle*= -1;
-					shooting = false;
-					//velocity.x = 0;
-					//velocity.y = 0;
-				}
-					
 				velocity.x = speed * Math.cos(MathU.degToRad(this.angle));
 				velocity.y = speed * Math.sin(MathU.degToRad(this.angle));
 			}
@@ -145,6 +144,12 @@ package com.zombiequest
 			healthbar.scale.x = this.health / 6;
 			healthbar.x = this.x - 2;
 			healthbar.y = this.y;
+		}
+		
+		public override function kill():void
+		{
+			super.kill();
+			healthbar.kill();
 		}
 	}
 
