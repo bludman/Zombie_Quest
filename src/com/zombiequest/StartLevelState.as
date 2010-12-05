@@ -48,9 +48,7 @@ package com.zombiequest
 			collideGroup.add(innocentGroup);
 			collideGroup.add(minionGroup);
 			
-			var minion:Minion = minionFactory.getMinion(640, 480);
-			minionGroup.add(minion);
-			add(minion);
+			minionFactory.getMinion(640, 480);
 			var enemy:Enemy = enemyFactory.getEnemy(320, 240);
 			add(enemy);
 			enemyGroup.add(enemy);
@@ -76,6 +74,7 @@ package com.zombiequest
 			overlapBullets();
 			playerAttack();
 			enemyShoot();
+			armyControl();
 			super.update();
 		}
 		
@@ -98,9 +97,7 @@ package com.zombiequest
 			enemy.health -= player.damage;
 			enemy.updateHealthbar();
 			if (enemy.dead) {
-				var minion:Minion = minionFactory.getMinion(enemy.x, enemy.y);
-				add(minion);
-				minionGroup.add(minion);
+				minionFactory.getMinion(enemy.x, enemy.y);
 				/*if (enemy.hasPowerup) {
 					if (currentPower != null) {
 						currentPower.destroy();
@@ -118,9 +115,7 @@ package com.zombiequest
 			innocent.kill();
 			player.health += 50;
 			updateHealthBar();
-			var minion:Minion = minionFactory.getMinion(innocent.x, innocent.y);
-			add(minion);
-			minionGroup.add(minion);
+			minionFactory.getMinion(innocent.x, innocent.y);
 			/*
 			if (currentPower != null) {
 				currentPower.destroy();
@@ -219,6 +214,13 @@ package com.zombiequest
 					FlxU.overlap(player.overlap, innocentGroup, attackInnocent);
 					attackTimer = 0;
 				}
+			}
+		}
+		
+		protected function armyControl():void
+		{
+			if (FlxG.keys.justPressed("A")) {
+				
 			}
 		}
 		

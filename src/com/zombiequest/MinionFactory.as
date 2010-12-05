@@ -1,6 +1,6 @@
 package com.zombiequest 
 {
-	import org.flixel.FlxGroup;
+	import org.flixel.*;
 	/**
 	 * ...
 	 * @author Team Zombie Quest
@@ -17,9 +17,11 @@ package com.zombiequest
 			this.player = player;
 		}
 		
-		public function getMinion(x:Number, y:Number):Minion
+		public function getMinion(x:Number, y:Number):void
 		{
-			return new Minion(x, y, enemyGroup, innocentGroup, player);
+			var minion:Minion = new Minion(x, y, enemyGroup, innocentGroup, player);
+			StartLevelState.minionGroup.add(minion);
+			FlxG.state.add(minion);
 		}
 	}
 

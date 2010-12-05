@@ -71,7 +71,6 @@
 			else {
 				play("walk");
 			}
-			
 			super.update();
 			updateOverlap();
 		}

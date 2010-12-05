@@ -9,7 +9,7 @@ package com.zombiequest
 	{
 		private var speed:Number = 90;
 		private var attackRange:Number = 20;
-		private var followRange:Number = 50;
+		private var followRange:Number = 100;
 		private var playerFollowMin:Number = 64;
 		private var damage:Number = 25;
 		private const attackTimeout:Number = 1;
@@ -20,6 +20,15 @@ package com.zombiequest
 		private var chasing:Boolean = false;
 		private var chaseTarget:FlxSprite;
 		private static var id:Number = 0;
+		
+		/*
+		 * State Enums
+		 */
+		public static const ATTACKING:Number = 1;
+		public static const FOLLOWING:Number = 2;
+		public static const SENTRY:Number = 3;
+		
+		private var state:Number;
 		/**
 		 * Should only be called by the MinionFactory
 		 */
