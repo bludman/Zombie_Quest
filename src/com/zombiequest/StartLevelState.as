@@ -16,11 +16,11 @@ package com.zombiequest
 		private const maxHealth:Number = 100;
 		private var player:Player;
 		private var coin:Coin;
-		private var enemyGroup:FlxGroup;
-		private var bulletGroup:FlxGroup;
-		private var innocentGroup:FlxGroup;
-		private var minionGroup:FlxGroup;
-		private var collideGroup:FlxGroup;
+		public static var enemyGroup:FlxGroup;
+		public static var bulletGroup:FlxGroup;
+		public static var innocentGroup:FlxGroup;
+		public static var minionGroup:FlxGroup;
+		public static var collideGroup:FlxGroup;
 		private var minionFactory:MinionFactory;
 		private var enemyFactory:EnemyFactory;
 		private var level:Map;
@@ -49,16 +49,13 @@ package com.zombiequest
 			collideGroup.add(player);
 			collideGroup.add(minionGroup);
 			
-			//TODO Remove
-			var minion:Minion = minionFactory.getMinion(640, 480);
-			minionGroup.add(minion);
-			add(minion);
-			var enemy:Enemy = enemyFactory.getEnemy(320, 240);
-			add(enemy);
-			enemyGroup.add(enemy);
+			minionFactory.getMinion(640, 480);
+			enemyFactory.getEnemy(320, 240);
+			
 			var innocent:Innocent = new Innocent(480, 400, 0);
 			add(innocent);
 			innocentGroup.add(innocent);
+			
 			//Set up the camera
 			FlxG.follow(player, 2.5);
 			FlxG.followAdjust(.5, .2);
@@ -99,9 +96,7 @@ package com.zombiequest
 			enemy.health -= player.damage;
 			enemy.updateHealthbar();
 			if (enemy.dead) {
-				var minion:Minion = minionFactory.getMinion(enemy.x, enemy.y);
-				add(minion);
-				minionGroup.add(minion);
+				minionFactory.getMinion(enemy.x, enemy.y);
 				/*if (enemy.hasPowerup) {
 					if (currentPower != null) {
 						currentPower.destroy();
@@ -119,9 +114,7 @@ package com.zombiequest
 			innocent.kill();
 			player.health += 50;
 			updateHealthBar();
-			var minion:Minion = minionFactory.getMinion(innocent.x, innocent.y);
-			add(minion);
-			minionGroup.add(minion);
+			minionFactory.getMinion(innocent.x, innocent.y);
 			/*
 			if (currentPower != null) {
 				currentPower.destroy();

@@ -1,5 +1,6 @@
 package com.zombiequest 
 {
+	import org.flixel.*;
 	import org.flixel.FlxGroup;
 	/**
 	 * ...
@@ -15,10 +16,14 @@ package com.zombiequest
 			this.player = player;
 		}
 		
-		public function getEnemy(x:Number, y:Number, hasPowerup:Boolean = false):Enemy
+		public function getEnemy(x:Number, y:Number, hasPowerup:Boolean = false):void
 		{
-			return new Enemy(x, y, player, hasPowerup);
+			var enemy:Enemy = new Enemy(x, y, player, hasPowerup);
+			StartLevelState.enemyGroup.add(enemy);
+			FlxG.state.add(enemy);
 		}
+		
+		//public function 
 	}
 	
 }
