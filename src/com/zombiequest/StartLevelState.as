@@ -25,8 +25,10 @@ package com.zombiequest
 		private var enemyFactory:EnemyFactory;
 		private var level:Map;
 		private var currentPower:PowerEffect;
-		private var hudManager:HUDMaker;
+		public static var hudManager:HUDMaker;
 		private const attackTimeout:Number = 0.5;
+		private var decayRate:Number = 1;
+		private var decayClock:Number = 0;
 		private var attackTimer:Number = attackTimeout;
 		
 		override public function create():void
@@ -76,6 +78,7 @@ package com.zombiequest
 			overlapBullets();
 			playerAttack();
 			enemyShoot();
+			playerDecay();
 			super.update();
 		}
 		
@@ -137,6 +140,17 @@ package com.zombiequest
 			player.health -= 10;
 			b.kill();
 			updateHealthBar();
+		}
+		
+		protected function playerDecay():void
+		{
+			decayClock += FlxG.elapsed;
+			if (decayClock > 1) 
+			{
+				player.health -= decayRate;
+				decayClock = 0;
+				updateHealthBar();
+			}
 		}
 		
 		protected function overlapBullets():void
