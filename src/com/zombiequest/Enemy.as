@@ -10,8 +10,10 @@ package com.zombiequest
 	{
 		private const speed:Number = 55;
 		private const turnSpeed:Number = 3;
-		private const shootRange:Number = 500;
+		private const shootRange:Number = 500; //Ben: What is this for?
 		private const followRange:Number = 300;
+		private const attackRange:Number = 100;
+		private const retreatRange:Number = 50;
 		private var healthbar:FlxSprite;
 		public var player:Player;
 		public var lastShot:Number;
@@ -43,33 +45,77 @@ package com.zombiequest
 			play("walk");
 			calcFrame();
 		}
+		
+		public function pickTarget():FlxSprite
+		{
+			//This should be overridden in the subclass
+			return player;
+		}
+		
+		
 		public override function update():void
 		{
-			var distance:Number = MathU.dist(player.x - x, player.y - y);
+			var target:FlxSprite = this.pickTarget();
+			
+			var distance:Number = MathU.dist(target.x - x, target.y - y);
 			if (distance > followRange) {
 				velocity.x = 0;
 				velocity.y = 0;
 				following = false;
 				shooting = false;
 			} else {
-				this.angle = FlxU.getAngle(player.x - this.x, player.y - this.y);
-				if (distance < followRange) { 
-					velocity.x = speed * Math.cos(MathU.degToRad(this.angle));
-					velocity.y = speed * Math.sin(MathU.degToRad(this.angle));
+				//face target
+				this.angle = FlxU.getAngle(target.x - this.x, target.y - this.y);
+				
+				
+				if (distance < attackRange) { 
 					shooting = true;
 					following = true;
 				}
-				else {
-					shooting = true;
-					velocity.x = 0;
-					velocity.y = 0;
+				
+				if (distance<retreatRange)
+				{
+					this.angle*= -1;
+					shooting = false;
+					//velocity.x = 0;
+					//velocity.y = 0;
 				}
+					
+				velocity.x = speed * Math.cos(MathU.degToRad(this.angle));
+				velocity.y = speed * Math.sin(MathU.degToRad(this.angle));
 			}
 			if (!following) {
 				_curFrame = 1;
 			}
 			super.update();
 			updateHealthbar();
+			
+			
+//			var distance:Number = MathU.dist(player.x - x, player.y - y);
+//			if (distance > followRange) {
+//				velocity.x = 0;
+//				velocity.y = 0;
+//				following = false;
+//				shooting = false;
+//			} else {
+//				this.angle = FlxU.getAngle(player.x - this.x, player.y - this.y);
+//				if (distance < followRange) { 
+//					velocity.x = speed * Math.cos(MathU.degToRad(this.angle));
+//					velocity.y = speed * Math.sin(MathU.degToRad(this.angle));
+//					shooting = true;
+//					following = true;
+//				}
+//				else {
+//					shooting = true;
+//					velocity.x = 0;
+//					velocity.y = 0;
+//				}
+//			}
+//			if (!following) {
+//				_curFrame = 1;
+//			}
+//			super.update();
+//			updateHealthbar();
 		}
 		
 		public function bulletSpawn():FlxPoint
