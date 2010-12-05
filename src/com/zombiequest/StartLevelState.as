@@ -76,6 +76,7 @@ package com.zombiequest
 			overlapBullets();
 			playerAttack();
 			enemyShoot();
+			armyControl();
 			playerDecay();
 			super.update();
 		}
@@ -227,6 +228,13 @@ package com.zombiequest
 					FlxU.overlap(player.overlap, innocentGroup, attackInnocent);
 					attackTimer = 0;
 				}
+			}
+		}
+		
+		protected function armyControl():void
+		{
+			if (FlxG.keys.justPressed("A")) {
+				
 			}
 		}
 		
