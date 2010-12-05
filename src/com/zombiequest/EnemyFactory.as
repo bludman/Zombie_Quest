@@ -53,6 +53,11 @@ package com.zombiequest
 		public function startHorde():void
 		{
 			hordeOn = true;
+			
+			spawnUp();
+			spawnDown();
+			spawnRight();
+			spawnLeft();
 		}
 		
 		public function spawnUp(hasPowerup:Boolean = false):void
