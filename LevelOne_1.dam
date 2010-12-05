@@ -1,0 +1,162 @@
+<?xml version="1.0" encoding="utf-8"?>
+<project>
+  <version>1.1.8</version>
+  <bgColor>0x000000</bgColor>
+  <spriteEntries>
+    <tileEntry name="Innocent" idx="1" className="Innocent" image="assets/png/oldinnocent.png" offsetX="0" offsetY="0" width="23" height="23" anchorX="0" anchorY="0" boundsX="0" boundsY="0" boundsWidth="23" boundsHeight="23" constructor="new Innocent(%xpos%, %ypos%, %prop:angle%)" exports="true" canScale="true" canRotate="true">
+      <properties>
+        <type typeof="Int" name="angle" value="0"/>
+      </properties>
+    </tileEntry>
+    <tileEntry name="Player" idx="2" className="Player" image="assets/jpeg/PlayerTopDown.jpg" offsetX="0" offsetY="0" width="20" height="20" anchorX="0" anchorY="0" boundsX="0" boundsY="0" boundsWidth="20" boundsHeight="20" constructor="new Player(%xpos%, %ypos%)" exports="true" canScale="true" canRotate="true"/>
+    <sprite name="enemyNoPowerup" idx="3" className="Enemy" image="assets/png/temp_person.png" width="32" height="32" preview="4" anchorX="0" anchorY="0" boundsX="0" boundsY="0" boundsWidth="32" boundsHeight="32" constructor="new Enemy(%xpos%, %ypos%, false)" exports="true" canScale="true" canRotate="true"/>
+    <sprite name="enemyPowerup" idx="4" className="Enemy" image="assets/png/temp_person.png" width="32" height="32" preview="1" anchorX="0" anchorY="0" boundsX="0" boundsY="0" boundsWidth="32" boundsHeight="32" constructor="new Enemy(%xpos%, %ypos%, true)" exports="true" canScale="true" canRotate="true"/>
+    <sprite name="Coin" idx="5" className="Coin" image="assets/png/coin.png" width="16" height="16" preview="3" anchorX="0" anchorY="0" boundsX="0" boundsY="0" boundsWidth="16" boundsHeight="16" constructor="" exports="true" canScale="true" canRotate="true"/>
+  </spriteEntries>
+  <layers>
+    <group name="Group1" xScroll="1" yScroll="1" visible="true" open="true" locked="false" exports="true">
+      <maplayer name="bg" xScroll="1" yScroll="1" x="0" y="0" width="20" height="16" tileset="assets/jpeg/temp_tiles.jpg" tileWidth="64" tileHeight="64" visible="true" hasHits="false" drawIdx="1" collideIdx="1" eraseIdx="0" locked="false" exports="true">
+        <row>0,0,0,0,0,0,0,0,0,10,10,0,0,0,0,0,0,0,0,0</row>
+        <row>0,10,10,10,10,10,10,10,11,10,10,10,10,10,10,10,10,10,10,0</row>
+        <row>0,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,0</row>
+        <row>0,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,0</row>
+        <row>0,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,0</row>
+        <row>0,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,0</row>
+        <row>0,11,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,11,0</row>
+        <row>10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,11,10</row>
+        <row>10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,11,10</row>
+        <row>0,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,11,0</row>
+        <row>0,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,11,0</row>
+        <row>0,11,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,11,0</row>
+        <row>0,11,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,11,0</row>
+        <row>0,11,10,10,10,10,10,11,11,11,11,11,10,10,10,10,10,10,11,0</row>
+        <row>0,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,0</row>
+        <row>0,0,0,0,0,0,0,0,0,11,11,0,0,0,0,0,0,0,0,0</row>
+      </maplayer>
+      <spritelayer name="Layer3" xScroll="1" yScroll="1" visible="true" locked="false" exports="true">
+        <sprite guid="998456C0-C37F-51BD-BDAC-F31723723CFE" idx="2" x="630" y="720" z="1" angle="0" scaleX="1" scaleY="1" flipped="false"/>
+      </spritelayer>
+      <maplayer name="Map1" xScroll="1" yScroll="1" x="0" y="0" width="20" height="16" tileset="assets/jpeg/temp_tiles.jpg" tileWidth="64" tileHeight="64" visible="true" hasHits="true" drawIdx="1" collideIdx="1" eraseIdx="0" locked="false" exports="true">
+        <row>16,16,16,16,16,16,16,16,17,0,0,16,16,16,16,16,16,16,16,16</row>
+        <row>16,2,2,2,2,2,2,2,0,0,0,0,2,2,2,2,2,2,2,16</row>
+        <row>2,2,2,2,2,2,2,0,0,0,0,0,0,2,2,2,2,2,2,16</row>
+        <row>16,2,2,2,2,2,0,0,0,0,0,0,0,0,2,2,2,2,2,16</row>
+        <row>16,2,2,2,2,0,0,0,0,0,0,0,0,0,0,2,2,2,2,16</row>
+        <row>16,2,2,2,0,0,0,0,0,0,0,0,0,0,0,0,2,2,2,16</row>
+        <row>17,2,2,0,0,0,0,0,0,40,41,0,0,0,0,0,0,2,2,16</row>
+        <row>0,0,0,0,0,0,0,0,40,88,89,41,0,0,0,0,0,0,0,0</row>
+        <row>0,0,0,0,0,0,0,0,54,102,103,55,0,0,0,0,0,0,0,0</row>
+        <row>17,2,2,0,0,0,0,0,0,54,55,0,0,0,0,0,0,2,2,16</row>
+        <row>17,2,2,2,0,0,0,0,0,0,0,0,0,0,0,0,2,2,2,16</row>
+        <row>17,2,2,2,2,0,0,0,0,0,0,0,0,0,0,2,2,2,2,16</row>
+        <row>16,2,2,2,2,2,0,0,0,0,0,0,0,0,2,2,2,2,2,16</row>
+        <row>17,2,2,2,2,2,2,0,0,0,0,0,0,2,2,2,2,2,2,16</row>
+        <row>17,2,2,2,2,2,2,2,0,0,0,0,2,2,2,2,2,2,2,16</row>
+        <row>17,17,17,17,17,17,17,17,17,0,0,17,17,17,17,17,3,3,3,3</row>
+      </maplayer>
+    </group>
+  </layers>
+  <tileMatrix currentMatrix="0" rows="3" cols="3" randomizeMiddle="true" ignoreClear="false" ignoreMapEdges="true" allowSpecialTiles="false" tileset="assets/jpeg/temp_tiles.jpg">
+    <row>
+      <tile>0</tile>
+      <tile>0</tile>
+      <tile>0</tile>
+    </row>
+    <row>
+      <tile>0</tile>
+      <tile>0</tile>
+      <tile>0</tile>
+    </row>
+    <row>
+      <tile>0</tile>
+      <tile>0</tile>
+      <tile>0</tile>
+    </row>
+    <specialConnections>
+      <sets>
+        <connections name="Single Inside Corners">
+          <entry green="0x1111111" red="0x10000000"/>
+          <entry green="0x11011111" red="0x100000"/>
+          <entry green="0x11111110" red="0x1"/>
+          <entry green="0x11111011" red="0x100"/>
+        </connections>
+        <connections name="Double Inside Corners">
+          <entry green="0x1011111" red="0x10100000"/>
+          <entry green="0x11011110" red="0x100001"/>
+          <entry green="0x11111010" red="0x101"/>
+          <entry green="0x1111011" red="0x10000100"/>
+        </connections>
+        <connections name="Triple Inside Corners">
+          <entry green="0x1011011" red="0x10100100"/>
+          <entry green="0x1011110" red="0x10100001"/>
+          <entry green="0x11011010" red="0x100101"/>
+          <entry green="0x1111010" red="0x10000101"/>
+        </connections>
+        <connections name="Quad Inside Corners">
+          <entry green="0x1011010" red="0x10100101"/>
+          <entry green="0x0" red="0x0"/>
+          <entry green="0x0" red="0x0"/>
+          <entry green="0x0" red="0x0"/>
+        </connections>
+        <connections name="Double Outside Corners">
+          <entry green="0x10" red="0x1011000"/>
+          <entry green="0x1000" red="0x1010010"/>
+          <entry green="0x1000000" red="0x11010"/>
+          <entry green="0x10000" red="0x1001010"/>
+        </connections>
+        <connections name="Double Outside Edges">
+          <entry green="0x1000010" red="0x11000"/>
+          <entry green="0x11000" red="0x1000010"/>
+          <entry green="0x0" red="0x0"/>
+          <entry green="0x0" red="0x0"/>
+        </connections>
+        <connections name="Opposing Double Inside Corners">
+          <entry green="0x1111110" red="0x10000001"/>
+          <entry green="0x11011011" red="0x100100"/>
+          <entry green="0x0" red="0x0"/>
+          <entry green="0x0" red="0x0"/>
+        </connections>
+      </sets>
+      <rows>
+        <row set="0">
+          <tiles>
+            <id>0</id>
+            <id>0</id>
+            <id>0</id>
+            <id>0</id>
+          </tiles>
+        </row>
+        <row set="0">
+          <tiles>
+            <id>0</id>
+            <id>0</id>
+            <id>0</id>
+            <id>0</id>
+          </tiles>
+        </row>
+      </rows>
+    </specialConnections>
+  </tileMatrix>
+  <tileMatrixData name="matrix1" rows="3" cols="3" randomizeMiddle="true" ignoreClear="false" ignoreMapEdges="true" allowSpecialTiles="false" tileset="assets/jpeg/temp_tiles.jpg">
+    <tiles>0,0,0,0,0,0,0,0,0</tiles>
+    <connections set="0">
+      <tiles>0,0,0,0</tiles>
+    </connections>
+    <connections set="0">
+      <tiles>0,0,0,0</tiles>
+    </connections>
+  </tileMatrixData>
+  <tileBrushes/>
+  <colorSwatches/>
+  <bookmarks>
+    <bookmark enabled="false"/>
+    <bookmark enabled="false"/>
+    <bookmark enabled="false"/>
+    <bookmark enabled="false"/>
+    <bookmark enabled="false"/>
+    <bookmark enabled="false"/>
+    <bookmark enabled="false"/>
+    <bookmark enabled="false"/>
+    <bookmark enabled="false"/>
+  </bookmarks>
+</project>
