@@ -20,6 +20,15 @@ package com.zombiequest
 		private var chasing:Boolean = false;
 		private var chaseTarget:FlxSprite;
 		private static var id:Number = 0;
+		
+		/*
+		 * State Enums
+		 */
+		public static const ATTACKING:Number = 1;
+		public static const FOLLOWING:Number = 2;
+		public static const SENTRY:Number = 3;
+		
+		private var state:Number;
 		/**
 		 * Should only be called by the MinionFactory
 		 */
