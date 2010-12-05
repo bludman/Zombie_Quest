@@ -97,6 +97,7 @@
 		{
 				return new FlxPoint(x + width / 2, y + height / 2);
 		}
+		
 	}
 
 }
