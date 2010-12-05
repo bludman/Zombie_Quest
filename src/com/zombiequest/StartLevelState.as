@@ -16,10 +16,10 @@ package com.zombiequest
 		private const maxHealth:Number = 100;
 		private var player:Player;
 		private var coin:Coin;
-		private var enemyGroup:FlxGroup;
-		private var bulletGroup:FlxGroup;
-		private var innocentGroup:FlxGroup;
-		private var minionGroup:FlxGroup;
+		public static var enemyGroup:FlxGroup;
+		public static var bulletGroup:FlxGroup;
+		public static var innocentGroup:FlxGroup;
+		public static var minionGroup:FlxGroup;
 		private var collideGroup:FlxGroup;
 		private var minionFactory:MinionFactory;
 		private var enemyFactory:EnemyFactory;
@@ -87,7 +87,6 @@ package com.zombiequest
 			if (obj is Player) {
 				player = obj as Player;
 			}
-			
 			return obj;
 		}
 		
