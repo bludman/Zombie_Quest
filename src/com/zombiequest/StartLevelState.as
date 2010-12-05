@@ -18,20 +18,25 @@ package com.zombiequest
 		private var enemyGroup:FlxGroup;
 		private var bulletGroup:FlxGroup;
 		private var innocentGroup:FlxGroup;
+		private var minionGroup:FlxGroup;
 		private var collideGroup:FlxGroup;
+		private var minionFactory:MinionFactory;
 		private var level:Map;
 		private var currentPower:PowerEffect;
 		private var hudManager:HUDMaker;
+		private const attackTimeout:Number = 0.5;
+		private var attackTimer:Number = attackTimeout;
 		
 		override public function create():void
 		{
 			//Instantiate objects
-			player = new Player(10, 280);
 			bulletGroup = new FlxGroup();
 			enemyGroup = new FlxGroup();
 			innocentGroup = new FlxGroup();
+			minionGroup = new FlxGroup();
 			collideGroup = new FlxGroup();
-			level = new Level_Group1(true, onAddSprite);			
+			level = new Level_Group1(true, onAddSprite);
+			minionFactory = new MinionFactory(enemyGroup, innocentGroup, player);
 			//give enemies reference to player
 			updateEnemyPlayerRef();
 			
@@ -39,7 +44,19 @@ package com.zombiequest
 			collideGroup.add(enemyGroup);
 			collideGroup.add(innocentGroup);
 			collideGroup.add(player);
+			collideGroup.add(minionGroup);
 			
+			//TODO Remove
+			var minion:Minion = minionFactory.getMinion(640, 480);
+			minionGroup.add(minion);
+			add(minion);
+			var enemy:Enemy = new Enemy(320, 240, false);
+			enemy.player = player;
+			add(enemy);
+			enemyGroup.add(enemy);
+			var innocent:Innocent = new Innocent(480, 400, 0);
+			add(innocent);
+			innocentGroup.add(innocent);
 			//Set up the camera
 			FlxG.follow(player, 2.5);
 			FlxG.followAdjust(.5, .2);
@@ -53,42 +70,18 @@ package com.zombiequest
 			collideGroup.collide();
 			FlxU.collide(level.hitTilemaps, collideGroup);
 			FlxU.overlap(player, bulletGroup, playerGotShot);
-			FlxU.overlap(player, coin, gotTheCoin);
 			overlapBullets();
-			if (FlxG.keys.justPressed("SPACE") ){
-				FlxU.overlap(player.overlap, enemyGroup, attackEnemy);
-				FlxU.overlap(player.overlap, innocentGroup, attackInnocent);
-			}
+			playerAttack();
 			enemyShoot();
-			updatePower();
 			super.update();
 		}
 		
 		protected function onAddSprite(obj:Object, layer:FlxGroup, level:Map, properties:Array):Object
 		{
-			if (obj is Enemy)
-			{
-				enemyGroup.add(obj as Enemy);
-			}
-			else if (obj is Innocent)
-			{
-				innocentGroup.add(obj as Innocent);
-			}
-			else if (obj is Player) {
+			if (obj is Player) {
 				player = obj as Player;
 			}
-			else if (obj is Coin) {
-				coin = obj as Coin;
-			}
-			else if ( obj is TextData )
-			{
-				var tData:TextData = obj as TextData;
-				if ( tData.fontName != "" && tData.fontName != "system" )
-				{
-					tData.fontName += "Font";
-				}
-				return level.addTextToLayer(tData, layer, true, properties, onAddSprite );
-			}
+			
 			return obj;
 		}
 		
@@ -103,7 +96,10 @@ package com.zombiequest
 			enemy.health -= player.damage;
 			enemy.updateHealthbar();
 			if (enemy.dead) {
-				if (enemy.hasPowerup) {
+				var minion:Minion = minionFactory.getMinion(enemy.x, enemy.y);
+				add(minion);
+				minionGroup.add(minion);
+				/*if (enemy.hasPowerup) {
 					if (currentPower != null) {
 						currentPower.destroy();
 					}
@@ -111,7 +107,7 @@ package com.zombiequest
 					currentPower = new DoubleSpeed();
 					currentPower.affect(player);
 					hudManager.pushStatusText(currentPower.flavorText());
-				}
+				}*/
 			}
 		}
 		protected function attackInnocent(overlap:Object, i:Object):void
@@ -120,13 +116,17 @@ package com.zombiequest
 			innocent.kill();
 			player.health += 50;
 			updateHealthBar();
+			var minion:Minion = minionFactory.getMinion(innocent.x, innocent.y);
+			add(minion);
+			minionGroup.add(minion);
+			/*
 			if (currentPower != null) {
 				currentPower.destroy();
 			}
 			currentPower = PowerdownFactory.getPowerdown();
 			//currentPower = new LimitedVision();
 			currentPower.affect(player);
-			hudManager.pushStatusText(currentPower.flavorText());
+			hudManager.pushStatusText(currentPower.flavorText());*/
 		}
 		
 		protected function playerGotShot(p:FlxObject, b:FlxObject):void
@@ -201,6 +201,20 @@ package com.zombiequest
 			for (var i:Number = 0; i < enemyA.length; i++) {
 				var enemy:Enemy = enemyA[i] as Enemy;
 				enemy.player = player;
+			}
+		}
+		
+		protected function playerAttack():void
+		{
+			attackTimer += FlxG.elapsed;
+			if (FlxG.keys.justPressed("SPACE"))
+			{
+				if (attackTimer >= attackTimeout) 
+				{
+					FlxU.overlap(player.overlap, enemyGroup, attackEnemy);
+					FlxU.overlap(player.overlap, innocentGroup, attackInnocent);
+					attackTimer = 0;
+				}
 			}
 		}
 		
