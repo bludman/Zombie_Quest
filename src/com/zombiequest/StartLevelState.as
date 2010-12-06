@@ -108,6 +108,7 @@ package com.zombiequest
 			enemy.health -= player.damage;
 			enemy.updateHealthbar();
 			if (enemy.dead) {
+				player.health += 10;
 				minionFactory.getMinion(enemy.x, enemy.y);
 				/*if (enemy.hasPowerup) {
 					if (currentPower != null) {
