@@ -9,7 +9,8 @@ package com.zombiequest
 	{
 		private var speed:Number = 90;
 		private var attackRange:Number = 20;
-		private var followRange:Number = 100;
+		private var sentryFollowRange:Number = 100;
+		private var attackFollowRange:Number = 200;
 		private var playerFollowMin:Number = 64;
 		private var damage:Number = 25;
 		private const attackTimeout:Number = 1;
@@ -18,6 +19,9 @@ package com.zombiequest
 		private var chasing:Boolean = false;
 		private var chaseTarget:FlxSprite;
 		private static var id:Number = 0;
+		public var pid:Number;
+		public const MAX_HEALTH:Number = 100;
+		
 		
 		/*
 		 * State Enums
@@ -32,10 +36,12 @@ package com.zombiequest
 		 */
 		public function Minion(x:Number, y:Number, player:Player) 
 		{
+			super(x, y);
 			this.player = player;
 			id++;
+			pid = id;
 			state = DEFENDING;
-			super(x, y);
+			health = MAX_HEALTH;
 		}
 		
 		public override function update():void
@@ -57,7 +63,7 @@ package com.zombiequest
 			else if (state == SENTRY)
 			{
 				//Find something to attack
-				findTarget(followRange);
+				findTarget(sentryFollowRange);
 			} 
 			else if (state == ATTACKING)
 			{
@@ -84,8 +90,31 @@ package com.zombiequest
 				if (chaseTarget.health <= 0)
 				{
 					chaseTarget.kill();
+					if (chaseTarget is Innocent)
+					{
+						distributeHealth(Innocent.healthRegen);
+					}
+					else if (chaseTarget is Enemy)
+					{
+						distributeHealth(Enemy.healthRegen);
+					}
 				}
 			}
+		}
+		
+		private function distributeHealth(health:Number):void
+		{
+			var minions:Array = StartLevelState.minionGroup.members;
+			var dist:Number = health / (minions.length + 1);
+			for (var i:Number = 0; i < minions.length; i++)
+			{
+				Minion(minions[i]).health += dist;
+				if (health > MAX_HEALTH)
+				{
+					health = MAX_HEALTH;
+				}
+			}
+			player.health += dist;
 		}
 		/**
 		 * 
@@ -97,7 +126,7 @@ package com.zombiequest
 			//Go attack the closest target
 			state = ATTACKING;
 			var targets:Array = StartLevelState.enemyGroup.members;
-			var closest:Number = 2000; //more than 2x the distance of the level
+			var closest:Number = attackFollowRange;
 			if (limit >= 0) {
 				closest = limit;
 			}

@@ -34,7 +34,8 @@ package com.zombiequest
 		private const WAVE_TIMEOUT:Number=20;
 		
 		
-		private var decayRate:Number = 1;
+		private var decayRate:Number = 10;
+		private var decayTimeout:Number = 10;
 		private var decayClock:Number = 0;
 		private var waveTimer:Number = WAVE_TIMEOUT;
 		private var attackTimer:Number = attackTimeout;
@@ -50,8 +51,6 @@ package com.zombiequest
 			level = new Level_Group1(true, onAddSprite);
 			minionFactory = new MinionFactory(player);
 			enemyFactory = new EnemyFactory(minionGroup, player);
-			//give enemies reference to player
-			updateEnemyPlayerRef();
 			
 			add(bulletGroup);
 			collideGroup.add(enemyGroup);
@@ -84,7 +83,8 @@ package com.zombiequest
 			playerAttack();
 			enemyShoot();
 			armyControl();
-			playerDecay();
+			zombieDecay();
+			updateHealthBar();
 			updateWaveStatus();
 			super.update();
 		}
@@ -107,51 +107,43 @@ package com.zombiequest
 			var enemy:Enemy = e as Enemy;
 			enemy.health -= player.damage;
 			enemy.updateHealthbar();
+			player.health += Enemy.healthRegen;
 			if (enemy.dead) {
 				minionFactory.getMinion(enemy.x, enemy.y);
-				/*if (enemy.hasPowerup) {
-					if (currentPower != null) {
-						currentPower.destroy();
-					}
-					//currentPower = PowerupFactory.getPowerup();
-					currentPower = new DoubleSpeed();
-					currentPower.affect(player);
-					hudManager.pushStatusText(currentPower.flavorText());
-				}*/
 			}
 		}
 		protected function attackInnocent(overlap:Object, i:Object):void
 		{
 			var innocent:Innocent = i as Innocent;
 			innocent.kill();
-			player.health += 50;
-			updateHealthBar();
+			player.health += Innocent.healthRegen;
 			minionFactory.getMinion(innocent.x, innocent.y);
-			/*
-			if (currentPower != null) {
-				currentPower.destroy();
-			}
-			currentPower = PowerdownFactory.getPowerdown();
-			//currentPower = new LimitedVision();
-			currentPower.affect(player);
-			hudManager.pushStatusText(currentPower.flavorText());*/
 		}
 		
 		protected function playerGotShot(p:FlxObject, b:FlxObject):void
 		{
 			player.health -= 10;
 			b.kill();
-			updateHealthBar();
 		}
 		
-		protected function playerDecay():void
+		protected function zombieDecay():void
 		{
 			decayClock += FlxG.elapsed;
-			if (decayClock > 1) 
+			if (decayClock > decayTimeout) 
 			{
 				player.health -= decayRate;
+				var minions:Array = minionGroup.members;
+				for (var i:Number = 0; i < minions.length; i++)
+				{
+					var minion:Minion = minions[i] as Minion;
+					minion.health -= decayRate;
+					if (minion.health <= 0)
+					{
+						minion.kill();
+						minionGroup.remove(minion, true);
+					}
+				}
 				decayClock = 0;
-				updateHealthBar();
 			}
 		}
 
@@ -167,7 +159,6 @@ package com.zombiequest
 				waveTimer = WAVE_TIMEOUT;
 				//triggerWave();
 				enemyFactory.startHorde();
-				trace("Starting wave!");
 			}
 		}
 		
@@ -219,6 +210,7 @@ package com.zombiequest
 		 * 
 		 *
 		 * Call whenever the player's health is changed
+		 * CHANGE: Now called from update, doesn't need to be called elsewhere
 		 */
 		protected function updateHealthBar():void
 		{
@@ -231,15 +223,6 @@ package com.zombiequest
 				FlxG.state = new EndState("You Lost!");
 			}
 			hudManager.setHealth(player.health);
-		}
-		
-		public function updateEnemyPlayerRef():void
-		{
-			var enemyA:Array = enemyGroup.members;
-			for (var i:Number = 0; i < enemyA.length; i++) {
-				var enemy:Enemy = enemyA[i] as Enemy;
-				enemy.player = player;
-			}
 		}
 		
 		protected function playerAttack():void

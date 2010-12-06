@@ -11,6 +11,8 @@ package com.zombiequest
 		private var ImgInnocent:Class;
 		private var speed:Number = 20;
 		
+		public static const healthRegen:Number = 50;
+		
 		public function Innocent(x:Number, y:Number, angle:Number):void 
 		{
 			super(x, y, ImgInnocent);
