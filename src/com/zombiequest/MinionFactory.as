@@ -8,19 +8,15 @@ package com.zombiequest
 	 */
 	public class MinionFactory 
 	{
-		private var enemyGroup:FlxGroup;
-		private var innocentGroup:FlxGroup;
 		private var player:Player;
-		public function MinionFactory(enemyGroup:FlxGroup, innocentGroup:FlxGroup, player:Player) 
+		public function MinionFactory(player:Player) 
 		{
-			this.enemyGroup = enemyGroup;
-			this.innocentGroup = innocentGroup;
 			this.player = player;
 		}
 		
 		public function getMinion(x:Number, y:Number):void
 		{
-			var minion:Minion = new Minion(x, y, enemyGroup, innocentGroup, player);
+			var minion:Minion = new Minion(x, y, player);
 			StartLevelState.minionGroup.add(minion);
 			FlxG.state.add(minion);
 		}

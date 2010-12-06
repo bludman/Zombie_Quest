@@ -1,5 +1,6 @@
 package com.zombiequest 
 {
+	import org.flixel.FlxPoint;
 	/**
 	 * ...
 	 * @author Team Zombie Quest

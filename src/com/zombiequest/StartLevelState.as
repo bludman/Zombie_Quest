@@ -48,7 +48,7 @@ package com.zombiequest
 			minionGroup = new FlxGroup();
 			collideGroup = new FlxGroup();
 			level = new Level_Group1(true, onAddSprite);
-			minionFactory = new MinionFactory(enemyGroup, innocentGroup, player);
+			minionFactory = new MinionFactory(player);
 			enemyFactory = new EnemyFactory(minionGroup, player);
 			//give enemies reference to player
 			updateEnemyPlayerRef();
@@ -58,7 +58,6 @@ package com.zombiequest
 			collideGroup.add(innocentGroup);
 			collideGroup.add(minionGroup);
 			
-			minionFactory.getMinion(640, 480);
 			enemyFactory.startHorde();
 			
 			var innocent:Innocent = new Innocent(480, 400, 0);
@@ -161,6 +160,7 @@ package com.zombiequest
 		 */
 		protected function updateWaveStatus():void
 		{
+			//I like how some timers go from TIMEOUT to 0, others go from 0 to TIMEOUT
 			waveTimer -= FlxG.elapsed;
 			if (waveTimer <=0) 
 			{
@@ -258,11 +258,49 @@ package com.zombiequest
 		
 		protected function armyControl():void
 		{
-			if (FlxG.keys.justPressed("A")) {
-				
+			var minion:Minion = null;
+			if (FlxG.keys.justPressed("A")) 
+			{
+				minion = nextMinion();
+				if (minion != null)
+				{
+					minion.state == Minion.ATTACKING;
+					minion.findTarget();
+				}
+			}
+			else if (FlxG.keys.justPressed("S"))
+			{
+				minion = nextMinion();
+				if (minion != null)
+				{
+					minion.state = Minion.SENTRY;
+				}
+			}
+			else if (FlxG.keys.justPressed("D"))
+			{
+				var minions:Array = minionGroup.members;
+				for (var i:Number = 0; i < minions.length; i++)
+				{
+					Minion(minions[i]).state = Minion.DEFENDING;
+				}
 			}
 		}
-		
+		/**
+		 * Finds the next minion with the DEFENDING state
+		 */
+		protected function nextMinion():Minion
+		{
+			var minions:Array = minionGroup.members;
+			for (var i:Number = 0; i < minions.length; i++)
+			{
+				var minion:Minion = minions[i] as Minion;
+				if (minion.state == Minion.DEFENDING && !minion.dead)
+				{
+					return minion;
+				}
+			}
+			return null;
+		}
 	}
 
 }

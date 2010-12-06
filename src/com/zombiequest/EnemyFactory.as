@@ -23,6 +23,7 @@ package com.zombiequest
 		public override function update():void
 		{
 			//THIS DOES NOT WORK!!!!
+			//Maybe because update is only called for objects added to the stage
 			if(hordeOn)
 			{
 				timeElapsed += FlxG.elapsed;
