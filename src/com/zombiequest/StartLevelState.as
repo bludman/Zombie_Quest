@@ -27,8 +27,16 @@ package com.zombiequest
 		private var currentPower:PowerEffect;
 		public static var hudManager:HUDMaker;
 		private const attackTimeout:Number = 0.5;
+		
+		/**Number of seconds between release of enemies 
+		 * Assumes constant time between waves
+		 */
+		private const WAVE_TIMEOUT:Number=20;
+		
+		
 		private var decayRate:Number = 1;
 		private var decayClock:Number = 0;
+		private var waveTimer:Number = WAVE_TIMEOUT;
 		private var attackTimer:Number = attackTimeout;
 		
 		override public function create():void
@@ -78,6 +86,7 @@ package com.zombiequest
 			enemyShoot();
 			armyControl();
 			playerDecay();
+			updateWaveStatus();
 			super.update();
 		}
 		
@@ -146,6 +155,22 @@ package com.zombiequest
 				updateHealthBar();
 			}
 		}
+
+		/** 
+		 * Keep track of when the next wave should come and trigger it
+		 */
+		protected function updateWaveStatus():void
+		{
+			waveTimer -= FlxG.elapsed;
+			if (waveTimer <=0) 
+			{
+				waveTimer = WAVE_TIMEOUT;
+				//triggerWave();
+				enemyFactory.startHorde();
+				trace("Starting wave!");
+			}
+		}
+		
 		
 		protected function overlapBullets():void
 		{
