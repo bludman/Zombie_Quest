@@ -109,6 +109,7 @@ package com.zombiequest
 			enemy.updateHealthbar();
 			player.health += Enemy.healthRegen;
 			if (enemy.dead) {
+				player.health += 10;
 				minionFactory.getMinion(enemy.x, enemy.y);
 			}
 		}
