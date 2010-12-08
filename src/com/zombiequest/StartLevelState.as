@@ -17,6 +17,7 @@ package com.zombiequest
 		private var player:Player;
 		private var coin:Coin;
 		public static var enemyGroup:FlxGroup;
+		public static var enemyCollideGroup:FlxGroup;
 		public static var bulletGroup:FlxGroup;
 		public static var innocentGroup:FlxGroup;
 		public static var minionGroup:FlxGroup;
@@ -45,6 +46,7 @@ package com.zombiequest
 			//Instantiate objects
 			bulletGroup = new FlxGroup();
 			enemyGroup = new FlxGroup();
+			enemyCollideGroup = new FlxGroup();
 			innocentGroup = new FlxGroup();
 			minionGroup = new FlxGroup();
 			collideGroup = new FlxGroup();
@@ -53,15 +55,11 @@ package com.zombiequest
 			enemyFactory = new EnemyFactory(minionGroup, player);
 			
 			add(bulletGroup);
-			addEnemyCollision();
+			collideGroup.add(enemyCollideGroup);
 			collideGroup.add(innocentGroup);
 			collideGroup.add(minionGroup);
 			
 			enemyFactory.startHorde();
-			
-			var innocent:Innocent = new Innocent(480, 400, 0);
-			add(innocent);
-			innocentGroup.add(innocent);
 			
 			//Set up the camera
 			FlxG.follow(player, 2.5);
@@ -76,9 +74,10 @@ package com.zombiequest
 			FlxU.collide(level.hitTilemaps, collideGroup);
 			FlxU.collide(level.hitTilemaps, player);
 			collideGroup.collide();
-			player.collide(enemyGroup);
+			player.collide(enemyCollideGroup);
 			player.collide(innocentGroup);
-			FlxU.overlap(player, bulletGroup, playerGotShot);
+			FlxU.overlap(player, bulletGroup, zombieGotShot);
+			FlxU.overlap(minionGroup, bulletGroup, zombieGotShot);
 			overlapBullets();
 			playerAttack();
 			enemyShoot();
@@ -120,9 +119,14 @@ package com.zombiequest
 			minionFactory.getMinion(innocent.x, innocent.y);
 		}
 		
-		protected function playerGotShot(p:FlxObject, b:FlxObject):void
+		protected function zombieGotShot(p:FlxObject, b:FlxObject):void
 		{
-			player.health -= 10;
+			if (p is Minion || p is Player) {
+				p.health -= 10;
+				if (p.health <= 0) {
+					p.kill();
+				}
+			}
 			b.kill();
 		}
 		
@@ -274,29 +278,30 @@ package com.zombiequest
 		protected function nextMinion():Minion
 		{
 			var minions:Array = minionGroup.members;
+			var closest:Number = 2000; // greater than the length of the map
+			var candidate:Minion = null;
 			for (var i:Number = 0; i < minions.length; i++)
 			{
 				var minion:Minion = minions[i] as Minion;
 				if (minion.state == Minion.DEFENDING && !minion.dead)
 				{
-					return minion;
+					var dist:Number = MathU.dist(player.x - minion.x, player.y - minion.y);
+					if (dist < closest)
+					{
+						closest = dist;
+						candidate = minion;
+					}
 				}
 			}
-			return null;
+			return candidate;
 		}
 		
-		public function addEnemyCollision(enemy:Enemy = null):void
+		protected function renderHud():void
 		{
-			if (enemy != null)
+			var hud:Array = hudManager.elements;
+			for (var i:Number = 0; i < hud.length; i++)
 			{
-				collideGroup.add(enemy.collideArea);
-			}
-			else{
-				var enemies:Array = enemyGroup.members;
-				for (var i:Number = 0; i < enemies.length; i++)
-				{
-					collideGroup.add(Enemy(enemies).collideArea);
-				}
+				FlxSprite(hud[i]).render();
 			}
 		}
 	}

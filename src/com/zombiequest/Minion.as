@@ -8,9 +8,9 @@ package com.zombiequest
 	public class Minion extends FlxSprite
 	{
 		private var speed:Number = 90;
-		private var attackRange:Number = 20;
-		private var sentryFollowRange:Number = 100;
-		private var attackFollowRange:Number = 200;
+		private var attackRange:Number = 40;
+		private var sentryFollowRange:Number = 200;
+		private var attackFollowRange:Number = 800; //Diagonal distance of map
 		private var playerFollowMin:Number = 64;
 		private var damage:Number = 25;
 		private const attackTimeout:Number = 1;

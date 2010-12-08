@@ -73,7 +73,7 @@ package com.zombiequest
 			else 
 				healthAnim.visible=true;
 			
-			healthAnim.play(""+(20-Math.round(amount*0.2)));
+			healthAnim.play("" + (20 - Math.round(amount * 0.2)));
 		}
 		
 		public function updatePowerTimer(amount:Number):void
@@ -82,6 +82,11 @@ package com.zombiequest
 				return;
 			}
 			timer.text = amount.toString();
+		}
+		
+		public function get elements():Array
+		{
+			return new Array(healthBar, healthAnim);
 		}
 	}
 }

@@ -28,7 +28,7 @@
 			attackRange.height = this.height;
 			attackRange.width = this.width;
 			calcFrame();
-			FlxG.play(FootSteps, 1.0, true);
+			//FlxG.play(FootSteps, 1.0, true);
 		}		
 		override public function update():void
 		{

@@ -48,8 +48,9 @@ package com.zombiequest
 		{
 			var enemy:Enemy = new Enemy(x, y, player, hasPowerup);
 			StartLevelState.enemyGroup.add(enemy);
-			StartLevelState(FlxG.state).addEnemyCollision(enemy);
+			StartLevelState.enemyCollideGroup.add(enemy.collideArea);
 			FlxG.state.add(enemy);
+			FlxG.state.add(enemy.collideArea);
 		}
 		
 		
