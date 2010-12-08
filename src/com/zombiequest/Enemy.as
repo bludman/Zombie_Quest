@@ -127,6 +127,7 @@ package com.zombiequest
 				_curFrame = 1;
 			}
 			super.update();
+			boundEnemy();
 			updateCollide();
 			updateHealthbar();
 
@@ -171,6 +172,25 @@ package com.zombiequest
 		{
 			collideArea.x = this.x;
 			collideArea.y = this.y;
+		}
+		
+		private function boundEnemy():void
+		{
+			if (x < 0) {
+				x = 0;
+			}
+			else if (x > Map.boundsMaxX)
+			{
+				x = Map.boundsMaxX;
+			}
+			if (y < 0)
+			{
+				y = 0;
+			}
+			else if (y > Map.boundsMaxY)
+			{
+				y = Map.boundsMaxY;
+			}
 		}
 	}
 

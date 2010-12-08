@@ -7,7 +7,7 @@ package com.zombiequest
 	 */
 	public class Bullet extends FlxSprite
 	{
-		[Embed(source="../../../assets/png/bullet.png")]
+		[Embed(source="../../../assets/png/bullet_down.png")]
 		private var ImgBullet:Class;
 		private var speed:Number = 200;
 		public function Bullet(p:FlxPoint, angle:Number)
