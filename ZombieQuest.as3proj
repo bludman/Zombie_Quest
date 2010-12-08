@@ -4,7 +4,7 @@
   <output>
     <movie disabled="False" />
     <movie input="" />
-    <movie path="bin\ZombieQuest.swf" />
+    <movie path="bin\Main.swf" />
     <movie fps="30" />
     <movie width="640" />
     <movie height="480" />
