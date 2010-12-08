@@ -53,7 +53,7 @@ package com.zombiequest
 			enemyFactory = new EnemyFactory(minionGroup, player);
 			
 			add(bulletGroup);
-			collideGroup.add(enemyGroup);
+			addEnemyCollision();
 			collideGroup.add(innocentGroup);
 			collideGroup.add(minionGroup);
 			
@@ -107,9 +107,8 @@ package com.zombiequest
 			var enemy:Enemy = e as Enemy;
 			enemy.health -= player.damage;
 			enemy.updateHealthbar();
-			player.health += Enemy.healthRegen;
 			if (enemy.dead) {
-				player.health += 10;
+				player.health += Enemy.healthRegen;
 				minionFactory.getMinion(enemy.x, enemy.y);
 			}
 		}
@@ -284,6 +283,21 @@ package com.zombiequest
 				}
 			}
 			return null;
+		}
+		
+		public function addEnemyCollision(enemy:Enemy = null):void
+		{
+			if (enemy != null)
+			{
+				collideGroup.add(enemy.collideArea);
+			}
+			else{
+				var enemies:Array = enemyGroup.members;
+				for (var i:Number = 0; i < enemies.length; i++)
+				{
+					collideGroup.add(Enemy(enemies).collideArea);
+				}
+			}
 		}
 	}
 

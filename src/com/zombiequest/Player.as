@@ -11,7 +11,7 @@
 		[Embed(source="../../../assets/sound/footsteps.mp3")] 
 		protected var FootSteps:Class;
 		
-		[Embed(source="../../../assets/png/ZombieTILES_WALK.png")]
+		[Embed(source="../../../assets/png/zombie.png")]
 		private var ImgPlayer:Class;
 		public const origSpeed:Number = 120;
 		private var speed:Number = origSpeed;
@@ -22,18 +22,12 @@
 		{
 			super(x, y, ImgPlayer);
 			health = 100;
-			loadGraphic(ImgPlayer, true, true, 64, 64);
-			scale.x = scale.x * (2/3);
-			scale.y = scale.y * (2 / 3);
-			width = width  * (2 / 3);
-			height = height  * (2/3);
-			addAnimation("walk", [1, 2, 3, 4, 0], 5);
+			loadGraphic(ImgPlayer, true, true, 42, 42);
+			addAnimation("walk", [0, 1, 0, 2], 5);
 			addAnimation("idle", [0]);
 			attackRange.height = this.height;
 			attackRange.width = this.width;
-			//play("walk");
 			calcFrame();
-			
 			FlxG.play(FootSteps, 1.0, true);
 		}		
 		override public function update():void
@@ -41,21 +35,51 @@
 			velocity.x = 0;
 			velocity.y = 0;
 			
-			if (FlxG.keys.UP) {
-				velocity.x = speed * Math.cos(MathU.degToRad(angle));
-				velocity.y = speed * Math.sin(MathU.degToRad(angle));
+			//walking up-left, up-right, etc.
+			if (FlxG.keys.UP)
+			{
+				if(FlxG.keys.LEFT){
+					angle = -135;
+					velocity.x = speed * Math.cos(MathU.degToRad(angle));
+					velocity.y = speed * Math.sin(MathU.degToRad(angle));
+				}
+				else if(FlxG.keys.RIGHT){
+					angle = -45;
+					velocity.x = speed * Math.cos(MathU.degToRad(angle));
+					velocity.y = speed * Math.sin(MathU.degToRad(angle));
+				}
+				else
+				{
+					velocity.y = -speed;
+					angle = -90
+				}
 			}
 			else if (FlxG.keys.DOWN)
 			{
-				velocity.x = -1 * speed * Math.cos(MathU.degToRad(angle));
-				velocity.y = -1 * speed * Math.sin(MathU.degToRad(angle));
+				if(FlxG.keys.LEFT){
+					angle = 135;
+					velocity.x = speed * Math.cos(MathU.degToRad(angle));
+					velocity.y = speed * Math.sin(MathU.degToRad(angle));
+				}
+				else if (FlxG.keys.RIGHT)
+				{
+					angle = 45;
+					velocity.x = speed * Math.cos(MathU.degToRad(angle));
+					velocity.y = speed * Math.sin(MathU.degToRad(angle));
+				}
+				else
+				{
+					velocity.y = speed;
+					angle = 90;
+				}
 			}
-
-			if (FlxG.keys.LEFT) {
-				angle -= 6;
+			else if (FlxG.keys.LEFT) {
+				angle = -180;
+				velocity.x = -speed;
 			}
 			else if (FlxG.keys.RIGHT) {
-				angle += 6;
+				angle = 0;
+				velocity.x = speed;
 			}
 			
 			if(velocity.x == 0 && velocity.y == 0) {

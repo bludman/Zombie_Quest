@@ -22,6 +22,8 @@ package com.zombiequest
 		public var pid:Number;
 		public const MAX_HEALTH:Number = 100;
 		
+		[Embed(source="../../../assets/png/minion.png")]
+		private var ImgMinion:Class;
 		
 		/*
 		 * State Enums
@@ -37,11 +39,14 @@ package com.zombiequest
 		public function Minion(x:Number, y:Number, player:Player) 
 		{
 			super(x, y);
+			loadGraphic(ImgMinion, true, true, 32, 32);
 			this.player = player;
 			id++;
 			pid = id;
 			state = DEFENDING;
 			health = MAX_HEALTH;
+			addAnimation("walk", [0, 1, 0, 2], 5);
+			addAnimation("idle", [0]);
 		}
 		
 		public override function update():void
@@ -58,18 +63,25 @@ package com.zombiequest
 					angle = FlxU.getAngle(pCenter.x - x, pCenter.y - y);
 					velocity.x = speed * Math.cos(MathU.degToRad(angle));
 					velocity.y = speed * Math.sin(MathU.degToRad(angle));
+					play("walk");
+				}
+				else
+				{
+					play("idle");
 				}
 			}
 			else if (state == SENTRY)
 			{
 				//Find something to attack
 				findTarget(sentryFollowRange);
+				play("idle");
 			} 
 			else if (state == ATTACKING)
 			{
 				angle = FlxU.getAngle(chaseTarget.x - x, chaseTarget.y - y);
 				velocity.x = speed * Math.cos(MathU.degToRad(angle));
 				velocity.y = speed * Math.sin(MathU.degToRad(angle));
+				play("walk");
 				if(MathU.dist(chaseTarget.x - x, chaseTarget.y - y) < attackRange){
 					attack();
 				}

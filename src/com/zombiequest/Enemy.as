@@ -16,8 +16,7 @@ package com.zombiequest
 		private const HOLD_RANGE:Number = 50;
 		private const ATTACK_RANGE:Number = 2*RETREAT_RANGE;
 		private const FOLLOW_RANGE:Number = 3*ATTACK_RANGE;
-		
-		public static const healthRegen:Number = 25;
+		public static const healthRegen:Number = 10;
 		
 		private var healthbar:FlxSprite;
 		public var player:Player;
@@ -26,29 +25,24 @@ package com.zombiequest
 		public var following:Boolean = false;
 		public var shooting:Boolean = false;
 		public var hasPowerup:Boolean = false;
-		[Embed(source = "../../../assets/png/temp_person.png")]
+		public var collideArea:FlxSprite = new FlxSprite(0, 0);
+		private const newSize:Number = 42 / 96;
+		[Embed(source = "../../../assets/png/cop.png")]
 		private var ImgEnemy:Class;
 		public function Enemy(X:Number, Y:Number, player:Player, hasPowerup:Boolean = false) 
 		{
 			super(X, Y);
 			this.player = player;
 			health = 100;
-			scale = new FlxPoint(20 / width, 20 / height);
-			width = 20;
-			height = 20;
+			
 			lastShot = (Math.random() * 2);
 			this.hasPowerup = hasPowerup;
 			createHealthbar();
-			loadGraphic(ImgEnemy, true, true, 32, 32);
-			scale.x = scale.x / 2;
-			scale.y = scale.y / 2;
-			if (this.hasPowerup == true) {
-				addAnimation("walk", [0, 1, 2], 10);
-			} else {
-				addAnimation("walk", [3, 4, 5], 10);
-			}
-			
+			loadGraphic(ImgEnemy, true, true, 42, 42);
+			addAnimation("walk", [0, 1, 2, 1, 0, 3, 4], 10);
 			play("walk");
+			collideArea.width = 20;
+			collideArea.height = 20;
 			calcFrame();
 		}
 		
@@ -133,6 +127,7 @@ package com.zombiequest
 				_curFrame = 1;
 			}
 			super.update();
+			updateCollide();
 			updateHealthbar();
 
 		}
@@ -170,6 +165,12 @@ package com.zombiequest
 		{
 			super.kill();
 			healthbar.kill();
+		}
+		
+		private function updateCollide():void
+		{
+			collideArea.x = this.x;
+			collideArea.y = this.y;
 		}
 	}
 
