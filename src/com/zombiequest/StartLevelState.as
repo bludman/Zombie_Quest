@@ -13,6 +13,9 @@ package com.zombiequest
 	 */
 	public class StartLevelState extends FlxState 
 	{
+		[Embed(source="../../../assets/png/coin.png")]
+		private var ImgBlood:Class;
+		
 		private const maxHealth:Number = 100;
 		private var player:Player;
 		private var coin:Coin;
@@ -111,6 +114,8 @@ package com.zombiequest
 				player.health += Enemy.healthRegen;
 				minionFactory.getMinion(enemy.x, enemy.y);
 			}
+			
+			bloodSplat(640, 480);
 		}
 		protected function attackInnocent(overlap:Object, i:Object):void
 		{
@@ -118,6 +123,11 @@ package com.zombiequest
 			innocent.kill();
 			player.health += Innocent.healthRegen;
 			minionFactory.getMinion(innocent.x, innocent.y);
+		}
+		
+		protected function bloodSplat(x:Number, y:Number)
+		{
+			
 		}
 		
 		protected function zombieGotShot(p:FlxObject, b:FlxObject):void
