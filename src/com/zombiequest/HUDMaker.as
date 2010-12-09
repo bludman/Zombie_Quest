@@ -27,7 +27,7 @@ package com.zombiequest
 			FlxG.state.add(inside);
 			 
 			healthBar = new FlxSprite(5,5);
-			healthBar.createGraphic(1,10,0xffff0000); //The red bar itself
+			healthBar.createGraphic(1,10,0xff669933); //The red bar itself
 			healthBar.scrollFactor.x = healthBar.scrollFactor.y = 0;
 			healthBar.origin.x = healthBar.origin.y = 0; //Zero out the origin
 			healthBar.scale.x = HEALTHBARSIZE; //Fill up the health bar all the way
