@@ -7,11 +7,11 @@ package com.zombiequest
 	import org.flixel.*;
 	public class Minion extends FlxSprite
 	{
-		private var speed:Number = 90;
+		private var speed:Number = 40;	//made the minions kinda slow because they are not a super zombie like you
 		private var attackRange:Number = 40;
 		private var sentryFollowRange:Number = 200;
 		private var attackFollowRange:Number = 800; //Diagonal distance of map
-		private var playerFollowMin:Number = 64;
+		private var playerFollowMin:Number = 150;
 		private var damage:Number = 25;
 		private const attackTimeout:Number = 1;
 		private var attackTimer:Number = 0;
@@ -68,6 +68,7 @@ package com.zombiequest
 				else
 				{
 					play("idle");
+					findTarget(playerFollowMin);
 				}
 			}
 			else if (state == SENTRY)
@@ -153,6 +154,7 @@ package com.zombiequest
 				{
 					continue;
 				}
+				/* Find the cop nearest to the minion, but close to the player */
 				var dist:Number = MathU.dist(x - target.x, y - target.y);
 				if (dist < closest)
 				{
@@ -162,7 +164,7 @@ package com.zombiequest
 			}
 			if (chaseTarget == null)
 			{
-				state = SENTRY;
+				state = DEFENDING;
 			}
 		}
 	}

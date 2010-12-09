@@ -44,8 +44,10 @@ package com.zombiequest
 			super.update();
 			
 			timeLeft -= FlxG.elapsed;
-			if(timeLeft <= 0)
+			if(timeLeft <= 0) {
+				StartLevelState.underGroup.remove(this, true);
 				this.kill();
+			}
 		}
 	}
 }
