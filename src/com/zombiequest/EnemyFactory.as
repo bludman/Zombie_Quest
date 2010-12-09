@@ -32,7 +32,7 @@ package com.zombiequest
 				if(updateTimeElapsed > 1) 	//it's time to spawn more
 				{
 					/* amount is the max number of enemies on screen at a time. */
-					var amount:Number = Math.sin(waveTimeElapsed/20) * 10;	//It's a wave, literally, a sine wave :P
+					var amount:Number = Math.cos(waveTimeElapsed/30) * 10;	//It's a wave, literally, a sine wave :P
 					trace('max enemies on screen: ' + amount);
 					
 					/* Spawn enemies if there arent enough */
