@@ -35,8 +35,8 @@ package com.zombiequest
 		private const WAVE_TIMEOUT:Number=20;
 		
 		
-		private var decayRate:Number = 10;
-		private var decayTimeout:Number = 10;
+		private var decayRate:Number = .1;
+		private var decayTimeout:Number = .1;
 		private var decayClock:Number = 0;
 		private var waveTimer:Number = WAVE_TIMEOUT;
 		private var attackTimer:Number = attackTimeout;
@@ -296,6 +296,7 @@ package com.zombiequest
 			return candidate;
 		}
 		
+		/* ???????????????????? */
 		protected function renderHud():void
 		{
 			var hud:Array = hudManager.elements;
