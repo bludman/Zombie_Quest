@@ -6,7 +6,7 @@ package com.zombiequest
 	 * ...
 	 * @author Team Zombie Quest
 	 */
-	public class EnemyFactory extends FlxObject
+	public class EnemyFactory
 	{
 		private var minionGroup:FlxGroup;
 		private var player:Player;
@@ -21,7 +21,7 @@ package com.zombiequest
 			this.player = player;
 		}
 		
-		public override function update():void
+		public function update():void
 		{
 			/* One run if wave is active */
 			if(waveOn)
