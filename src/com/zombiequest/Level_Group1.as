@@ -33,7 +33,7 @@ package com.zombiequest
 
 			//Add layers to the master group in correct order.
 			masterLayer.add(layerbg);
-			masterLayer.add(Layer3Group);
+			FlxG.state.add(Layer3Group);
 			Layer3Group.scrollFactor.x = 1.000000;
 			Layer3Group.scrollFactor.y = 1.000000;
 			masterLayer.add(layerMap1);
@@ -52,7 +52,7 @@ package com.zombiequest
 		{
 			addSpritesForLayerLayer3(onAddCallback);
 			generateObjectLinks(onAddCallback);
-			FlxG.state.add(masterLayer);
+			StartLevelState.mapLayer = masterLayer;
 		}
 
 		public function addSpritesForLayerLayer3(onAddCallback:Function = null):void

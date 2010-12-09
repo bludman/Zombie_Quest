@@ -111,6 +111,8 @@ package com.zombiequest
 						distributeHealth(Enemy.healthRegen);
 					}
 				}
+				
+				StartLevelState.bloodSplat(chaseTarget.x, chaseTarget.y);
 			}
 		}
 		

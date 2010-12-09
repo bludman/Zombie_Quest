@@ -12,10 +12,7 @@ package com.zombiequest
 	 * @author Team Zombie Quest
 	 */
 	public class StartLevelState extends FlxState 
-	{
-		[Embed(source="../../../assets/png/coin.png")]
-		private var ImgBlood:Class;
-		
+	{		
 		private const maxHealth:Number = 100;
 		private var player:Player;
 		private var coin:Coin;
@@ -25,12 +22,17 @@ package com.zombiequest
 		public static var innocentGroup:FlxGroup;
 		public static var minionGroup:FlxGroup;
 		public static var collideGroup:FlxGroup;
+		public static var mapLayer:FlxGroup;
 		private var minionFactory:MinionFactory;
 		private var enemyFactory:EnemyFactory;
 		private var level:Map;
-		private var currentPower:PowerEffect;
 		public static var hudManager:HUDMaker;
+		private var currentPower:PowerEffect;
 		private const attackTimeout:Number = 0.5;
+		
+		/* Sprite layers */
+		public static var underGroup:FlxGroup;	//for blood splats
+		public static var overGroup:FlxGroup;	//for HUD
 		
 		/**Number of seconds between release of enemies 
 		 * Assumes constant time between waves
@@ -39,6 +41,7 @@ package com.zombiequest
 		
 		
 		private var decayRate:Number = .1;
+		private var minionDecayRate:Number = 1;
 		private var decayTimeout:Number = .1;
 		private var decayClock:Number = 0;
 		private var waveTimer:Number = WAVE_TIMEOUT;
@@ -46,6 +49,9 @@ package com.zombiequest
 		
 		override public function create():void
 		{
+			underGroup = new FlxGroup();
+			overGroup = new FlxGroup();
+			
 			//Instantiate objects
 			bulletGroup = new FlxGroup();
 			enemyGroup = new FlxGroup();
@@ -62,7 +68,6 @@ package com.zombiequest
 			collideGroup.add(innocentGroup);
 			collideGroup.add(minionGroup);
 			
-			add(enemyFactory);
 			enemyFactory.startWave();
 			
 			//Set up the camera
@@ -90,6 +95,12 @@ package com.zombiequest
 			updateHealthBar();
 			updateWaveStatus();
 			super.update();
+			
+			/* Update Others */
+			mapLayer.update();
+			enemyFactory.update();
+			underGroup.update();
+			overGroup.update();
 		}
 		
 		protected function onAddSprite(obj:Object, layer:FlxGroup, level:Map, properties:Array):Object
@@ -115,7 +126,7 @@ package com.zombiequest
 				minionFactory.getMinion(enemy.x, enemy.y);
 			}
 			
-			bloodSplat(640, 480);
+			bloodSplat(enemy.x, enemy.y);
 		}
 		protected function attackInnocent(overlap:Object, i:Object):void
 		{
@@ -123,11 +134,14 @@ package com.zombiequest
 			innocent.kill();
 			player.health += Innocent.healthRegen;
 			minionFactory.getMinion(innocent.x, innocent.y);
+			
+			bloodSplat(innocent.x, innocent.y);
 		}
 		
-		protected function bloodSplat(x:Number, y:Number)
+		public static function bloodSplat(x:Number, y:Number):void
 		{
-			
+			var splat:Splat = new Splat(x, y);
+			underGroup.add(splat);
 		}
 		
 		protected function zombieGotShot(p:FlxObject, b:FlxObject):void
@@ -151,7 +165,7 @@ package com.zombiequest
 				for (var i:Number = 0; i < minions.length; i++)
 				{
 					var minion:Minion = minions[i] as Minion;
-					minion.health -= decayRate;
+					minion.health -= minionDecayRate;
 					if (minion.health <= 0)
 					{
 						minion.kill();
@@ -307,14 +321,18 @@ package com.zombiequest
 			return candidate;
 		}
 		
-		/* ???????????????????? */
-		protected function renderHud():void
-		{
-			var hud:Array = hudManager.elements;
-			for (var i:Number = 0; i < hud.length; i++)
-			{
-				FlxSprite(hud[i]).render();
-			}
+		/* This must be done to render the HUD above all else */
+		override public function render():void
+		{			
+			mapLayer.render();
+			
+			/* Render Under */
+			underGroup.render();
+			
+			super.render();	
+			
+			/* Render Over */	
+			overGroup.render();
 		}
 	}
 
