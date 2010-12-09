@@ -59,7 +59,8 @@ package com.zombiequest
 			collideGroup.add(innocentGroup);
 			collideGroup.add(minionGroup);
 			
-			enemyFactory.startHorde();
+			add(enemyFactory);
+			enemyFactory.startWave();
 			
 			//Set up the camera
 			FlxG.follow(player, 2.5);
@@ -162,7 +163,7 @@ package com.zombiequest
 			{
 				waveTimer = WAVE_TIMEOUT;
 				//triggerWave();
-				enemyFactory.startHorde();
+				//enemyFactory.startHorde();
 			}
 		}
 		

@@ -15,7 +15,7 @@ package com.zombiequest
 		private const RETREAT_RANGE:Number = 100;
 		private const HOLD_RANGE:Number = 50;
 		private const ATTACK_RANGE:Number = 2*RETREAT_RANGE;
-		private const FOLLOW_RANGE:Number = 3*ATTACK_RANGE;
+		private const FOLLOW_RANGE:Number = 50*ATTACK_RANGE;
 		public static const healthRegen:Number = 10;
 		
 		private var healthbar:FlxSprite;

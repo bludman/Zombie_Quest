@@ -6,6 +6,8 @@ package com.zombiequest
 	
 	public class HUDMaker
 	{
+		private var HEALTHBARSIZE:Number = 200;
+		
 		private var healthBar:FlxSprite;
 		private var statusText:FlxText;
 		private var statusBox:FlxSprite;
@@ -15,12 +17,12 @@ package com.zombiequest
 		public function HUDMaker()
 		{
 			var frame:FlxSprite = new FlxSprite(4,4);
-			frame.createGraphic(202,12); //White frame for the health bar
+			frame.createGraphic(HEALTHBARSIZE+2,12); //White frame for the health bar
 			frame.scrollFactor.x = frame.scrollFactor.y = 0;
 			FlxG.state.add(frame);
 			 
 			var inside:FlxSprite = new FlxSprite(5,5);
-			inside.createGraphic(200,10,0xff000000); //Black interior, 48 pixels wide
+			inside.createGraphic(HEALTHBARSIZE,10,0xff000000); //Black interior, 48 pixels wide
 			inside.scrollFactor.x = inside.scrollFactor.y = 0;
 			FlxG.state.add(inside);
 			 
@@ -28,7 +30,7 @@ package com.zombiequest
 			healthBar.createGraphic(1,10,0xffff0000); //The red bar itself
 			healthBar.scrollFactor.x = healthBar.scrollFactor.y = 0;
 			healthBar.origin.x = healthBar.origin.y = 0; //Zero out the origin
-			healthBar.scale.x = 200; //Fill up the health bar all the way
+			healthBar.scale.x = HEALTHBARSIZE; //Fill up the health bar all the way
 			FlxG.state.add(healthBar);
 			
 			statusBox = new FlxSprite(0, 460);
@@ -66,7 +68,7 @@ package com.zombiequest
 		public function setHealth(amount:Number):void
 		{
 			
-			healthBar.scale.x = amount*2;
+			healthBar.scale.x = amount/(100/HEALTHBARSIZE);
 		}
 		
 		public function updatePowerTimer(amount:Number):void

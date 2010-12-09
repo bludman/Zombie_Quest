@@ -11,8 +11,9 @@ package com.zombiequest
 		private var minionGroup:FlxGroup;
 		private var player:Player;
 		
-		private var hordeOn:Boolean = false;
-		private var timeElapsed:Number = 0;
+		private var waveOn:Boolean = false;
+		private var waveTimeElapsed:Number = 0;
+		private var updateTimeElapsed:Number = 0;
 		
 		public function EnemyFactory(minionGroup:FlxGroup, player:Player) 
 		{
@@ -22,24 +23,32 @@ package com.zombiequest
 		
 		public override function update():void
 		{
-			//THIS DOES NOT WORK!!!!
-			//Maybe because update is only called for objects added to the stage
-			if(hordeOn)
+			/* One run if wave is active */
+			if(waveOn)
 			{
-				timeElapsed += FlxG.elapsed;
-				if(timeElapsed > .1) {
-					if(Math.random() > 0.7) {
-						spawnUp();
+				waveTimeElapsed += FlxG.elapsed;	//total time elapsed during wave
+				updateTimeElapsed += FlxG.elapsed;	//time since the last spawn
+				
+				if(updateTimeElapsed > 1) 	//it's time to spawn more
+				{
+					/* amount is the max number of enemies on screen at a time. */
+					var amount:Number = Math.sin(waveTimeElapsed/20) * 10;	//It's a wave, literally, a sine wave :P
+					trace('max enemies on screen: ' + amount);
+					
+					/* Spawn enemies if there arent enough */
+					if(StartLevelState.enemyGroup.countLiving() < amount)
+					{
+						spawnAll();
 					}
-					if(Math.random() > 0.7) {
-						spawnDown();
+					
+					/* Stop the wave if the sine wave has gone to negatives */
+					if(amount < 0) 
+					{
+						waveOn = false
+						trace('wave ended');
 					}
-					if(Math.random() > 0.7) {
-						spawnLeft();
-					}
-					if(Math.random() > 0.7) {
-						spawnRight();
-					}
+					
+					updateTimeElapsed=0;
 				}
 			}
 		}
@@ -54,14 +63,20 @@ package com.zombiequest
 		}
 		
 		
-		public function startHorde():void
+		public function startWave():void
 		{
-			hordeOn = true;
-			
-			spawnUp();
-			spawnDown();
-			spawnRight();
-			spawnLeft();
+			waveOn = true;
+			waveTimeElapsed = 0;
+			updateTimeElapsed = 0;
+			trace('wave started!');
+		}
+		
+		public function spawnAll(hasPowerup:Boolean = false):void
+		{
+			spawnUp(hasPowerup);
+			spawnDown(hasPowerup);
+			spawnLeft(hasPowerup);
+			spawnRight(hasPowerup);
 		}
 		
 		public function spawnUp(hasPowerup:Boolean = false):void
