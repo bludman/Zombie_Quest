@@ -35,7 +35,7 @@ package com.zombiequest
 		{
 			super(X, Y);
 			this.player = player;
-			health = 100;
+			health = 200;
 			
 			lastShot = (Math.random() * 2);
 			this.hasPowerup = hasPowerup;
