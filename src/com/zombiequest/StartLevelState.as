@@ -40,12 +40,16 @@ package com.zombiequest
 		private const WAVE_TIMEOUT:Number=20;
 		
 		
-		private var decayRate:Number = .2;
-		private var minionDecayRate:Number = 1;
+		private var decayRate:Number = .5;
+		private var minionDecayRate:Number = .5;
 		private var decayTimeout:Number = .1;
 		private var decayClock:Number = 0;
 		private var waveTimer:Number = WAVE_TIMEOUT;
 		private var attackTimer:Number = attackTimeout;
+		
+		private var flashTimer:Number = 0;
+		private var whiteFlash:FlxSprite;
+		
 		
 		override public function create():void
 		{
@@ -76,6 +80,10 @@ package com.zombiequest
 			FlxG.followBounds(Map.boundsMinX, Map.boundsMinY, Map.boundsMaxX, Map.boundsMaxY);
 			FlxG.mouse.hide();
 			hudManager = new HUDMaker();
+			
+			whiteFlash = new FlxSprite(0,0);
+			whiteFlash.createGraphic(640, 480, 0x88ffffff); //White frame for the health bar
+			whiteFlash.scrollFactor.x = whiteFlash.scrollFactor.y = 0;
 		}
 		
 		override public function update():void
@@ -94,6 +102,7 @@ package com.zombiequest
 			zombieDecay();
 			updateHealthBar();
 			updateWaveStatus();
+			flashPlayer();
 			super.update();
 			
 			/* Update Others */
@@ -160,9 +169,25 @@ package com.zombiequest
 			bloodSplat(p.x, p.y, true); //true because it is a zombie splat
 			
 			if(p is Minion)
+			{
 				Minion(p).playHurtSound();
+			}
 			if(p is Player)
+			{
+				flashPlayer(.1);
 				Player(p).playHurtSound();
+			}
+		}
+		
+		protected function flashPlayer(time:Number = 0):void
+		{
+			if(time > 0)
+			{
+				flashTimer = time;
+			}		
+			
+			if(flashTimer > 0)
+				flashTimer -= FlxG.elapsed;
 		}
 		
 		protected function zombieDecay():void
@@ -342,6 +367,9 @@ package com.zombiequest
 			underGroup.render();
 			
 			super.render();	
+			
+			if(flashTimer > 0)
+				whiteFlash.render();
 			
 			/* Render Over */	
 			overGroup.render();

@@ -15,7 +15,7 @@
 		private var speed:Number = origSpeed;
 		private var attackDistance:Number = 10;
 		private var attackRange:FlxSprite = new FlxSprite(0, 0);
-		public var damage:Number = 50;
+		public var damage:Number = 25;
 		
 		[Embed(source="../../../assets/sound/zombie_attack1.mp3")]
 		private static var attackSound1:Class;
@@ -162,7 +162,7 @@
 		{
 			var attackSound:Class;
 			var roll:Number = Math.random() * 5;
-			if(roll > 4 || true)
+			if(roll > 4)
 				attackSound = attackSound1;
 			else if(roll > 3)
 				attackSound = attackSound2;

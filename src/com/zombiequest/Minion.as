@@ -7,7 +7,7 @@ package com.zombiequest
 	import org.flixel.*;
 	public class Minion extends FlxSprite
 	{
-		private var speed:Number = 75;	//made the minions kinda slow because they are not a super zombie like you
+		private var speed:Number = 90;	//made the minions kinda slow because they are not a super zombie like you
 		private var attackRange:Number = 40;
 		private var sentryFollowRange:Number = 200;
 		private var attackFollowRange:Number = 800; //Diagonal distance of map
@@ -176,7 +176,7 @@ package com.zombiequest
 		private function distributeHealth(health:Number):void
 		{
 			var minions:Array = StartLevelState.minionGroup.members;
-			var dist:Number = health / (minions.length + 1);
+			var dist:Number = health / (minions.length);
 			for (var i:Number = 0; i < minions.length; i++)
 			{
 				Minion(minions[i]).health += dist;
@@ -185,7 +185,7 @@ package com.zombiequest
 					health = MAX_HEALTH;
 				}
 			}
-			player.health += dist;
+			player.health += health/2;	//player gets half health
 		}
 		/**
 		 * 
@@ -236,7 +236,7 @@ package com.zombiequest
 				dieSound = dieSound3;
 			else
 				dieSound = dieSound4;
-			FlxG.play(dieSound,.33,false);
+			FlxG.play(dieSound,.4,false);
 			
 			super.kill();
 		}

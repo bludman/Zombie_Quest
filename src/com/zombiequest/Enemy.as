@@ -16,7 +16,7 @@ package com.zombiequest
 		private const HOLD_RANGE:Number = 50;
 		private const ATTACK_RANGE:Number = 2*RETREAT_RANGE;
 		private const FOLLOW_RANGE:Number = 50*ATTACK_RANGE;
-		public static const healthRegen:Number = 10;
+		public static const healthRegen:Number = 20;
 		
 		private var healthbar:FlxSprite;
 		public var player:Player;
@@ -261,7 +261,7 @@ package com.zombiequest
 					hitSound = hitSound1;
 				else
 					hitSound = hitSound2;
-				FlxG.play(hitSound,.4,false);
+				FlxG.play(hitSound,.55,false);
 			}
 		}
 	}
