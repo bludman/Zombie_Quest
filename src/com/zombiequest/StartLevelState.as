@@ -154,6 +154,11 @@ package com.zombiequest
 			}
 			b.kill();
 			bloodSplat(p.x, p.y, true); //true because it is a zombie splat
+			
+			if(p is Minion)
+				Minion(p).playHurtSound();
+			if(p is Player)
+				Player(p).playHurtSound();
 		}
 		
 		protected function zombieDecay():void
@@ -265,6 +270,8 @@ package com.zombiequest
 					FlxU.overlap(player.overlap, enemyGroup, attackEnemy);
 					FlxU.overlap(player.overlap, innocentGroup, attackInnocent);
 					attackTimer = 0;
+					
+					player.playAttackSound();
 				}
 			}
 		}

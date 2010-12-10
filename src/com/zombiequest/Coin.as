@@ -8,7 +8,7 @@ package com.zombiequest
 	 */
 	public class Coin extends FlxSprite 
 	{
-		[Embed(source = '../../../assets/png/coin.png')] private var ImgCoin:Class;
+		[Embed(source = '../../../assets/png/coin.png')] private static var ImgCoin:Class;
 		
 		public function Coin(X:Number, Y:Number) 
 		{

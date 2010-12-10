@@ -30,7 +30,7 @@ package com.zombiequest
 		private var collideOffset:FlxPoint = new FlxSprite(10, 10);
 		private const newSize:Number = 42 / 96;
 		[Embed(source = "../../../assets/png/cop.png")]
-		private var ImgEnemy:Class;
+		private static var ImgEnemy:Class;
 		public function Enemy(X:Number, Y:Number, player:Player, hasPowerup:Boolean = false) 
 		{
 			super(X, Y);

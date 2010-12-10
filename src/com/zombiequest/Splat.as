@@ -12,14 +12,14 @@ package com.zombiequest
 		private var timeLeft:Number = 7.5;
 		
 		[Embed(source="../../../assets/png/blood.png")]
-		private var ImgBlood:Class;
+		private static var ImgBlood:Class;
 		[Embed(source="../../../assets/png/blood2.png")]
-		private var ImgBlood2:Class;
+		private static var ImgBlood2:Class;
 		
 		[Embed(source="../../../assets/png/zombie_blood.png")]
-		private var ImgZombieBlood:Class;
+		private static var ImgZombieBlood:Class;
 		[Embed(source="../../../assets/png/zombie_blood2.png")]
-		private var ImgZombieBlood2:Class;
+		private static var ImgZombieBlood2:Class;
 		
 		public function Splat(X:Number, Y:Number, zombie:Boolean = false) 
 		{

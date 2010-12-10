@@ -23,14 +23,34 @@ package com.zombiequest
 		public const MAX_HEALTH:Number = 100;
 		
 		[Embed(source="../../../assets/png/minion.png")]
-		private var ImgMinion:Class;
+		private static var ImgMinion:Class;
 		
 		[Embed(source="../../../assets/sound/zombie_moan1.mp3")]
-		private var moanSound1:Class;		
+		private static var moanSound1:Class;		
 		[Embed(source="../../../assets/sound/zombie_moan2.mp3")]
-		private var moanSound2:Class;		
+		private static var moanSound2:Class;		
 		[Embed(source="../../../assets/sound/zombie_moan3.mp3")]
-		private var moanSound3:Class;
+		private static var moanSound3:Class;
+		
+		[Embed(source="../../../assets/sound/zombie_attack1.mp3")]
+		private static var attackSound1:Class;
+		[Embed(source="../../../assets/sound/zombie_attack2.mp3")]
+		private static var attackSound2:Class;
+		[Embed(source="../../../assets/sound/zombie_attack3.mp3")]
+		private static var attackSound3:Class;
+		[Embed(source="../../../assets/sound/zombie_attack4.mp3")]
+		private static var attackSound4:Class;
+		[Embed(source="../../../assets/sound/zombie_attack5.mp3")]
+		private static var attackSound5:Class;
+		
+		[Embed(source="../../../assets/sound/zombie_hurt1.mp3")]
+		private static var hurtSound1:Class;
+		[Embed(source="../../../assets/sound/zombie_hurt2.mp3")]
+		private static var hurtSound2:Class;
+		[Embed(source="../../../assets/sound/zombie_hurt3.mp3")]
+		private static var hurtSound3:Class;
+		[Embed(source="../../../assets/sound/zombie_hurt4.mp3")]
+		private static var hurtSound4:Class;
 		
 		/*
 		 * State Enums
@@ -131,7 +151,25 @@ package com.zombiequest
 				}
 				
 				StartLevelState.bloodSplat(chaseTarget.x, chaseTarget.y);
+				playAttackSound();
 			}
+		}
+		
+		private function playAttackSound():void
+		{
+			var attackSound:Class;
+			var roll:Number = Math.random() * 5;
+			if(roll > 4)
+				attackSound = attackSound1;
+			else if(roll > 3)
+				attackSound = attackSound2;
+			else if(roll > 2)
+				attackSound = attackSound3;
+			else if(roll > 1)
+				attackSound = attackSound4;
+			else
+				attackSound = attackSound5;
+			FlxG.play(attackSound,.33,false);
 		}
 		
 		private function distributeHealth(health:Number):void
@@ -183,6 +221,21 @@ package com.zombiequest
 			{
 				state = DEFENDING;
 			}
+		}			
+		
+		public function playHurtSound():void
+		{
+			var hurtSound:Class;
+			var roll:Number = Math.random() * 4;
+			if(roll > 3)
+				hurtSound = hurtSound1;
+			else if(roll > 2)
+				hurtSound = hurtSound2;
+			else if(roll > 1)
+				hurtSound = hurtSound3;
+			else
+				hurtSound = hurtSound4;
+			FlxG.play(hurtSound,1,false);
 		}
 	}
 }

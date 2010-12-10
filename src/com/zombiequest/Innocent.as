@@ -8,7 +8,7 @@ package com.zombiequest
 	public class Innocent extends FlxSprite
 	{
 		[Embed(source = "../../../assets/png/oldinnocent.png")]
-		private var ImgInnocent:Class;
+		private static var ImgInnocent:Class;
 		private var speed:Number = 20;
 		
 		public static const healthRegen:Number = 50;

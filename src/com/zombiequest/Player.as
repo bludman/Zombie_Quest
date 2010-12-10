@@ -10,12 +10,33 @@
 	{
 		
 		[Embed(source="../../../assets/png/zombie.png")]
-		private var ImgPlayer:Class;
+		private static var ImgPlayer:Class;
 		public const origSpeed:Number = 120;
 		private var speed:Number = origSpeed;
 		private var attackDistance:Number = 10;
 		private var attackRange:FlxSprite = new FlxSprite(0, 0);
 		public var damage:Number = 50;
+		
+		[Embed(source="../../../assets/sound/zombie_attack1.mp3")]
+		private static var attackSound1:Class;
+		[Embed(source="../../../assets/sound/zombie_attack2.mp3")]
+		private static var attackSound2:Class;
+		[Embed(source="../../../assets/sound/zombie_attack3.mp3")]
+		private static var attackSound3:Class;
+		[Embed(source="../../../assets/sound/zombie_attack4.mp3")]
+		private static var attackSound4:Class;
+		[Embed(source="../../../assets/sound/zombie_attack5.mp3")]
+		private static var attackSound5:Class;
+		
+		[Embed(source="../../../assets/sound/zombie_hurt1.mp3")]
+		private static var hurtSound1:Class;
+		[Embed(source="../../../assets/sound/zombie_hurt2.mp3")]
+		private static var hurtSound2:Class;
+		[Embed(source="../../../assets/sound/zombie_hurt3.mp3")]
+		private static var hurtSound3:Class;
+		[Embed(source="../../../assets/sound/zombie_hurt4.mp3")]
+		private static var hurtSound4:Class;
+		
 		public function Player(x:Number, y:Number):void
 		{
 			super(x, y, ImgPlayer);
@@ -109,6 +130,38 @@
 		public function center():FlxPoint
 		{
 				return new FlxPoint(x + width / 2, y + height / 2);
+		}		
+		
+		public function playAttackSound():void
+		{
+			var attackSound:Class;
+			var roll:Number = Math.random() * 5;
+			if(roll > 4)
+				attackSound = attackSound1;
+			else if(roll > 3)
+				attackSound = attackSound2;
+			else if(roll > 2)
+				attackSound = attackSound3;
+			else if(roll > 1)
+				attackSound = attackSound4;
+			else
+				attackSound = attackSound5;
+			FlxG.play(attackSound,1,false);
+		}	
+		
+		public function playHurtSound():void
+		{
+			var hurtSound:Class;
+			var roll:Number = Math.random() * 4;
+			if(roll > 3)
+				hurtSound = hurtSound1;
+			else if(roll > 2)
+				hurtSound = hurtSound2;
+			else if(roll > 1)
+				hurtSound = hurtSound3;
+			else
+				hurtSound = hurtSound4;
+			FlxG.play(hurtSound,1,false);
 		}
 		
 	}
