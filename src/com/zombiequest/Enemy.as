@@ -40,6 +40,8 @@ package com.zombiequest
 		
 		[Embed(source = "../../../assets/sound/cop_die1.mp3")]
 		private static var dieSound1:Class;
+		[Embed(source = "../../../assets/sound/cop_die2.mp3")]
+		private static var dieSound2:Class;
 			
 		
 		public function Enemy(X:Number, Y:Number, player:Player, minions:FlxGroup, hasPowerup:Boolean = false) 
@@ -211,7 +213,11 @@ package com.zombiequest
 			super.kill();
 			healthbar.kill();
 			collideArea.kill();
-			FlxG.play(dieSound1,.6,false);
+			
+			if(Math.random() > 0.5)
+				FlxG.play(dieSound1,.6,false);
+			else
+				FlxG.play(dieSound2,.6,false);				
 		}
 		
 		private function updateCollide():void

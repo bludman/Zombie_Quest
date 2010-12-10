@@ -162,7 +162,7 @@
 		{
 			var attackSound:Class;
 			var roll:Number = Math.random() * 5;
-			if(roll > 4)
+			if(roll > 4 || true)
 				attackSound = attackSound1;
 			else if(roll > 3)
 				attackSound = attackSound2;
