@@ -11,7 +11,7 @@ package com.zombiequest
 		private var attackRange:Number = 40;
 		private var sentryFollowRange:Number = 200;
 		private var attackFollowRange:Number = 800; //Diagonal distance of map
-		private var playerFollowMin:Number = 150;
+		private var playerFollowMin:Number = 200;
 		private var damage:Number = 25;
 		private const attackTimeout:Number = 1;
 		private var attackTimer:Number = 0;
@@ -24,6 +24,13 @@ package com.zombiequest
 		
 		[Embed(source="../../../assets/png/minion.png")]
 		private var ImgMinion:Class;
+		
+		[Embed(source="../../../assets/sound/zombie_moan1.mp3")]
+		private var moanSound1:Class;		
+		[Embed(source="../../../assets/sound/zombie_moan2.mp3")]
+		private var moanSound2:Class;		
+		[Embed(source="../../../assets/sound/zombie_moan3.mp3")]
+		private var moanSound3:Class;
 		
 		/*
 		 * State Enums
@@ -47,6 +54,16 @@ package com.zombiequest
 			health = MAX_HEALTH;
 			addAnimation("walk", [0, 1, 0, 2], 5);
 			addAnimation("idle", [0]);
+			
+			var wakeSound:Class;
+			var roll:Number = Math.random();
+			if(roll>0.66)
+				wakeSound = moanSound1;
+			else if(roll > 0.33)
+				wakeSound = moanSound2;
+			else
+				wakeSound = moanSound3;
+			FlxG.play(wakeSound,1,false);
 		}
 		
 		public override function update():void

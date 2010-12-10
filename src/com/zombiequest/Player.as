@@ -8,8 +8,6 @@
 	 */
 	public class Player extends FlxSprite
 	{
-		[Embed(source="../../../assets/sound/footsteps.mp3")] 
-		protected var FootSteps:Class;
 		
 		[Embed(source="../../../assets/png/zombie.png")]
 		private var ImgPlayer:Class;
@@ -28,7 +26,6 @@
 			attackRange.height = this.height;
 			attackRange.width = this.width;
 			calcFrame();
-			//FlxG.play(FootSteps, 1.0, true);
 		}		
 		override public function update():void
 		{
