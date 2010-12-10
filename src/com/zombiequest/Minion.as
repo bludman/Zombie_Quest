@@ -84,15 +84,18 @@ package com.zombiequest
 			addAnimation("walk", [0, 1, 0, 2], 5);
 			addAnimation("idle", [0]);
 			
-			var wakeSound:Class;
-			var roll:Number = Math.random();
-			if(roll>0.66)
-				wakeSound = moanSound1;
-			else if(roll > 0.33)
-				wakeSound = moanSound2;
-			else
-				wakeSound = moanSound3;
-			FlxG.play(wakeSound,1,false);
+			if(Math.random() > 0.66)
+			{
+				var wakeSound:Class;
+				var roll:Number = Math.random();
+				if(roll>0.66)
+					wakeSound = moanSound1;
+				else if(roll > 0.33)
+					wakeSound = moanSound2;
+				else
+					wakeSound = moanSound3;
+				FlxG.play(wakeSound,1,false);
+			}
 		}
 		
 		public override function update():void
