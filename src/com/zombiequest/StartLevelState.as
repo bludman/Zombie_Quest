@@ -40,7 +40,7 @@ package com.zombiequest
 		private const WAVE_TIMEOUT:Number=20;
 		
 		
-		private var decayRate:Number = .1;
+		private var decayRate:Number = .2;
 		private var minionDecayRate:Number = 1;
 		private var decayTimeout:Number = .1;
 		private var decayClock:Number = 0;
@@ -124,6 +124,10 @@ package com.zombiequest
 			if (enemy.dead) {
 				player.health += Enemy.healthRegen;
 				minionFactory.getMinion(enemy.x, enemy.y);
+			}
+			else
+			{
+				enemy.playHitSound();
 			}
 			
 			bloodSplat(enemy.x, enemy.y);
@@ -218,7 +222,7 @@ package com.zombiequest
 					enemy.lastShot += FlxG.elapsed;
 					if (enemy.lastShot >= enemy.shotTimeout) {
 						var p:FlxPoint = enemy.bulletSpawn();
-						var a:Number = FlxU.getAngle(player.x - p.x, player.y - p.y);
+						var a:Number = /*FlxU.getAngle(player.x - p.x, player.y - p.y);*/enemy.angle;
 						bulletGroup.add(new Bullet(p, a));
 						enemy.lastShot = 0;
 					}

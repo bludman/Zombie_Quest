@@ -7,7 +7,7 @@ package com.zombiequest
 	import org.flixel.*;
 	public class Minion extends FlxSprite
 	{
-		private var speed:Number = 50;	//made the minions kinda slow because they are not a super zombie like you
+		private var speed:Number = 75;	//made the minions kinda slow because they are not a super zombie like you
 		private var attackRange:Number = 40;
 		private var sentryFollowRange:Number = 200;
 		private var attackFollowRange:Number = 800; //Diagonal distance of map
@@ -94,7 +94,7 @@ package com.zombiequest
 					wakeSound = moanSound2;
 				else
 					wakeSound = moanSound3;
-				FlxG.play(wakeSound,1,false);
+				FlxG.play(wakeSound,.33,false);
 			}
 		}
 		
@@ -128,6 +128,9 @@ package com.zombiequest
 			} 
 			else if (state == ATTACKING)
 			{
+				if (MathU.dist(player.x - x, player.y - y) > playerFollowMin)
+					state = DEFENDING;
+				
 				angle = FlxU.getAngle(chaseTarget.x - x, chaseTarget.y - y);
 				velocity.x = speed * Math.cos(MathU.degToRad(angle));
 				velocity.y = speed * Math.sin(MathU.degToRad(angle));
@@ -161,6 +164,9 @@ package com.zombiequest
 						distributeHealth(Enemy.healthRegen);
 					}
 				}
+				
+				if (chaseTarget is Enemy)
+					Enemy(chaseTarget).playHitSound(.2);
 				
 				StartLevelState.bloodSplat(chaseTarget.x, chaseTarget.y);
 				playAttackSound();
@@ -220,20 +226,17 @@ package com.zombiequest
 		
 		public override function kill():void
 		{
-			if(Math.random() > 0.66)
-			{
-				var dieSound:Class;
-				var roll:Number = Math.random() * 4;
-				if(roll > 3)
-					dieSound = dieSound1;
-				else if(roll > 2)
-					dieSound = dieSound2;
-				else if(roll > 1)
-					dieSound = dieSound3;
-				else
-					dieSound = dieSound4;
-				FlxG.play(dieSound,.5,false);
-			}		
+			var dieSound:Class;
+			var roll:Number = Math.random() * 4;
+			if(roll > 3)
+				dieSound = dieSound1;
+			else if(roll > 2)
+				dieSound = dieSound2;
+			else if(roll > 1)
+				dieSound = dieSound3;
+			else
+				dieSound = dieSound4;
+			FlxG.play(dieSound,.33,false);
 			
 			super.kill();
 		}

@@ -20,6 +20,7 @@ package com.zombiequest
 		
 		private var healthbar:FlxSprite;
 		public var player:Player;
+		private var minionGroup:FlxGroup;
 		public var lastShot:Number;
 		public var shotTimeout:Number = 1.5;
 		private var moving:Boolean = false;
@@ -31,10 +32,21 @@ package com.zombiequest
 		private const newSize:Number = 42 / 96;
 		[Embed(source = "../../../assets/png/cop.png")]
 		private static var ImgEnemy:Class;
-		public function Enemy(X:Number, Y:Number, player:Player, hasPowerup:Boolean = false) 
+		
+		[Embed(source = "../../../assets/sound/cop_hit1.mp3")]
+		private static var hitSound1:Class;
+		[Embed(source = "../../../assets/sound/cop_hit2.mp3")]
+		private static var hitSound2:Class;
+		
+		[Embed(source = "../../../assets/sound/cop_die1.mp3")]
+		private static var dieSound1:Class;
+			
+		
+		public function Enemy(X:Number, Y:Number, player:Player, minions:FlxGroup, hasPowerup:Boolean = false) 
 		{
 			super(X, Y);
 			this.player = player;
+			minionGroup = minions;
 			health = 100;
 			lastShot = (Math.random() * 2);
 			this.hasPowerup = hasPowerup;
@@ -51,11 +63,25 @@ package com.zombiequest
 			calcFrame();
 		}
 		
-		public function pickTarget():FlxSprite
+		public function pickTarget():FlxObject
 		{
-			//TODO: This should be overridden in the subclass to find 
-			//closest not following minion or player 
-			return player;
+			//Find closest minion or player
+			var distance:Number = 100000;
+			var returnMe:FlxObject;
+			for each (var o:FlxObject in minionGroup.members)
+			{
+				var dist:Number = MathU.dist(o.x - x, o.y - y)
+				if (dist < distance)
+				{
+					distance = dist;
+					returnMe = o;
+				}
+			}
+			
+			if(MathU.dist(player.x - x, player.y - y) < distance)
+				return player;
+			
+			return returnMe;
 		}
 		
 		/**
@@ -72,7 +98,7 @@ package com.zombiequest
 		/**
 		 * Retreat from a target
 		 */
-		private function retreat(target:FlxSprite):void
+		private function retreat(target:FlxObject):void
 		{
 			this.angle = -1 * FlxU.getAngle(target.x - this.x, target.y - this.y);
 			collideArea.angle = angle;
@@ -85,7 +111,7 @@ package com.zombiequest
 		/**
 		 * Chase a target
 		 */
-		private function chase(target:FlxSprite,attack:Boolean = false):void
+		private function chase(target:FlxObject,attack:Boolean = false):void
 		{
 			this.angle = FlxU.getAngle(target.x - this.x, target.y - this.y);
 			collideArea.angle = angle;
@@ -98,7 +124,7 @@ package com.zombiequest
 		
 		public override function update():void
 		{
-			var target:FlxSprite = this.pickTarget();
+			var target:FlxObject = this.pickTarget();
 			var distance:Number = MathU.dist(target.x - x, target.y - y);
 			
 			if(distance<=FOLLOW_RANGE)
@@ -185,6 +211,7 @@ package com.zombiequest
 			super.kill();
 			healthbar.kill();
 			collideArea.kill();
+			FlxG.play(dieSound1,.6,false);
 		}
 		
 		private function updateCollide():void
@@ -216,6 +243,20 @@ package com.zombiequest
 		{
 			super.play(name, force);
 			currentAnim = name;
+		}
+		
+		public function playHitSound(probability:Number = 1):void
+		{
+			if(Math.random() < probability) 
+			{
+				var hitSound:Class;
+				var roll:Number = Math.random();
+				if(roll > .5)
+					hitSound = hitSound1;
+				else
+					hitSound = hitSound2;
+				FlxG.play(hitSound,.4,false);
+			}
 		}
 	}
 
