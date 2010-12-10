@@ -138,9 +138,9 @@ package com.zombiequest
 			bloodSplat(innocent.x, innocent.y);
 		}
 		
-		public static function bloodSplat(x:Number, y:Number):void
+		public static function bloodSplat(x:Number, y:Number, zombie:Boolean = false):void
 		{
-			var splat:Splat = new Splat(x, y);
+			var splat:Splat = new Splat(x, y, zombie);
 			underGroup.add(splat);
 		}
 		
@@ -153,6 +153,7 @@ package com.zombiequest
 				}
 			}
 			b.kill();
+			bloodSplat(p.x, p.y, true); //true because it is a zombie splat
 		}
 		
 		protected function zombieDecay():void

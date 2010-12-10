@@ -16,21 +16,43 @@ package com.zombiequest
 		[Embed(source="../../../assets/png/blood2.png")]
 		private var ImgBlood2:Class;
 		
-		public function Splat(X:Number, Y:Number) 
+		[Embed(source="../../../assets/png/zombie_blood.png")]
+		private var ImgZombieBlood:Class;
+		[Embed(source="../../../assets/png/zombie_blood2.png")]
+		private var ImgZombieBlood2:Class;
+		
+		public function Splat(X:Number, Y:Number, zombie:Boolean = false) 
 		{
 			super(X, Y);
 			
 			var img:Class;
 			var size:Number;
-			if(Math.random() > 0.5)
+			
+			if(zombie) 
 			{
-				img = ImgBlood;
-				size = 64;
+				if(Math.random() > 0.5)
+				{
+					img = ImgZombieBlood;
+					size = 64;
+				}
+				else
+				{
+					img = ImgZombieBlood2;
+					size = 64;
+				}
 			}
-			else
-			{
-				img = ImgBlood2;
-				size = 32;
+			else 
+			{				
+				if(Math.random() > 0.5)
+				{
+					img = ImgBlood;
+					size = 64;
+				}
+				else
+				{
+					img = ImgBlood2;
+					size = 32;
+				}
 			}				
 			
 			loadGraphic(img, true, true, size, size);
