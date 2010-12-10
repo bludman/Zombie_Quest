@@ -217,51 +217,60 @@ package com.zombiequest
 		
 		public override function kill():void
 		{
-			var dieSound:Class;
-			var roll:Number = Math.random() * 4;
-			if(roll > 3)
-				dieSound = dieSound1;
-			else if(roll > 2)
-				dieSound = dieSound2;
-			else if(roll > 1)
-				dieSound = dieSound3;
-			else
-				dieSound = dieSound4;
-			FlxG.play(dieSound,.5,false);
+			if(Math.random() > 0.66)
+			{
+				var dieSound:Class;
+				var roll:Number = Math.random() * 4;
+				if(roll > 3)
+					dieSound = dieSound1;
+				else if(roll > 2)
+					dieSound = dieSound2;
+				else if(roll > 1)
+					dieSound = dieSound3;
+				else
+					dieSound = dieSound4;
+				FlxG.play(dieSound,.5,false);
+			}		
 			
 			super.kill();
 		}
 		
 		public function playAttackSound():void
 		{
-			var attackSound:Class;
-			var roll:Number = Math.random() * 5;
-			if(roll > 4)
-				attackSound = attackSound1;
-			else if(roll > 3)
-				attackSound = attackSound2;
-			else if(roll > 2)
-				attackSound = attackSound3;
-			else if(roll > 1)
-				attackSound = attackSound4;
-			else
-				attackSound = attackSound5;
-			FlxG.play(attackSound,.33,false);
+			if(Math.random() > 0.66)
+			{
+				var attackSound:Class;
+				var roll:Number = Math.random() * 5;
+				if(roll > 4)
+					attackSound = attackSound1;
+				else if(roll > 3)
+					attackSound = attackSound2;
+				else if(roll > 2)
+					attackSound = attackSound3;
+				else if(roll > 1)
+					attackSound = attackSound4;
+				else
+					attackSound = attackSound5;
+				FlxG.play(attackSound,.33,false);
+			}
 		}		
 		
 		public function playHurtSound():void
 		{
-			var hurtSound:Class;
-			var roll:Number = Math.random() * 4;
-			if(roll > 3)
-				hurtSound = hurtSound1;
-			else if(roll > 2)
-				hurtSound = hurtSound2;
-			else if(roll > 1)
-				hurtSound = hurtSound3;
-			else
-				hurtSound = hurtSound4;
-			FlxG.play(hurtSound,.33,false);
+			if(Math.random() > 0.66)
+			{
+				var hurtSound:Class;
+				var roll:Number = Math.random() * 4;
+				if(roll > 3)
+					hurtSound = hurtSound1;
+				else if(roll > 2)
+					hurtSound = hurtSound2;
+				else if(roll > 1)
+					hurtSound = hurtSound3;
+				else
+					hurtSound = hurtSound4;
+				FlxG.play(hurtSound,.33,false);
+			}
 		}
 	}
 }
