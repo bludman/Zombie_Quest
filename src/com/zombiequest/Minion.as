@@ -238,6 +238,9 @@ package com.zombiequest
 				dieSound = dieSound4;
 			FlxG.play(dieSound,.4,false);
 			
+			var corpse:MinionCorpse = new MinionCorpse(x, y);
+			StartLevelState.underGroup.add(corpse);
+			
 			super.kill();
 		}
 		
