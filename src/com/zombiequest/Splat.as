@@ -67,9 +67,14 @@ package com.zombiequest
 			
 			timeLeft -= FlxG.elapsed;
 			if(timeLeft <= 0) {
-				StartLevelState.underGroup.remove(this, true);
 				this.kill();
 			}
+		}
+		
+		public override function kill():void
+		{
+			StartLevelState.underGroup.remove(this, true);
+			super.kill();
 		}
 	}
 }

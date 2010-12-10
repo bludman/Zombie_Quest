@@ -52,6 +52,15 @@ package com.zombiequest
 		[Embed(source="../../../assets/sound/zombie_hurt4.mp3")]
 		private static var hurtSound4:Class;
 		
+		[Embed(source="../../../assets/sound/zombie_die1.mp3")]
+		private static var dieSound1:Class;
+		[Embed(source="../../../assets/sound/zombie_die2.mp3")]
+		private static var dieSound2:Class;
+		[Embed(source="../../../assets/sound/zombie_die3.mp3")]
+		private static var dieSound3:Class;
+		[Embed(source="../../../assets/sound/zombie_die4.mp3")]
+		private static var dieSound4:Class;
+		
 		/*
 		 * State Enums
 		 */
@@ -155,23 +164,6 @@ package com.zombiequest
 			}
 		}
 		
-		private function playAttackSound():void
-		{
-			var attackSound:Class;
-			var roll:Number = Math.random() * 5;
-			if(roll > 4)
-				attackSound = attackSound1;
-			else if(roll > 3)
-				attackSound = attackSound2;
-			else if(roll > 2)
-				attackSound = attackSound3;
-			else if(roll > 1)
-				attackSound = attackSound4;
-			else
-				attackSound = attackSound5;
-			FlxG.play(attackSound,.33,false);
-		}
-		
 		private function distributeHealth(health:Number):void
 		{
 			var minions:Array = StartLevelState.minionGroup.members;
@@ -221,7 +213,41 @@ package com.zombiequest
 			{
 				state = DEFENDING;
 			}
-		}			
+		}	
+		
+		public override function kill():void
+		{
+			var dieSound:Class;
+			var roll:Number = Math.random() * 4;
+			if(roll > 3)
+				dieSound = dieSound1;
+			else if(roll > 2)
+				dieSound = dieSound2;
+			else if(roll > 1)
+				dieSound = dieSound3;
+			else
+				dieSound = dieSound4;
+			FlxG.play(dieSound,.5,false);
+			
+			super.kill();
+		}
+		
+		public function playAttackSound():void
+		{
+			var attackSound:Class;
+			var roll:Number = Math.random() * 5;
+			if(roll > 4)
+				attackSound = attackSound1;
+			else if(roll > 3)
+				attackSound = attackSound2;
+			else if(roll > 2)
+				attackSound = attackSound3;
+			else if(roll > 1)
+				attackSound = attackSound4;
+			else
+				attackSound = attackSound5;
+			FlxG.play(attackSound,.33,false);
+		}		
 		
 		public function playHurtSound():void
 		{
@@ -235,7 +261,7 @@ package com.zombiequest
 				hurtSound = hurtSound3;
 			else
 				hurtSound = hurtSound4;
-			FlxG.play(hurtSound,1,false);
+			FlxG.play(hurtSound,.33,false);
 		}
 	}
 }

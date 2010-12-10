@@ -37,6 +37,15 @@
 		[Embed(source="../../../assets/sound/zombie_hurt4.mp3")]
 		private static var hurtSound4:Class;
 		
+		[Embed(source="../../../assets/sound/zombie_die1.mp3")]
+		private static var dieSound1:Class;
+		[Embed(source="../../../assets/sound/zombie_die2.mp3")]
+		private static var dieSound2:Class;
+		[Embed(source="../../../assets/sound/zombie_die3.mp3")]
+		private static var dieSound3:Class;
+		[Embed(source="../../../assets/sound/zombie_die4.mp3")]
+		private static var dieSound4:Class;
+		
 		public function Player(x:Number, y:Number):void
 		{
 			super(x, y, ImgPlayer);
@@ -131,6 +140,23 @@
 		{
 				return new FlxPoint(x + width / 2, y + height / 2);
 		}		
+		
+		public override function kill():void
+		{
+			var dieSound:Class;
+			var roll:Number = Math.random() * 4;
+			if(roll > 3)
+				dieSound = dieSound1;
+			else if(roll > 2)
+				dieSound = dieSound2;
+			else if(roll > 1)
+				dieSound = dieSound3;
+			else
+				dieSound = dieSound4;
+			FlxG.play(dieSound,1,false);
+			
+			super.kill();
+		}
 		
 		public function playAttackSound():void
 		{
