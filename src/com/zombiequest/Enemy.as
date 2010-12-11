@@ -8,7 +8,7 @@ package com.zombiequest
 	 */
 	public class Enemy extends FlxSprite 
 	{
-		private const speed:Number = 90;
+		private const speed:Number = 75;
 		
 		private const RETREAT_RANGE:Number = 100;
 		private const HOLD_RANGE:Number = 50;

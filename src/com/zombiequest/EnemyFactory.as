@@ -32,7 +32,7 @@ package com.zombiequest
 				if(updateTimeElapsed > 1) 	//it's time to spawn more
 				{
 					/* amount is the max number of enemies on screen at a time. */
-					var amount:Number = Math.cos(waveTimeElapsed/30) * 10;	//It's a wave, literally, a sine wave :P
+					var amount:Number = (1-Math.cos(waveTimeElapsed/30)) * 10;	//It's a wave, literally, a sine wave :P
 					trace('max enemies on screen: ' + amount);
 					
 					/* Spawn enemies if there arent enough */
@@ -42,7 +42,7 @@ package com.zombiequest
 					}
 					
 					/* Stop the wave if the sine wave has gone to negatives */
-					if(amount < 0) 
+					if(amount > 11) 
 					{
 						waveOn = false
 						trace('wave ended');
@@ -81,22 +81,22 @@ package com.zombiequest
 		
 		public function spawnUp(hasPowerup:Boolean = false):void
 		{
-			getEnemy(640, 0, hasPowerup);
+			getEnemy(640, 70, hasPowerup);
 		}
 		
 		public function spawnDown(hasPowerup:Boolean = false):void
 		{
-			getEnemy(640, 1024, hasPowerup);
+			getEnemy(640, 920, hasPowerup);
 		}
 		
 		public function spawnLeft(hasPowerup:Boolean = false):void
 		{
-			getEnemy(0, 512, hasPowerup);
+			getEnemy(64, 512, hasPowerup);
 		}
 		
 		public function spawnRight(hasPowerup:Boolean = false):void
 		{
-			getEnemy(1280, 512, hasPowerup);
+			getEnemy(1170, 512, hasPowerup);
 		}
 	}
 	
