@@ -7,7 +7,7 @@ package com.zombiequest
 	import org.flixel.*;
 	public class Minion extends FlxSprite
 	{
-		private var speed:Number = 70;	//made the minions kinda slow because they are not a super zombie like you
+		private var speed:Number = 80;	//made the minions kinda slow because they are not a super zombie like you
 		private var attackRange:Number = 40;
 		private var sentryFollowRange:Number = 200;
 		private var attackFollowRange:Number = 800; //Diagonal distance of map
@@ -82,7 +82,7 @@ package com.zombiequest
 			pid = id;
 			state = DEFENDING;
 			health = MAX_HEALTH;
-			addAnimation("walk", [0, 1, 0, 2], 5);
+			addAnimation("walk", [0, 1, 0, 2], 4);
 			addAnimation("idle", [0]);
 			addAnimation("attack", [3, 4, 0], 8, false);
 			
@@ -114,12 +114,12 @@ package com.zombiequest
 					angle = FlxU.getAngle(pCenter.x - x, pCenter.y - y);
 					velocity.x = speed * Math.cos(MathU.degToRad(angle));
 					velocity.y = speed * Math.sin(MathU.degToRad(angle));
-					if(!attacking)
+					if(!attacking)	//make sure the attacking anim is done
 						play("walk");
 				}
 				else
 				{
-					if(!attacking)
+					if(!attacking)	//make sure the attacking anim is done
 						play("idle");
 					findTarget(playerFollowMin);
 				}
@@ -128,7 +128,7 @@ package com.zombiequest
 			{
 				//Find something to attack
 				findTarget(sentryFollowRange);
-				if(!attacking)
+				if(!attacking)	//make sure the attacking anim is done
 					play("idle");
 			} 
 			else if (state == ATTACKING)
@@ -140,7 +140,7 @@ package com.zombiequest
 				angle = FlxU.getAngle(chaseTarget.x - x, chaseTarget.y - y);
 				velocity.x = speed * Math.cos(MathU.degToRad(angle));
 				velocity.y = speed * Math.sin(MathU.degToRad(angle));
-				if(!attacking)
+				if(!attacking)	//make sure the attacking anim is done
 					play("walk");
 				if(MathU.dist(chaseTarget.x - x, chaseTarget.y - y) < attackRange){
 					attack();
@@ -162,13 +162,14 @@ package com.zombiequest
 			if (attackTimer >= attackTimeout)
 			{
 				play("attack");
-				attacking = true;
-				
-				chaseTarget.health -= damage;
+				attacking = true;	//set this so other animation
+									//dont play while this one is playing
+				chaseTarget.health -= damage
 				attackTimer = 0;
 				if (chaseTarget.health <= 0)
 				{
-					chaseTarget.kill();
+					chaseTarget.kill();					
+					StartLevelState.minionFactory.getMinion(chaseTarget.x, chaseTarget.y);
 					StartLevelState.minionBrainCount++;
 					if (chaseTarget is Enemy)
 					{

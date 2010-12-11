@@ -11,7 +11,7 @@ package com.zombiequest
 		
 		private var timeLeft:Number = 7.5;
 		
-		[Embed(source="../../../assets/png/minion_corpse.png")]
+		[Embed(source="../../../assets/png/deadZombie.png")]
 		private static var ImgCorpse:Class;
 		
 		public function MinionCorpse(X:Number, Y:Number) 
