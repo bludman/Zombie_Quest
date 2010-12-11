@@ -38,16 +38,16 @@ package com.zombiequest
 			
 			statusBox = new FlxSprite(0, 460);
 			statusBox.scrollFactor.x = statusBox.scrollFactor.y = 0;
-			FlxG.state.add(statusBox);
+			StartLevelState.overGroup.add(statusBox);
 			statusText = new FlxText(0, 460, 320);
 			statusText.color = 0xff000000;
 			statusText.scrollFactor.x = statusText.scrollFactor.y = 0;
 			statusBox.createGraphic(statusText.width+timerOffset, statusText.height, 0x00ffffff);
-			FlxG.state.add(statusText);
+			StartLevelState.overGroup.add(statusText);
 			timer = new FlxText(325, 460, 20);
 			timer.color = 0xff000000;
 			timer.scrollFactor.x = timer.scrollFactor.y = 0;
-			FlxG.state.add(timer);
+			StartLevelState.overGroup.add(timer);
 			
 		}
 		

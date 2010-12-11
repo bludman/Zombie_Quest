@@ -20,7 +20,7 @@ package com.zombiequest.power
 		
 		public override function affect(p:Player):void
 		{
-			FlxG.state.add(overlay);
+			StartLevelState.overGroup.add(overlay);
 		}
 		
 		public override function flavorText():String

@@ -193,7 +193,7 @@ package com.zombiequest
 			healthbar.createGraphic(2, 1, 0xffff0000);
 			healthbar.origin.x = healthbar.origin.y = 0;
 			healthbar.scale.x = this.health / 4;
-			FlxG.state.add(healthbar);
+			StartLevelState.overGroup.add(healthbar);
 		}
 		
 		public function updateHealthbar():void

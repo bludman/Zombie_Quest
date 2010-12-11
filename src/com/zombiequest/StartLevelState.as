@@ -22,7 +22,6 @@ package com.zombiequest
 		public static var innocentGroup:FlxGroup;
 		public static var minionGroup:FlxGroup;
 		public static var collideGroup:FlxGroup;
-		public static var mapLayer:FlxGroup;
 		public static var minionFactory:MinionFactory;
 		public static var enemyFactory:EnemyFactory;
 		private var level:Map;
@@ -48,7 +47,7 @@ package com.zombiequest
 		private var attackTimer:Number = attackTimeout;
 		
 		private var flashTimer:Number = 0;
-		private var whiteFlash:FlxSprite;
+		//private var whiteFlash:FlxSprite;
 		
 		
 		override public function create():void
@@ -57,13 +56,13 @@ package com.zombiequest
 			overGroup = new FlxGroup();
 			
 			//Instantiate objects
+			player = new Player(640,480);
 			bulletGroup = new FlxGroup();
 			enemyGroup = new FlxGroup();
 			enemyCollideGroup = new FlxGroup();
 			innocentGroup = new FlxGroup();
 			minionGroup = new FlxGroup();
 			collideGroup = new FlxGroup();
-			mapLayer = new FlxGroup();
 			level = new Level_Group1(true, onAddSprite);
 			minionFactory = new MinionFactory(player);
 			enemyFactory = new EnemyFactory(minionGroup, player);
@@ -82,9 +81,9 @@ package com.zombiequest
 			FlxG.mouse.hide();
 			hudManager = new HUDMaker();
 			
-			whiteFlash = new FlxSprite(0,0);
-			whiteFlash.createGraphic(640, 480, 0x88ffffff); //White frame for the health bar
-			whiteFlash.scrollFactor.x = whiteFlash.scrollFactor.y = 0;
+			//whiteFlash = new FlxSprite(0,0);
+			//whiteFlash.createGraphic(640, 480, 0x88ffffff); //White frame for the health bar
+			//whiteFlash.scrollFactor.x = whiteFlash.scrollFactor.y = 0;
 		}
 		
 		override public function update():void
@@ -108,10 +107,13 @@ package com.zombiequest
 			super.update();
 			
 			/* Update Others */
-			mapLayer.update();
+			player.update();
 			enemyFactory.update();
 			underGroup.update();
 			overGroup.update();
+			enemyGroup.update();
+			enemyCollideGroup.update();
+			minionGroup.update();
 		}
 		
 		protected function onAddSprite(obj:Object, layer:FlxGroup, level:Map, properties:Array):Object
@@ -362,16 +364,19 @@ package com.zombiequest
 		
 		/* This must be done to render the HUD above all else */
 		override public function render():void
-		{			
-			mapLayer.render();
+		{	
+			super.render();	
 			
 			/* Render Under */
 			underGroup.render();
 			
-			super.render();	
+			enemyGroup.render();
+			enemyCollideGroup.render();
+			minionGroup.render();
+			player.render();
 			
-			if(flashTimer > 0)
-				whiteFlash.render();
+			//if(flashTimer > 0)
+			//	whiteFlash.render();
 			
 			/* Render Over */	
 			overGroup.render();

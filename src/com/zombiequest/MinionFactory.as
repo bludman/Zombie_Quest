@@ -18,7 +18,7 @@ package com.zombiequest
 		{
 			var minion:Minion = new Minion(x, y, player);
 			StartLevelState.minionGroup.add(minion);
-			FlxG.state.add(minion);
+			//FlxG.state.add(minion);
 		}
 	}
 
