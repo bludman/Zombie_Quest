@@ -290,13 +290,13 @@ package com.zombiequest
 				var minions:Array = minionGroup.members;
 				for (var i:Number = 0; i < minions.length; i++)
 				{
-					Minion(minions[i]).state = Minion.ATTACKING;
+					Minion(minions[i]).findTarget();
 				}
 			}
 			else if (FlxG.keys.justPressed("S"))
 			{
-				var minions:Array = minionGroup.members;
-				for (var i:Number = 0; i < minions.length; i++)
+				minions = minionGroup.members;
+				for (i = 0; i < minions.length; i++)
 				{
 					Minion(minions[i]).state = Minion.DEFENDING;
 				}

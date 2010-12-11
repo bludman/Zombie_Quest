@@ -133,10 +133,6 @@ package com.zombiequest
 			} 
 			else if (state == ATTACKING)
 			{
-				//Uncomment if you want zombie to follow you when you are too far
-				//if (MathU.dist(player.x - x, player.y - y) > playerFollowMin)
-				//	state = DEFENDING;
-				
 				angle = FlxU.getAngle(chaseTarget.x - x, chaseTarget.y - y);
 				velocity.x = speed * Math.cos(MathU.degToRad(angle));
 				velocity.y = speed * Math.sin(MathU.degToRad(angle));
