@@ -15,10 +15,15 @@ package com.zombiequest
 		private var waveTimeElapsed:Number = 0;
 		private var updateTimeElapsed:Number = 0;
 		
+		/* wave variables */
+		private var enemyMax:Number = 11; //maximum number of enemies at the peak
+		private var waveTime:Number = 10	//increasing this slows down the wave progressions
+		
 		public function EnemyFactory(minionGroup:FlxGroup, player:Player) 
 		{
 			this.minionGroup = minionGroup;
 			this.player = player;
+			startWave();
 		}
 		
 		public function update():void
@@ -32,7 +37,7 @@ package com.zombiequest
 				if(updateTimeElapsed > 1) 	//it's time to spawn more
 				{
 					/* amount is the max number of enemies on screen at a time. */
-					var amount:Number = (1-Math.cos(waveTimeElapsed/30)) * 10;	//It's a wave, literally, a sine wave :P
+					var amount:Number = (1-Math.cos(waveTimeElapsed/waveTime));	//It's a wave, literally, a sine wave :P
 					trace('max enemies on screen: ' + amount);
 					
 					/* Spawn enemies if there arent enough */
