@@ -12,10 +12,22 @@ package com.zombiequest
 		private var inside:FlxSprite;
 		private var frame:FlxSprite;
 		
+		private var bigBrain:FlxSprite;
+		private var bigBrainCount:FlxText;
+		
+		private var smallBrain:FlxSprite;
+		private var smallBrainCount:FlxText;
+		
 		private var statusText:FlxText;
 		private var statusBox:FlxSprite;
 		private var timer:FlxText;
 		private var timerOffset:Number = 25;
+		
+		[Embed(source="../../../assets/jpeg/brain_big.jpg")]
+		private static var BigBrain:Class;
+		
+		[Embed(source="../../../assets/jpeg/brain_small.jpg")]
+		private static var SmallBrain:Class;
 		
 		public function HUDMaker()
 		{
@@ -35,6 +47,29 @@ package com.zombiequest
 			healthBar.origin.x = healthBar.origin.y = 0; //Zero out the origin
 			healthBar.scale.x = HEALTHBARSIZE; //Fill up the health bar all the way
 			StartLevelState.overGroup.add(healthBar);
+			
+			bigBrain = new FlxSprite(450,4);
+			bigBrain.loadGraphic(BigBrain, false, false, 64, 32);
+			bigBrain.scrollFactor.x = bigBrain.scrollFactor.y = 0;
+			bigBrain.origin.x = bigBrain.origin.y = 0;
+			StartLevelState.overGroup.add(bigBrain);
+			
+			bigBrainCount = new FlxText(520, 12, 64);
+			bigBrainCount.scrollFactor.x = bigBrainCount.scrollFactor.y = 0;
+			bigBrainCount.size = 10;
+			StartLevelState.overGroup.add(bigBrainCount);
+			
+			smallBrain = new FlxSprite(550,4);
+			smallBrain.loadGraphic(SmallBrain, false, false, 48, 32);
+			smallBrain.scrollFactor.x = smallBrain.scrollFactor.y = 0;
+			smallBrain.origin.x = smallBrain.origin.y = 0;
+			StartLevelState.overGroup.add(smallBrain);
+			
+			smallBrainCount = new FlxText(605, 12, 64);
+			smallBrainCount.scrollFactor.x = smallBrainCount.scrollFactor.y = 0;
+			smallBrainCount.size = 10;
+			StartLevelState.overGroup.add(smallBrainCount);
+			
 			
 			statusBox = new FlxSprite(0, 460);
 			statusBox.scrollFactor.x = statusBox.scrollFactor.y = 0;
@@ -58,16 +93,12 @@ package com.zombiequest
 		}
 		
 		
-		public function get elements():Array
-		{
-			return new Array(frame, inside, healthBar);
-		}
 		
 		public function update():void
 		{
 			//Just updating the brain counter for now
-			statusText.text = "Brains you ate: " + StartLevelState.playerBrainCount;
-			statusText.text = statusText.text + " Brains your minions ate: " + +StartLevelState.minionBrainCount;
+			bigBrainCount.text = "x " + StartLevelState.playerBrainCount;
+			smallBrainCount.text = "x " + StartLevelState.minionBrainCount;
 		}
 	}
 }

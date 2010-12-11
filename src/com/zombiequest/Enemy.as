@@ -13,9 +13,7 @@ package com.zombiequest
 		protected var attackRange:Number = 2*retreatRange;
 		protected var followRange:Number = 50*attackRange;
 		protected var holdBuffer:Number = 50;
-		
-		
-		public static const healthRegen:Number = 20;
+		public static const healthRegen:Number = 40;
 		
 		/* Enemy states */
 		protected var moving:Boolean = false;

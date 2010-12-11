@@ -73,8 +73,6 @@ package com.zombiequest
 			collideGroup.add(innocentGroup);
 			collideGroup.add(minionGroup);
 			
-			enemyFactory.startWave();
-			
 			//Set up the camera
 			FlxG.follow(player, 2.5);
 			FlxG.followAdjust(.5, .2);

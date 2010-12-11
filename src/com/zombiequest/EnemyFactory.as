@@ -15,10 +15,15 @@ package com.zombiequest
 		private var waveTimeElapsed:Number = 0;
 		private var updateTimeElapsed:Number = 0;
 		
+		/* wave variables */
+		private var waveAmount:Number = 20; //enemy spawn amount
+		private var waveDuration:Number = 120;	//in seconds
+		
 		public function EnemyFactory(minionGroup:FlxGroup, player:Player) 
 		{
 			this.minionGroup = minionGroup;
 			this.player = player;
+			startWave();
 		}
 		
 		public function update():void
@@ -32,17 +37,15 @@ package com.zombiequest
 				if(updateTimeElapsed > 1) 	//it's time to spawn more
 				{
 					/* amount is the max number of enemies on screen at a time. */
-					var amount:Number = (1-Math.cos(waveTimeElapsed/30)) * 10;	//It's a wave, literally, a sine wave :P
-					trace('max enemies on screen: ' + amount);
+					var amount:Number = Math.min(waveAmount, waveTimeElapsed/4);	//It's a wave
+					trace('amount: ' + amount);
 					
-					/* Spawn enemies if there arent enough */
-					if(StartLevelState.enemyGroup.countLiving() < amount)
-					{
-						spawnAll();
-					}
+					/* Spawn enemies */
+					if(StartLevelState.enemyGroup.countLiving() , amount)
+						spawnAll(amount/100);
 					
 					/* Stop the wave if the sine wave has gone to negatives */
-					if(amount > 11) 
+					if(waveTimeElapsed > waveDuration) 
 					{
 						waveOn = false
 						trace('wave ended');
@@ -82,15 +85,32 @@ package com.zombiequest
 			waveOn = true;
 			waveTimeElapsed = 0;
 			updateTimeElapsed = 0;
+			spawnAll(1);
 			trace('wave started!');
 		}
 		
-		public function spawnAll(hasPowerup:Boolean = false):void
+		public function spawnAll(chance:Number, hasPowerup:Boolean = false):void
 		{
-			spawnUp(hasPowerup);
-			spawnDown(hasPowerup);
-			spawnLeft(hasPowerup);
-			spawnRight(hasPowerup);
+			var roll:Number = Math.random();
+			if(roll < chance)
+			{
+				spawnUp(hasPowerup);
+			}
+			roll = Math.random();
+			if(roll < chance)
+			{
+				spawnDown(hasPowerup);
+			}
+			roll = Math.random();
+			if(roll < chance)
+			{
+				spawnLeft(hasPowerup);
+			}
+			roll = Math.random();
+			if(roll < chance)
+			{
+				spawnRight(hasPowerup);
+			}
 		}
 		
 		public function spawnUp(hasPowerup:Boolean = false):void

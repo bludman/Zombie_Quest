@@ -12,7 +12,7 @@
 		
 		[Embed(source="../../../assets/png/zombie.png")]
 		private static var ImgPlayer:Class;
-		public const origSpeed:Number = 80;
+		public const origSpeed:Number = 60;
 		public static var maxHealth:Number = 300;
 		private var speed:Number = origSpeed;
 		private var attackDistance:Number = 10;
@@ -54,9 +54,9 @@
 			super(x, y, ImgPlayer);
 			health = maxHealth;
 			loadGraphic(ImgPlayer, true, true, 42, 42);
-			addAnimation("walk", [0, 1, 0, 2], 5);
+			addAnimation("walk", [0, 1, 0, 2], 3);
 			addAnimation("idle", [0]);
-			addAnimation("attack", [3, 4, 0], 7, false);
+			addAnimation("attack", [4, 3, 0], 7, false);
 			attackRange.height = this.height;
 			attackRange.width = this.width;
 			calcFrame();
