@@ -51,40 +51,23 @@ package com.zombiequest
 			
 		}
 		
-		public function pushStatusText(text:String):void
-		{
-			/* In the future, make this function "push" a statusText to
-			 * an array of status texts that scroll with time */
-			statusText.text = text;
-			//create a new graphic with 100 alpha
-			statusBox.createGraphic(statusText.width+timerOffset, statusText.height, 0xffffffff);
-		}
-		
-		public function clearStatusText():void
-		{
-			statusText.text = "";
-			//create a new graphic with 0 alpha
-			statusBox.createGraphic(statusText.width+timerOffset, statusText.height, 0x00ffffff);
-			timer.text = "";
-		}
-		
 		public function setHealth(amount:Number):void
 		{
 			
 			healthBar.scale.x = amount/(Player.maxHealth/HEALTHBARSIZE);
 		}
 		
-		public function updatePowerTimer(amount:Number):void
-		{
-			if (statusText.text == "") {
-				return;
-			}
-			timer.text = amount.toString();
-		}
 		
 		public function get elements():Array
 		{
 			return new Array(frame, inside, healthBar);
+		}
+		
+		public function update():void
+		{
+			//Just updating the brain counter for now
+			statusText.text = "Brains you ate: " + StartLevelState.playerBrainCount;
+			statusText.text = statusText.text + " Brains your minions ate: " + +StartLevelState.minionBrainCount;
 		}
 	}
 }

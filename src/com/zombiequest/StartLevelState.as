@@ -24,6 +24,8 @@ package com.zombiequest
 		public static var collideGroup:FlxGroup;
 		public static var minionFactory:MinionFactory;
 		public static var enemyFactory:EnemyFactory;
+		public static var playerBrainCount:Number = 0;
+		public static var minionBrainCount:Number = 0;
 		private var level:Map;
 		public static var hudManager:HUDMaker;
 		private var currentPower:PowerEffect;
@@ -114,6 +116,7 @@ package com.zombiequest
 			enemyGroup.update();
 			enemyCollideGroup.update();
 			minionGroup.update();
+			hudManager.update();
 		}
 		
 		protected function onAddSprite(obj:Object, layer:FlxGroup, level:Map, properties:Array):Object
@@ -135,6 +138,7 @@ package com.zombiequest
 			enemy.health -= player.damage;
 			enemy.updateHealthbar();
 			if (enemy.dead) {
+				playerBrainCount++;
 				player.health += Enemy.healthRegen;
 				minionFactory.getMinion(enemy.x, enemy.y);
 			}
@@ -142,17 +146,7 @@ package com.zombiequest
 			{
 				enemy.playHitSound();
 			}
-			
 			bloodSplat(enemy.x, enemy.y);
-		}
-		protected function attackInnocent(overlap:Object, i:Object):void
-		{
-			var innocent:Innocent = i as Innocent;
-			innocent.kill();
-			player.health += Innocent.healthRegen;
-			minionFactory.getMinion(innocent.x, innocent.y);
-			
-			bloodSplat(innocent.x, innocent.y);
 		}
 		
 		public static function bloodSplat(x:Number, y:Number, zombie:Boolean = false):void
@@ -258,22 +252,6 @@ package com.zombiequest
 				}
 			}
 		}
-		
-		protected function updatePower():void
-		{
-			if (currentPower == null)
-			{
-				return;
-			}
-			currentPower.updateTime();
-			if (!currentPower.isActive()) {
-				hudManager.clearStatusText();
-			}
-			else
-			{
-				hudManager.updatePowerTimer(currentPower.timeRemaining());
-			}
-		}
 		/**
 		 * 
 		 *
@@ -301,7 +279,6 @@ package com.zombiequest
 				if (attackTimer >= attackTimeout) 
 				{
 					FlxU.overlap(player.overlap, enemyGroup, attackEnemy);
-					FlxU.overlap(player.overlap, innocentGroup, attackInnocent);
 					attackTimer = 0;
 					
 					player.playAttackSound();
@@ -317,7 +294,7 @@ package com.zombiequest
 				minion = nextMinion();
 				if (minion != null)
 				{
-					minion.state == Minion.ATTACKING;
+					minion.state = Minion.ATTACKING;
 					minion.findTarget();
 				}
 			}
