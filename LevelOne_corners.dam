@@ -33,9 +33,12 @@
         <row>0,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,0</row>
         <row>0,0,0,0,0,0,0,0,0,11,11,0,0,0,0,0,0,0,0,0</row>
       </maplayer>
+<<<<<<< HEAD
       <spritelayer name="Layer3" xScroll="1" yScroll="1" visible="true" locked="false" exports="true">
         <sprite guid="998456C0-C37F-51BD-BDAC-F31723723CFE" idx="2" x="600" y="660" z="1" angle="0" scaleX="1" scaleY="1" flipped="false"/>
       </spritelayer>
+=======
+>>>>>>> 4408eb26b8d0447b2ce6440ffa9c2bebb5951f7a
       <maplayer name="Map1" xScroll="1" yScroll="1" x="0" y="0" width="20" height="16" tileset="assets/jpeg/temp_tiles.jpg" tileWidth="64" tileHeight="64" visible="true" hasHits="true" drawIdx="1" collideIdx="1" eraseIdx="0" locked="false" exports="true">
         <row>16,16,16,16,16,16,16,16,17,10,10,16,16,16,16,16,16,16,16,16</row>
         <row>16,17,17,0,0,0,0,0,17,0,0,17,0,0,0,0,0,17,17,16</row>

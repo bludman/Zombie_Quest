@@ -15,9 +15,6 @@ package com.zombiequest
 		public var layerbg:FlxTilemap;
 		public var layerMap1:FlxTilemap;
 
-		//Sprites
-		public var Layer3Group:FlxGroup = new FlxGroup;
-
 		//Properties
 
 
@@ -33,9 +30,6 @@ package com.zombiequest
 
 			//Add layers to the master group in correct order.
 			masterLayer.add(layerbg);
-			masterLayer.add(Layer3Group);
-			Layer3Group.scrollFactor.x = 1.000000;
-			Layer3Group.scrollFactor.y = 1.000000;
 			masterLayer.add(layerMap1);
 
 			if ( addToStage )
@@ -50,14 +44,8 @@ package com.zombiequest
 
 		override public function createObjects(onAddCallback:Function = null):void
 		{
-			addSpritesForLayerLayer3(onAddCallback);
 			generateObjectLinks(onAddCallback);
 			FlxG.state.add(masterLayer);
-		}
-
-		public function addSpritesForLayerLayer3(onAddCallback:Function = null):void
-		{
-			addSpriteToLayer(new Player(610.000, 670.000), Player, Layer3Group , 610.000, 670.000, 0.000, false, 1.000, 1.000, generateProperties( null ), onAddCallback );//"Player"
 		}
 
 		public function generateObjectLinks(onAddCallback:Function = null):void

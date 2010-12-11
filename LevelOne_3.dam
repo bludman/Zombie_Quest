@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <project>
-  <version>1.1.8</version>
+  <version>1.1.9</version>
   <bgColor>0x000000</bgColor>
   <spriteEntries>
     <tileEntry name="Innocent" idx="1" className="Innocent" image="assets/png/oldinnocent.png" offsetX="0" offsetY="0" width="23" height="23" anchorX="0" anchorY="0" boundsX="0" boundsY="0" boundsWidth="23" boundsHeight="23" constructor="new Innocent(%xpos%, %ypos%, %prop:angle%)" exports="true" canScale="true" canRotate="true">
@@ -33,9 +33,6 @@
         <row>26,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,26,26</row>
         <row>26,26,26,26,26,26,26,26,26,26,26,26,26,26,26,26,26,26,26,26</row>
       </maplayer>
-      <spritelayer name="Layer3" xScroll="1" yScroll="1" visible="true" locked="false" exports="true">
-        <sprite guid="998456C0-C37F-51BD-BDAC-F31723723CFE" idx="2" x="630" y="720" z="1" angle="0" scaleX="1" scaleY="1" flipped="false"/>
-      </spritelayer>
       <maplayer name="Map1" xScroll="1" yScroll="1" x="0" y="0" width="20" height="16" tileset="assets/jpeg/temp_tiles.jpg" tileWidth="64" tileHeight="64" visible="true" hasHits="true" drawIdx="1" collideIdx="1" eraseIdx="0" locked="false" exports="true">
         <row>35,35,35,35,35,35,35,35,0,0,0,0,35,35,35,35,35,35,35,35</row>
         <row>35,35,35,35,35,35,35,35,0,0,0,0,35,35,35,35,35,35,35,35</row>

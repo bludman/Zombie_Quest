@@ -11,7 +11,7 @@ package com.zombiequest
 		private var attackRange:Number = 40;
 		private var sentryFollowRange:Number = 200;
 		private var attackFollowRange:Number = 800; //Diagonal distance of map
-		private var playerFollowMin:Number = 200;
+		private var playerFollowMin:Number = 80;
 		private var damage:Number = 25;
 		private const attackTimeout:Number = 1;
 		private var attackTimer:Number = 0;
@@ -117,7 +117,7 @@ package com.zombiequest
 				else
 				{
 					play("idle");
-					//findTarget(playerFollowMin);
+					findTarget(playerFollowMin);
 				}
 			}
 			else if (state == SENTRY)
@@ -128,8 +128,9 @@ package com.zombiequest
 			} 
 			else if (state == ATTACKING)
 			{
-				if (MathU.dist(player.x - x, player.y - y) > playerFollowMin)
-					state = DEFENDING;
+				//Uncomment if you want zombie to follow you when you are too far
+				//if (MathU.dist(player.x - x, player.y - y) > playerFollowMin)
+				//	state = DEFENDING;
 				
 				angle = FlxU.getAngle(chaseTarget.x - x, chaseTarget.y - y);
 				velocity.x = speed * Math.cos(MathU.degToRad(angle));
