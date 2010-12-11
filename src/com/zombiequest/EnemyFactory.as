@@ -58,7 +58,21 @@ package com.zombiequest
 		
 		public function getEnemy(x:Number, y:Number, hasPowerup:Boolean = false):void
 		{
-			var enemy:Enemy = new Enemy(x, y, player, minionGroup, hasPowerup);
+			var enemy:Enemy;
+			var rand:Number = Math.random();
+			
+			if (rand > .33 && rand < .66)
+			{
+				enemy = new Enemy(x, y, player, minionGroup, hasPowerup);
+			}
+			else if (rand >= .66)
+			{
+				enemy = new FearlessEnemy(x, y, player, minionGroup, hasPowerup);
+			}
+			else 
+			{
+				enemy = new CowardlyEnemy(x, y, player, minionGroup, hasPowerup);
+			}
 			StartLevelState.enemyGroup.add(enemy);
 			StartLevelState.enemyCollideGroup.add(enemy.collideArea);
 			//FlxG.state.add(enemy);
