@@ -23,10 +23,10 @@ package com.zombiequest
 		private var timer:FlxText;
 		private var timerOffset:Number = 25;
 		
-		[Embed(source="../../../assets/jpeg/brain_big.jpg")]
+		[Embed(source="../../../assets/png/full_brain_big.png")]
 		private static var BigBrain:Class;
 		
-		[Embed(source="../../../assets/jpeg/brain_small.jpg")]
+		[Embed(source="../../../assets/png/full_brain_small.png")]
 		private static var SmallBrain:Class;
 		
 		public function HUDMaker()
@@ -48,24 +48,24 @@ package com.zombiequest
 			healthBar.scale.x = HEALTHBARSIZE; //Fill up the health bar all the way
 			StartLevelState.overGroup.add(healthBar);
 			
-			bigBrain = new FlxSprite(450,4);
-			bigBrain.loadGraphic(BigBrain, false, false, 64, 32);
+			bigBrain = new FlxSprite(520,4);
+			bigBrain.loadGraphic(BigBrain, false, false, 38, 31);
 			bigBrain.scrollFactor.x = bigBrain.scrollFactor.y = 0;
 			bigBrain.origin.x = bigBrain.origin.y = 0;
 			StartLevelState.overGroup.add(bigBrain);
 			
-			bigBrainCount = new FlxText(520, 12, 64);
+			bigBrainCount = new FlxText(558, 12, 64);
 			bigBrainCount.scrollFactor.x = bigBrainCount.scrollFactor.y = 0;
 			bigBrainCount.size = 10;
 			StartLevelState.overGroup.add(bigBrainCount);
 			
-			smallBrain = new FlxSprite(550,4);
-			smallBrain.loadGraphic(SmallBrain, false, false, 48, 32);
+			smallBrain = new FlxSprite(588,8);
+			smallBrain.loadGraphic(SmallBrain, false, false, 27, 22);
 			smallBrain.scrollFactor.x = smallBrain.scrollFactor.y = 0;
 			smallBrain.origin.x = smallBrain.origin.y = 0;
 			StartLevelState.overGroup.add(smallBrain);
 			
-			smallBrainCount = new FlxText(605, 12, 64);
+			smallBrainCount = new FlxText(614, 10, 64);
 			smallBrainCount.scrollFactor.x = smallBrainCount.scrollFactor.y = 0;
 			smallBrainCount.size = 10;
 			StartLevelState.overGroup.add(smallBrainCount);
