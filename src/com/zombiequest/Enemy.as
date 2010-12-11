@@ -8,38 +8,41 @@ package com.zombiequest
 	 */
 	public class Enemy extends FlxSprite 
 	{
-		private const speed:Number = 75;
-		
-		private const RETREAT_RANGE:Number = 100;
-		private const HOLD_RANGE:Number = 50;
-		private const ATTACK_RANGE:Number = 2*RETREAT_RANGE;
-		private const FOLLOW_RANGE:Number = 50*ATTACK_RANGE;
+		protected const speed:Number = 75;
+		protected var retreatRange:Number = 100;
+		protected var attackRange:Number = 2*retreatRange;
+		protected var followRange:Number = 50*attackRange;
+		protected var holdBuffer:Number = 50;
 		public static const healthRegen:Number = 40;
 		
-		private var healthbar:FlxSprite;
+		/* Enemy states */
+		protected var moving:Boolean = false;
+		public var shooting:Boolean = false;
+		protected var retreating:Boolean = false;
+		
+		
+		protected var healthbar:FlxSprite;
 		public var player:Player;
-		private var minionGroup:FlxGroup;
+		protected var minionGroup:FlxGroup;
 		public var lastShot:Number;
 		public var shotTimeout:Number = 1.5;
-		private var moving:Boolean = false;
-		public var shooting:Boolean = false;
-		private var currentAnim:String = "";
+		protected var currentAnim:String = "";
 		public var hasPowerup:Boolean = false;
 		public var collideArea:FlxSprite = new FlxSprite(0, 0);
-		private var collideOffset:FlxPoint = new FlxSprite(10, 10);
-		private const newSize:Number = 42 / 96;
+		protected var collideOffset:FlxPoint = new FlxSprite(10, 10);
+		protected const newSize:Number = 42 / 96;
 		[Embed(source = "../../../assets/png/cop.png")]
-		private static var ImgEnemy:Class;
+		protected static var ImgEnemy:Class;
 		
 		[Embed(source = "../../../assets/sound/cop_hit1.mp3")]
-		private static var hitSound1:Class;
+		protected static var hitSound1:Class;
 		[Embed(source = "../../../assets/sound/cop_hit2.mp3")]
-		private static var hitSound2:Class;
+		protected static var hitSound2:Class;
 		
 		[Embed(source = "../../../assets/sound/cop_die1.mp3")]
-		private static var dieSound1:Class;
+		protected static var dieSound1:Class;
 		[Embed(source = "../../../assets/sound/cop_die2.mp3")]
-		private static var dieSound2:Class;
+		protected static var dieSound2:Class;
 			
 		
 		public function Enemy(X:Number, Y:Number, player:Player, minions:FlxGroup, hasPowerup:Boolean = false) 
@@ -87,7 +90,7 @@ package com.zombiequest
 		/**
 		 * Hold position
 		 */
-		private function holdPosition(attack:Boolean = false):void
+		protected function holdPosition(attack:Boolean = false):void
 		{
 			collideArea.velocity.x = 0;
 			collideArea.velocity.y = 0;
@@ -98,7 +101,7 @@ package com.zombiequest
 		/**
 		 * Retreat from a target
 		 */
-		private function retreat(target:FlxObject):void
+		protected function retreat(target:FlxObject):void
 		{
 			this.angle = -1 * FlxU.getAngle(target.x - this.x, target.y - this.y);
 			collideArea.angle = angle;
@@ -111,7 +114,7 @@ package com.zombiequest
 		/**
 		 * Chase a target
 		 */
-		private function chase(target:FlxObject,attack:Boolean = false):void
+		protected function chase(target:FlxObject,attack:Boolean = false):void
 		{
 			this.angle = FlxU.getAngle(target.x - this.x, target.y - this.y);
 			collideArea.angle = angle;
@@ -127,13 +130,13 @@ package com.zombiequest
 			var target:FlxObject = this.pickTarget();
 			var distance:Number = MathU.dist(target.x - x, target.y - y);
 			
-			if(distance<=FOLLOW_RANGE)
+			if(distance<=followRange)
 			{
-				if(distance <= ATTACK_RANGE)
+				if(distance <= attackRange)
 				{
-					if(distance <= ATTACK_RANGE - HOLD_RANGE)
+					if(distance <= attackRange - holdBuffer)
 					{
-						if(distance<= RETREAT_RANGE)
+						if(distance<= retreatRange)
 						{
 							retreat(target);
 						}
@@ -183,7 +186,7 @@ package com.zombiequest
 			return ret;
 		}
 		
-		private function createHealthbar():void
+		protected function createHealthbar():void
 		{
 			healthbar = new FlxSprite(this.x, this.y);
 			healthbar.createGraphic(2, 1, 0xffff0000);
@@ -216,13 +219,13 @@ package com.zombiequest
 				FlxG.play(dieSound2,.6,false);				
 		}
 		
-		private function updateCollide():void
+		protected function updateCollide():void
 		{
 			x = collideArea.x - collideOffset.x;
 			y = collideArea.y - collideOffset.y;
 		}
 		
-		private function boundEnemy():void
+		protected function boundEnemy():void
 		{
 			if (x < 0) {
 				x = 0;
