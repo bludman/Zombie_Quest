@@ -11,7 +11,7 @@
 		
 		[Embed(source="../../../assets/png/zombie.png")]
 		private static var ImgPlayer:Class;
-		public const origSpeed:Number = 75;
+		public const origSpeed:Number = 50;
 		public static var maxHealth:Number = 500;
 		private var speed:Number = origSpeed;
 		private var attackDistance:Number = 10;

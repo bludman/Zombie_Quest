@@ -38,7 +38,6 @@ package com.zombiequest
 		 */
 		private const WAVE_TIMEOUT:Number=20;
 		
-		
 		private var decayRate:Number = .5;
 		private var minionDecayRate:Number = .5;
 		private var decayTimeout:Number = .1;

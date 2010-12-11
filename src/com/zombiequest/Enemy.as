@@ -8,7 +8,7 @@ package com.zombiequest
 	 */
 	public class Enemy extends FlxSprite 
 	{
-		private const speed:Number = 90;
+		private const speed:Number = 75;
 		private const turnSpeed:Number = 3;
 		private const shootRange:Number = 500; //Ben: What is this for?
 		
