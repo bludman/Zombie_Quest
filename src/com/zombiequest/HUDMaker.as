@@ -48,24 +48,24 @@ package com.zombiequest
 			healthBar.scale.x = HEALTHBARSIZE; //Fill up the health bar all the way
 			StartLevelState.overGroup.add(healthBar);
 			
-			bigBrain = new FlxSprite(520,4);
+			bigBrain = new FlxSprite(514,4);
 			bigBrain.loadGraphic(BigBrain, false, false, 38, 31);
 			bigBrain.scrollFactor.x = bigBrain.scrollFactor.y = 0;
 			bigBrain.origin.x = bigBrain.origin.y = 0;
 			StartLevelState.overGroup.add(bigBrain);
 			
-			bigBrainCount = new FlxText(558, 12, 64);
+			bigBrainCount = new FlxText(552, 12, 64);
 			bigBrainCount.scrollFactor.x = bigBrainCount.scrollFactor.y = 0;
 			bigBrainCount.size = 10;
 			StartLevelState.overGroup.add(bigBrainCount);
 			
-			smallBrain = new FlxSprite(588,8);
+			smallBrain = new FlxSprite(582,8);
 			smallBrain.loadGraphic(SmallBrain, false, false, 27, 22);
 			smallBrain.scrollFactor.x = smallBrain.scrollFactor.y = 0;
 			smallBrain.origin.x = smallBrain.origin.y = 0;
 			StartLevelState.overGroup.add(smallBrain);
 			
-			smallBrainCount = new FlxText(614, 10, 64);
+			smallBrainCount = new FlxText(608, 10, 64);
 			smallBrainCount.scrollFactor.x = smallBrainCount.scrollFactor.y = 0;
 			smallBrainCount.size = 10;
 			StartLevelState.overGroup.add(smallBrainCount);
