@@ -7,7 +7,7 @@ package com.zombiequest
 	import org.flixel.*;
 	public class Minion extends FlxSprite
 	{
-		private var speed:Number = 45;	//made the minions kinda slow because they are not a super zombie like you
+		private var speed:Number = 80;	//made the minions kinda slow because they are not a super zombie like you
 		private var attackRange:Number = 40;
 		private var sentryFollowRange:Number = 200;
 		private var attackFollowRange:Number = 800; //Diagonal distance of map
@@ -168,7 +168,8 @@ package com.zombiequest
 				attackTimer = 0;
 				if (chaseTarget.health <= 0)
 				{
-					chaseTarget.kill();
+					chaseTarget.kill();					
+					StartLevelState.minionFactory.getMinion(chaseTarget.x, chaseTarget.y);
 					StartLevelState.minionBrainCount++;
 					if (chaseTarget is Enemy)
 					{
