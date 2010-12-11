@@ -287,25 +287,15 @@ package com.zombiequest
 		
 		protected function armyControl():void
 		{
-			var minion:Minion = null;
 			if (FlxG.keys.justPressed("A")) 
 			{
-				minion = nextMinion();
-				if (minion != null)
+				var minions:Array = minionGroup.members;
+				for (var i:Number = 0; i < minions.length; i++)
 				{
-					minion.state = Minion.ATTACKING;
-					minion.findTarget();
+					Minion(minions[i]).state = Minion.ATTACKING;
 				}
 			}
 			else if (FlxG.keys.justPressed("S"))
-			{
-				minion = nextMinion();
-				if (minion != null)
-				{
-					minion.state = Minion.SENTRY;
-				}
-			}
-			else if (FlxG.keys.justPressed("D"))
 			{
 				var minions:Array = minionGroup.members;
 				for (var i:Number = 0; i < minions.length; i++)
