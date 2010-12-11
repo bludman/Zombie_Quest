@@ -13,7 +13,7 @@ package com.zombiequest
 	 */
 	public class StartLevelState extends FlxState 
 	{		
-		private const maxHealth:Number = 100;
+		//public const maxHealth:Number = 500;
 		private var player:Player;
 		private var coin:Coin;
 		public static var enemyGroup:FlxGroup;
@@ -280,8 +280,8 @@ package com.zombiequest
 		 */
 		protected function updateHealthBar():void
 		{
-			if (player.health > maxHealth) {
-				player.health = maxHealth;
+			if (player.health > Player.maxHealth) {
+				player.health = Player.maxHealth;
 			}
 			if (player.health <= 0) {
 				player.kill();
