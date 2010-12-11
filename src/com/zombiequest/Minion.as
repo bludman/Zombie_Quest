@@ -17,6 +17,7 @@ package com.zombiequest
 		private var attackTimer:Number = 0;
 		private var player:Player;
 		private var chasing:Boolean = false;
+		private var attacking:Boolean = false;
 		private var chaseTarget:FlxSprite;
 		private static var id:Number = 0;
 		public var pid:Number;
@@ -83,6 +84,7 @@ package com.zombiequest
 			health = MAX_HEALTH;
 			addAnimation("walk", [0, 1, 0, 2], 5);
 			addAnimation("idle", [0]);
+			addAnimation("attack", [3, 4, 0], 8, false);
 			
 			if(Math.random() > 0.66)
 			{
@@ -112,11 +114,13 @@ package com.zombiequest
 					angle = FlxU.getAngle(pCenter.x - x, pCenter.y - y);
 					velocity.x = speed * Math.cos(MathU.degToRad(angle));
 					velocity.y = speed * Math.sin(MathU.degToRad(angle));
-					play("walk");
+					if(!attacking)
+						play("walk");
 				}
 				else
 				{
-					play("idle");
+					if(!attacking)
+						play("idle");
 					findTarget(playerFollowMin);
 				}
 			}
@@ -124,7 +128,8 @@ package com.zombiequest
 			{
 				//Find something to attack
 				findTarget(sentryFollowRange);
-				play("idle");
+				if(!attacking)
+					play("idle");
 			} 
 			else if (state == ATTACKING)
 			{
@@ -135,7 +140,8 @@ package com.zombiequest
 				angle = FlxU.getAngle(chaseTarget.x - x, chaseTarget.y - y);
 				velocity.x = speed * Math.cos(MathU.degToRad(angle));
 				velocity.y = speed * Math.sin(MathU.degToRad(angle));
-				play("walk");
+				if(!attacking)
+					play("walk");
 				if(MathU.dist(chaseTarget.x - x, chaseTarget.y - y) < attackRange){
 					attack();
 				}
@@ -145,12 +151,19 @@ package com.zombiequest
 				}
 				
 			}
+			
+			if(attacking && finished)
+				attacking = false;
+			
 			super.update();
 		}
 		private function attack():void
 		{
 			if (attackTimer >= attackTimeout)
 			{
+				play("attack");
+				attacking = true;
+				
 				chaseTarget.health -= damage;
 				attackTimer = 0;
 				if (chaseTarget.health <= 0)

@@ -1,6 +1,7 @@
  package com.zombiequest 
 {
 	import flash.text.Font;
+	
 	import org.flixel.*;
 	/**
 	 * ...
@@ -16,7 +17,8 @@
 		private var speed:Number = origSpeed;
 		private var attackDistance:Number = 10;
 		private var attackRange:FlxSprite = new FlxSprite(0, 0);
-		public var damage:Number = 50;
+		public var damage:Number = 25;
+		private var attacking:Boolean = false;
 		
 		[Embed(source="../../../assets/sound/zombie_attack1.mp3")]
 		private static var attackSound1:Class;
@@ -54,6 +56,7 @@
 			loadGraphic(ImgPlayer, true, true, 42, 42);
 			addAnimation("walk", [0, 1, 0, 2], 5);
 			addAnimation("idle", [0]);
+			addAnimation("attack", [3, 4, 0], 7, false);
 			attackRange.height = this.height;
 			attackRange.width = this.width;
 			calcFrame();
@@ -110,12 +113,23 @@
 				velocity.x = speed;
 			}
 			
-			if(velocity.x == 0 && velocity.y == 0) {
+			if(FlxG.keys.justPressed("SPACE"))
+			{
+				play("attack");
+				attacking = true;
+			}
+			else if((!attacking || finished) && velocity.x == 0 && velocity.y == 0)
+			{
 				play("idle");
 			}
-			else {
+			else if((!attacking || finished))
+			{
 				play("walk");
 			}
+			
+			if(attacking && finished)
+				attacking = false;
+			
 			super.update();
 			updateOverlap();
 		}
