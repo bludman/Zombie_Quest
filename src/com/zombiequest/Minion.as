@@ -117,7 +117,7 @@ package com.zombiequest
 				else
 				{
 					play("idle");
-					findTarget(playerFollowMin);
+					//findTarget(playerFollowMin);
 				}
 			}
 			else if (state == SENTRY)
