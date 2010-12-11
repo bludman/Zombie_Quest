@@ -10,19 +10,29 @@ package com.zombiequest
 	{
 		protected const speed:Number = 75;
 		
-		protected const RETREAT_RANGE:Number = 100;
-		protected const HOLD_RANGE:Number = 50;
-		protected const ATTACK_RANGE:Number = 2*RETREAT_RANGE;
-		protected const FOLLOW_RANGE:Number = 50*ATTACK_RANGE;
+		
+		
+		
+		
+		protected var retreatRange:Number = 100;
+		protected var attackRange:Number = 2*retreatRange;
+		protected var followRange:Number = 50*attackRange;
+		protected var holdBuffer:Number = 50;
+		
+		
 		public static const healthRegen:Number = 20;
+		
+		/* Enemy states */
+		protected var moving:Boolean = false;
+		public var shooting:Boolean = false;
+		protected var retreating:Boolean = false;
+		
 		
 		protected var healthbar:FlxSprite;
 		public var player:Player;
 		protected var minionGroup:FlxGroup;
 		public var lastShot:Number;
 		public var shotTimeout:Number = 1.5;
-		protected var moving:Boolean = false;
-		public var shooting:Boolean = false;
 		protected var currentAnim:String = "";
 		public var hasPowerup:Boolean = false;
 		public var collideArea:FlxSprite = new FlxSprite(0, 0);
@@ -127,13 +137,13 @@ package com.zombiequest
 			var target:FlxObject = this.pickTarget();
 			var distance:Number = MathU.dist(target.x - x, target.y - y);
 			
-			if(distance<=FOLLOW_RANGE)
+			if(distance<=followRange)
 			{
-				if(distance <= ATTACK_RANGE)
+				if(distance <= attackRange)
 				{
-					if(distance <= ATTACK_RANGE - HOLD_RANGE)
+					if(distance <= attackRange - holdBuffer)
 					{
-						if(distance<= RETREAT_RANGE)
+						if(distance<= retreatRange)
 						{
 							retreat(target);
 						}
