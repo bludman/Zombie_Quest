@@ -23,8 +23,8 @@ package com.zombiequest
 		public static var minionGroup:FlxGroup;
 		public static var collideGroup:FlxGroup;
 		public static var mapLayer:FlxGroup;
-		private var minionFactory:MinionFactory;
-		private var enemyFactory:EnemyFactory;
+		public static var minionFactory:MinionFactory;
+		public static var enemyFactory:EnemyFactory;
 		private var level:Map;
 		public static var hudManager:HUDMaker;
 		private var currentPower:PowerEffect;
@@ -165,7 +165,7 @@ package com.zombiequest
 					p.kill();
 				}
 			}
-			b.kill();
+			b.kill();	
 			bloodSplat(p.x, p.y, true); //true because it is a zombie splat
 			
 			if(p is Minion)

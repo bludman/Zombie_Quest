@@ -52,7 +52,7 @@ package com.zombiequest
 			health = 100;
 			lastShot = (Math.random() * 2);
 			this.hasPowerup = hasPowerup;
-			createHealthbar();
+			//createHealthbar();
 			loadGraphic(ImgEnemy, true, true, 42, 42);
 			addAnimation("walk", [0, 1, 2, 1, 0, 3, 4], 10);
 			addAnimation("shoot", [5], 1);
@@ -203,15 +203,15 @@ package com.zombiequest
 				this.health = 0;
 				this.kill();
 			}
-			healthbar.scale.x = this.health / 6;
-			healthbar.x = this.x - 2;
-			healthbar.y = this.y;
+			//healthbar.scale.x = this.health / 6;
+			//healthbar.x = this.x - 2;
+			//healthbar.y = this.y;
 		}
 		
 		public override function kill():void
 		{
 			super.kill();
-			healthbar.kill();
+			//healthbar.kill();
 			collideArea.kill();
 			
 			if(Math.random() > 0.5)
