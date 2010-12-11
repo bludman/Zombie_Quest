@@ -63,6 +63,7 @@ package com.zombiequest
 			innocentGroup = new FlxGroup();
 			minionGroup = new FlxGroup();
 			collideGroup = new FlxGroup();
+			mapLayer = new FlxGroup();
 			level = new Level_Group1(true, onAddSprite);
 			minionFactory = new MinionFactory(player);
 			enemyFactory = new EnemyFactory(minionGroup, player);
@@ -90,6 +91,7 @@ package com.zombiequest
 		{
 			FlxU.collide(level.hitTilemaps, collideGroup);
 			FlxU.collide(level.hitTilemaps, player);
+		
 			collideGroup.collide();
 			player.collide(enemyCollideGroup);
 			player.collide(innocentGroup);
