@@ -11,11 +11,12 @@
 		
 		[Embed(source="../../../assets/png/zombie.png")]
 		private static var ImgPlayer:Class;
-		public const origSpeed:Number = 90;
+		public const origSpeed:Number = 75;
+		public static var maxHealth:Number = 500;
 		private var speed:Number = origSpeed;
 		private var attackDistance:Number = 10;
 		private var attackRange:FlxSprite = new FlxSprite(0, 0);
-		public var damage:Number = 25;
+		public var damage:Number = 50;
 		
 		[Embed(source="../../../assets/sound/zombie_attack1.mp3")]
 		private static var attackSound1:Class;
@@ -49,7 +50,7 @@
 		public function Player(x:Number, y:Number):void
 		{
 			super(x, y, ImgPlayer);
-			health = 100;
+			health = maxHealth;
 			loadGraphic(ImgPlayer, true, true, 42, 42);
 			addAnimation("walk", [0, 1, 0, 2], 5);
 			addAnimation("idle", [0]);

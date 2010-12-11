@@ -71,7 +71,7 @@ package com.zombiequest
 		public function setHealth(amount:Number):void
 		{
 			
-			healthBar.scale.x = amount/(100/HEALTHBARSIZE);
+			healthBar.scale.x = amount/(Player.maxHealth/HEALTHBARSIZE);
 		}
 		
 		public function updatePowerTimer(amount:Number):void
