@@ -169,12 +169,8 @@ package com.zombiequest
 				if (chaseTarget.health <= 0)
 				{
 					chaseTarget.kill();
-					//StartLevelState.minionFactory.getMinion(chaseTarget.x, chaseTarget.y);
-					if (chaseTarget is Innocent)
-					{
-						distributeHealth(Innocent.healthRegen);
-					}
-					else if (chaseTarget is Enemy)
+					StartLevelState.minionBrainCount++;
+					if (chaseTarget is Enemy)
 					{
 						distributeHealth(Enemy.healthRegen);
 					}
