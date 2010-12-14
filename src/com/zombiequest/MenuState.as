@@ -14,6 +14,7 @@ package com.zombiequest
 		{
 			bgColor = 0xFFD3D3D3;
 			createButtons();
+			createInstructions();
 			FlxG.mouse.show();
 			super.create();
 		}
@@ -30,6 +31,17 @@ package com.zombiequest
 			startText.color = 0x000000;
 			_startButton.loadText(startText);
 			this.add(_startButton);
+			
+		}
+		private function createInstructions():void
+		{
+			var inst:String = "Arrow Keys - Move\n"
+			inst += "A - Send minions to attack\n";
+			inst += "S - Call minions to follow you\n";
+			inst += "Space - Attack";
+			var instText:FlxText = new FlxText(200, 200, 200, inst);
+			instText.color = 0xff000000;
+			add(instText);
 			
 		}
 		
