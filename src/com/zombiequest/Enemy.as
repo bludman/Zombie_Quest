@@ -331,8 +331,8 @@ package com.zombiequest
 		public function bulletSpawn():FlxPoint
 		{
 			var ret:FlxPoint = new FlxPoint();
-			ret.x = x + width / 2 + width * Math.cos(MathU.degToRad(angle)) / 2;
-			ret.y = y + height / 2 + height * Math.sin(MathU.degToRad(angle)) / 2;
+			ret.x = x + collideArea.width / 2 + collideArea.width * Math.cos(MathU.degToRad(angle)) / 4;
+			ret.y = y + collideArea.height / 2 + collideArea.height * Math.sin(MathU.degToRad(angle)) / 4;
 			return ret;
 		}
 		

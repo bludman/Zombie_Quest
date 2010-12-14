@@ -57,6 +57,8 @@ package com.zombiequest
 			overGroup = new FlxGroup();
 			
 			//Instantiate objects
+			playerBrainCount = 0;
+			minionBrainCount = 0;
 			player = new Player(640,480);
 			bulletGroup = new FlxGroup();
 			enemyGroup = new FlxGroup();
