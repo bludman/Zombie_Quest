@@ -9,14 +9,24 @@ package com.zombiequest
 	public class Enemy extends FlxSprite 
 	{
 		protected const speed:Number = 75;
-		protected var retreatRange:Number = 100;
-		protected var attackRange:Number = 2*retreatRange;
-		protected var followRange:Number = 50*attackRange;
-		protected var holdBuffer:Number = 50;
+		protected static var retreatRange:Number = 100;
+		protected static var holdRange:Number = 200;//2*retreatRange+200;
+		protected static var attackRange:Number = 250;//2*attackRange;
+		protected static var followRange:Number = 300;//2*followRange+200;
+		
 		public static const healthRegen:Number = 40;
 		
+		
+		/** Distance rings between target and enemy */
+		protected static const DISTANCE_RETREAT:Number = 0;
+		protected static const DISTANCE_HOLD:Number = 1;
+		protected static const DISTANCE_ATTACK:Number = 2;
+		protected static const DISTANCE_FOLLOW:Number = 3;
+		protected static const DISTANCE_IGNORE:Number = 4;
+		
+		
 		/* Enemy states */
-		protected var moving:Boolean = false;
+		protected var following:Boolean = false;
 		public var shooting:Boolean = false;
 		protected var retreating:Boolean = false;
 		
@@ -94,7 +104,7 @@ package com.zombiequest
 		{
 			collideArea.velocity.x = 0;
 			collideArea.velocity.y = 0;
-			moving = false;
+			following = false;
 			shooting = attack;
 		}
 		
@@ -103,12 +113,13 @@ package com.zombiequest
 		 */
 		protected function retreat(target:FlxObject):void
 		{
+			this.angularVelocity = 100;
 			this.angle = -1 * FlxU.getAngle(target.x - this.x, target.y - this.y);
-			collideArea.angle = angle;
+			collideArea.angle = this.angle;
 			collideArea.velocity.x = speed * Math.cos(MathU.degToRad(this.angle));
 			collideArea.velocity.y = speed * Math.sin(MathU.degToRad(this.angle));
 			shooting = false;
-			moving = true;
+			following = true;
 		}
 		
 		/**
@@ -121,43 +132,182 @@ package com.zombiequest
 			collideArea.velocity.x = speed * Math.cos(MathU.degToRad(this.angle));
 			collideArea.velocity.y = speed * Math.sin(MathU.degToRad(this.angle));
 			shooting = attack;
-			moving = true;
+			following = true;
 		}
 		
+		
+		protected function getDistanceRing(distance:Number):Number
+		{
+			trace("distance ",distance);
+			if(distance<=retreatRange)		//Retreat Ring
+				return DISTANCE_RETREAT;
+			if(distance<=holdRange)	//Holding Ring
+				return DISTANCE_HOLD;
+			if(distance<=attackRange)	//Attack Ring
+				return DISTANCE_ATTACK;
+			if (distance<=followRange)	//Follow Ring
+				return DISTANCE_FOLLOW;
+			else 							//No view of target
+				return DISTANCE_IGNORE;
+		}
+		
+		protected function setState(following:Boolean, attacking:Boolean, retreating:Boolean):void
+		{
+			this.following = following;
+			this.shooting = attacking;
+			this.retreating = retreating;
+		}
 		
 		public override function update():void
 		{
 			var target:FlxObject = this.pickTarget();
 			var distance:Number = MathU.dist(target.x - x, target.y - y);
+//			var ring:Number;// = getDistanceRing(distance);
+//			
+//			if(distance<=retreatRange){		//Retreat Ring
+//				ring= DISTANCE_RETREAT;
+//			}else if(distance<=holdRange){	//Holding Ring
+//				ring= DISTANCE_HOLD;
+//			}else if(distance<=attackRange){	//Attack Ring
+//				ring= DISTANCE_ATTACK;
+//			}else if (distance<=followRange){	//Follow Ring
+//				ring= DISTANCE_FOLLOW;
+//			}else {							//No view of target
+//				ring= DISTANCE_IGNORE;
+//			}
+//			trace("distance", distance, "ring: ",ring, "f",following,"a",shooting,"r",retreating);
+//			
+//			if(retreating)
+//			{
+//				switch(ring)
+//				{
+//					case DISTANCE_RETREAT:
+//						setState(false,false,false);
+//						break;
+//					case DISTANCE_HOLD:
+//						setState(false,true,false);
+//						break;
+//					case DISTANCE_ATTACK:
+//						setState(true,true,false);
+//						break;
+//					case DISTANCE_FOLLOW:
+//						setState(true,false,false);
+//						break;
+//					case DISTANCE_IGNORE:
+//						setState(false,false,false);
+//						break;
+//				}
+//			}
+//			else
+//			{
+//				switch(ring)
+//				{
+//					case DISTANCE_RETREAT:
+//						setState(false,false,true);
+//						break;
+//					case DISTANCE_HOLD:
+//						setState(false,false,true);
+//						break;
+//					case DISTANCE_ATTACK:
+//						setState(false,false,true);
+//						break;
+//					case DISTANCE_FOLLOW:
+//						setState(true,false,false);
+//						break;
+//					case DISTANCE_IGNORE:
+//						setState(false,false,false);
+//						break;
+//				}
+//			}
+//			
+//			
+//			//Set the angle
+//			if(following || shooting)
+//			{
+//				this.angle = FlxU.getAngle(target.x - this.x, target.y - this.y);
+//			}else if(retreating)
+//			{
+//				this.angle = -1* FlxU.getAngle(target.x - this.x, target.y - this.y);
+//			}
+//			collideArea.angle = angle;
+//			
+//			//Set the speed
+//			if(following || retreating)
+//			{
+//				
+//				collideArea.velocity.x = speed * Math.cos(MathU.degToRad(this.angle));
+//				collideArea.velocity.y = speed * Math.sin(MathU.degToRad(this.angle));
+//			}
+//			else
+//			{
+//				collideArea.velocity.x = 0;
+//				collideArea.velocity.y = 0;
+//			}
+//			
+//			//Set animation
+//			
+//			if(shooting)
+//			{
+//				play("shoot");
+//			}
+//			else {
+////				if (currentAnim != "walk")
+////				{
+////					play("walk");
+////				}
+////				
+////				if (!(following || retreating)) 
+////				{
+////					_curFrame = 1;
+////				}
+////				
+//			}
+//			
+			
+			
+			//OLD IMPL
 			
 			if(distance<=followRange)
 			{
 				if(distance <= attackRange)
 				{
-					if(distance <= attackRange - holdBuffer)
+					if(distance <= holdRange)
 					{
-						if(distance<= retreatRange)
+						if(distance<= retreatRange) //within retreat
 						{
 							retreat(target);
+							retreating = true;
 						}
-						else
+						else //within hold
 						{
-							holdPosition(true);
+							if(retreating)
+								retreat(target);
+							else
+								holdPosition(true);
 						}
 					}
-					else
+					else //within attack
 					{
-						chase(target,true);	
+						if(retreating)
+							retreat(target);
+							//holdPosition(true);
+						else
+							chase(target,true);	
 					}
 				}
-				else{
+				else{ //within follow
+					retreating = false;
 					chase(target,false);
 				}
 			}
 			else
 			{
 				holdPosition(false);
+				retreating = false;
 			}
+			
+			
+			
 			if (shooting)
 			{
 				play("shoot");
@@ -168,7 +318,7 @@ package com.zombiequest
 				{
 					play("walk");
 				}
-				if (!moving) {
+				if (!following) {
 					_curFrame = 1;
 				}
 			}
