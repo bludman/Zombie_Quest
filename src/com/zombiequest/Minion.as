@@ -7,7 +7,7 @@ package com.zombiequest
 	import org.flixel.*;
 	public class Minion extends FlxSprite
 	{
-		private var speed:Number = 80;	//made the minions kinda slow because they are not a super zombie like you
+		private var speed:Number = 55;	//made the minions kinda slow because they are not a super zombie like you
 		private var attackRange:Number = 40;
 		private var sentryFollowRange:Number = 200;
 		private var attackFollowRange:Number = 800; //Diagonal distance of map
@@ -23,7 +23,7 @@ package com.zombiequest
 		public var pid:Number;
 		public const MAX_HEALTH:Number = 100;
 		
-		[Embed(source="../../../assets/png/minion.png")]
+		[Embed(source="../../../assets/png/3_stage_zombie.png")]
 		private static var ImgMinion:Class;
 		
 		[Embed(source="../../../assets/sound/zombie_moan1.mp3")]
@@ -82,9 +82,15 @@ package com.zombiequest
 			pid = id;
 			state = DEFENDING;
 			health = MAX_HEALTH;
-			addAnimation("walk", [0, 1, 0, 2], 4);
-			addAnimation("idle", [0]);
-			addAnimation("attack", [3, 4, 0], 8, false);
+			addAnimation("walk-high", [0, 1, 0, 2], 6);
+			addAnimation("idle-high", [0]);
+			addAnimation("attack-high", [3, 4, 0], 8, false);
+			addAnimation("walk-medium", [5, 6, 5, 7], 6);
+			addAnimation("idle-medium", [5]);
+			addAnimation("attack-medium", [8, 9, 5], 8, false);
+			addAnimation("walk-low", [10, 11, 10, 12], 6);
+			addAnimation("idle-low", [10]);
+			addAnimation("attack-low", [13, 14, 10], 8, false);
 			
 			if(Math.random() > 0.66)
 			{
@@ -288,6 +294,24 @@ package com.zombiequest
 					hurtSound = hurtSound4;
 				FlxG.play(hurtSound,.33,false);
 			}
+		}
+		
+		override public function play(AnimName:String, Force:Boolean = false):void 
+		{
+			var healthPct:Number = 100 * health / MAX_HEALTH;
+			if (healthPct >= 66) 
+			{
+				AnimName = AnimName + "-high";
+			} 
+			else if (healthPct > 33 && healthPct < 66)
+			{
+				AnimName = AnimName + "-medium";
+			}
+			else
+			{
+				AnimName = AnimName + "-low";
+			}
+			super.play(AnimName, Force);
 		}
 	}
 }

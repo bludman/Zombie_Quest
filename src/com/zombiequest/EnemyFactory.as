@@ -38,8 +38,6 @@ package com.zombiequest
 				{
 					/* amount is the max number of enemies on screen at a time. */
 					var amount:Number = Math.min(waveAmount, waveTimeElapsed/4);	//It's a wave
-					trace('amount: ' + amount);
-					
 					/* Spawn enemies */
 					if(StartLevelState.enemyGroup.countLiving() , amount)
 						spawnAll(amount/100);
@@ -47,8 +45,7 @@ package com.zombiequest
 					/* Stop the wave if the sine wave has gone to negatives */
 					if(waveTimeElapsed > waveDuration) 
 					{
-						waveOn = false
-						trace('wave ended');
+						waveOn = false;
 					}
 					
 					updateTimeElapsed=0;
@@ -86,7 +83,6 @@ package com.zombiequest
 			waveTimeElapsed = 0;
 			updateTimeElapsed = 0;
 			spawnAll(1);
-			trace('wave started!');
 		}
 		
 		public function spawnAll(chance:Number, hasPowerup:Boolean = false):void
