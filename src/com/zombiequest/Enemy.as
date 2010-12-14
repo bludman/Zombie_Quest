@@ -113,12 +113,14 @@ package com.zombiequest
 		 */
 		protected function retreat(target:FlxObject):void
 		{
-			this.angularVelocity = 100;
-			var secretAngle:Number = 180 + FlxU.getAngle(target.x - this.x, target.y - this.y);
-			//angle = secretAngle;
-			//collideArea.angle = this.angle;
-			collideArea.velocity.x = speed * Math.cos(MathU.degToRad(secretAngle));
-			collideArea.velocity.y = speed * Math.sin(MathU.degToRad(secretAngle));
+//			var secretAngle:Number = 180 + FlxU.getAngle(target.x - this.x, target.y - this.y);
+//			this.angle = secretAngle;
+//			collideArea.angle = this.angle;
+			
+			this.angle = 180 + FlxU.getAngle(target.x - this.x, target.y - this.y);
+			collideArea.angle = this.angle;
+			collideArea.velocity.x = speed * Math.cos(MathU.degToRad(this.angle));
+			collideArea.velocity.y = speed * Math.sin(MathU.degToRad(this.angle));
 			shooting = false;
 			following = true;
 			retreating = true;
