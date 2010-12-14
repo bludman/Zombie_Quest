@@ -114,12 +114,14 @@ package com.zombiequest
 		protected function retreat(target:FlxObject):void
 		{
 			this.angularVelocity = 100;
-			this.angle = -1 * FlxU.getAngle(target.x - this.x, target.y - this.y);
-			collideArea.angle = this.angle;
-			collideArea.velocity.x = speed * Math.cos(MathU.degToRad(this.angle));
-			collideArea.velocity.y = speed * Math.sin(MathU.degToRad(this.angle));
+			var secretAngle:Number = 180 + FlxU.getAngle(target.x - this.x, target.y - this.y);
+			//angle = secretAngle;
+			//collideArea.angle = this.angle;
+			collideArea.velocity.x = speed * Math.cos(MathU.degToRad(secretAngle));
+			collideArea.velocity.y = speed * Math.sin(MathU.degToRad(secretAngle));
 			shooting = false;
 			following = true;
+			retreating = true;
 		}
 		
 		/**
@@ -276,23 +278,19 @@ package com.zombiequest
 						if(distance<= retreatRange) //within retreat
 						{
 							retreat(target);
-							retreating = true;
 						}
 						else //within hold
 						{
-							if(retreating)
-								retreat(target);
-							else
+							if(!retreating)
 								holdPosition(true);
+							else retreat(target);
 						}
 					}
 					else //within attack
 					{
-						if(retreating)
-							retreat(target);
-							//holdPosition(true);
-						else
+						if(!retreating)
 							chase(target,true);	
+						else retreat(target);
 					}
 				}
 				else{ //within follow
@@ -300,7 +298,7 @@ package com.zombiequest
 					chase(target,false);
 				}
 			}
-			else
+			else //in ignore ring
 			{
 				holdPosition(false);
 				retreating = false;
