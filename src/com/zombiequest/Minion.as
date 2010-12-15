@@ -10,7 +10,7 @@ package com.zombiequest
 		private var speed:Number = 80;	//made the minions kinda slow because they are not a super zombie like you
 		private var attackRange:Number = 40;
 		private var sentryFollowRange:Number = 200;
-		private var attackFollowRange:Number = 800; //Diagonal distance of map
+		private var attackFollowRange:Number = 320; //NOT Diagonal distance of map
 		private var playerFollowRadius:Number = 100;
 		private var damage:Number = 25;
 		private const attackTimeout:Number = 1;
@@ -21,7 +21,7 @@ package com.zombiequest
 		private var chaseTarget:FlxSprite;
 		private static var id:Number = 0;
 		public var pid:Number;
-		public const MAX_HEALTH:Number = 100;
+		public const MAX_HEALTH:Number = 200;
 		
 		private const RANDOM_POSITION_TIME:Number = 2;
 		private var randomPositionTimer:Number = 0;
@@ -124,7 +124,7 @@ package com.zombiequest
 				if(randomPositionTimer <= 0)
 				{
 					randomPositionTimer = RANDOM_POSITION_TIME;
-					var radius:Number = Math.random() * (playerFollowRadius-40) + 40;
+					var radius:Number = Math.random() * (playerFollowRadius-60) + 60;
 					var randangle: Number = Math.random() * 2*Math.PI;
 					randX = radius * Math.cos(randangle);
 					randY = radius * Math.sin(randangle);
