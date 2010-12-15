@@ -11,7 +11,7 @@ package com.zombiequest
 		private var attackRange:Number = 40;
 		private var sentryFollowRange:Number = 200;
 		private var attackFollowRange:Number = 800; //Diagonal distance of map
-		private var playerFollowMin:Number = 80;
+		private var playerFollowRadius:Number = 100;
 		private var damage:Number = 25;
 		private const attackTimeout:Number = 1;
 		private var attackTimer:Number = 0;
@@ -23,7 +23,7 @@ package com.zombiequest
 		public var pid:Number;
 		public const MAX_HEALTH:Number = 100;
 		
-		private const RANDOM_POSITION_TIME = 2;
+		private const RANDOM_POSITION_TIME:Number = 2;
 		private var randomPositionTimer:Number = 0;
 		private var randX:Number = 0;
 		private var randY:Number = 0;
@@ -117,9 +117,6 @@ package com.zombiequest
 			velocity.x = 0;
 			velocity.y = 0;
 			attackTimer += FlxG.elapsed;
-			var pCenter:FlxPoint = player.center();
-			pCenter.x += randX;
-			pCenter.y += randY;
 			
 			if (state == DEFENDING) 
 			{
@@ -127,16 +124,18 @@ package com.zombiequest
 				if(randomPositionTimer <= 0)
 				{
 					randomPositionTimer = RANDOM_POSITION_TIME;
-					var mult:Number = 1;
-					if(Math.random() > 0.5)
-						mult = -1;
-					
-					randX = ((Math.random()*(playerFollowMin-40)) + 40)*mult;
-					randY = ((Math.random()*(playerFollowMin-40)) + 40)*mult;			
-				}
+					var radius:Number = Math.random() * (playerFollowRadius-40) + 40;
+					var randangle: Number = Math.random() * 2*Math.PI;
+					randX = radius * Math.cos(randangle);
+					randY = radius * Math.sin(randangle);
+				}				
+				
+				var pX:Number = player.x + randX;
+				var pY:Number = player.y + randY;
+				
 				//Just follow the player
-				if (MathU.dist(pCenter.x - x, pCenter.y - y) > 1){
-					angle = FlxU.getAngle(pCenter.x - x, pCenter.y - y);
+				if (MathU.dist(pX - x, pY - y) > 40){
+					angle = FlxU.getAngle(pX - x, pY - y);
 					velocity.x = speed * Math.cos(MathU.degToRad(angle));
 					velocity.y = speed * Math.sin(MathU.degToRad(angle));
 					if(!attacking)	//make sure the attacking anim is done
@@ -146,7 +145,7 @@ package com.zombiequest
 				{
 					if(!attacking)	//make sure the attacking anim is done
 						play("idle");
-					findTarget(playerFollowMin);
+					findTarget(playerFollowRadius);
 				}
 			}
 			else if (state == SENTRY)
