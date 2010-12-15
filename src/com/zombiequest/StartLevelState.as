@@ -330,6 +330,17 @@ package com.zombiequest
 			return candidate;
 		}
 		
+		public static function generateClock():String
+		{	
+			var displayClock:String = ":::";
+			var sec:Number = playClock;
+			var h:Number=Math.floor(sec/3600);
+			var m:Number=Math.floor((sec%3600)/60);
+			var s:Number=Math.floor((sec%3600)%60);
+			displayClock = (h == 0?"":(h < 10?"0" + h.toString() + ":":h.toString() + ":")) + (m < 10?"0" + m.toString():m.toString()) + ":" + (s < 10?"0" + s.toString():s.toString());
+			return displayClock;
+		}
+		
 		/* This must be done to render the HUD above all else */
 		override public function render():void
 		{	
@@ -349,14 +360,7 @@ package com.zombiequest
 			/* Render Over */	
 			overGroup.render();
 		}
-		
-		public static function generateClock():String
-		{	var sec:Number = playClock;
-			var h:Number=Math.floor(sec/3600);
-			var m:Number=Math.floor((sec%3600)/60);
-			var s:Number=Math.floor((sec%3600)%60);
-			return(h==0?"":(h<10?"0"+h.toString()+":":h.toString()+":"))+(m<10?"0"+m.toString():m.toString())+":"+(s<10?"0"+s.toString():s.toString());
-		}
+	
 	}
 
 }
