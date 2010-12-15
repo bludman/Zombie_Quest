@@ -7,7 +7,7 @@ package com.zombiequest
 	import org.flixel.*;
 	public class Minion extends FlxSprite
 	{
-		private var speed:Number = 55;	//made the minions kinda slow because they are not a super zombie like you
+		private var speed:Number = 80;	//made the minions kinda slow because they are not a super zombie like you
 		private var attackRange:Number = 40;
 		private var sentryFollowRange:Number = 200;
 		private var attackFollowRange:Number = 800; //Diagonal distance of map
@@ -22,6 +22,11 @@ package com.zombiequest
 		private static var id:Number = 0;
 		public var pid:Number;
 		public const MAX_HEALTH:Number = 100;
+		
+		private const RANDOM_POSITION_TIME = 2;
+		private var randomPositionTimer:Number = 0;
+		private var randX:Number = 0;
+		private var randY:Number = 0;
 		
 		[Embed(source="../../../assets/png/3_stage_zombie.png")]
 		private static var ImgMinion:Class;
@@ -113,10 +118,24 @@ package com.zombiequest
 			velocity.y = 0;
 			attackTimer += FlxG.elapsed;
 			var pCenter:FlxPoint = player.center();
+			pCenter.x += randX;
+			pCenter.y += randY;
+			
 			if (state == DEFENDING) 
 			{
+				randomPositionTimer -= FlxG.elapsed;
+				if(randomPositionTimer <= 0)
+				{
+					randomPositionTimer = RANDOM_POSITION_TIME;
+					var mult:Number = 1;
+					if(Math.random() > 0.5)
+						mult = -1;
+					
+					randX = ((Math.random()*(playerFollowMin-40)) + 40)*mult;
+					randY = ((Math.random()*(playerFollowMin-40)) + 40)*mult;			
+				}
 				//Just follow the player
-				if (MathU.dist(player.x - x, player.y - y) > playerFollowMin){
+				if (MathU.dist(pCenter.x - x, pCenter.y - y) > 1){
 					angle = FlxU.getAngle(pCenter.x - x, pCenter.y - y);
 					velocity.x = speed * Math.cos(MathU.degToRad(angle));
 					velocity.y = speed * Math.sin(MathU.degToRad(angle));
