@@ -17,16 +17,38 @@ package com.zombiequest
 		public override function create():void
 		{
 			button = new FlxButton(50, 50, loadStartLevel);
-			var buttonText:FlxText = new FlxText(0, 0, 100, "Start Over");
+			var buttonText:FlxText = new FlxText(0, 0, 100, "Start Over:");
 			text.color = buttonText.color = 0x00000000;
 			button.loadText(buttonText);
 			add(button);
 			add(text);
+			createReport();
 			FlxG.mouse.show();
 		}
 		private function loadStartLevel():void
 		{
 			FlxG.state = new StartLevelState();
+		}
+
+		private function createReport():void
+		{
+			var inst:String = "You ate " + StartLevelState.playerBrainCount; 
+			if (StartLevelState.playerBrainCount == 1)
+				inst += " Brain\n";
+			else
+				inst += " Brains\n"
+
+			inst += "Your minions ate " +  StartLevelState.minionBrainCount;
+			if (StartLevelState.minionBrainCount == 1)
+				inst += " Brain\n";
+			else
+				inst += " Brains\n"
+				
+			inst += "Your total survival time was " + StartLevelState.generateClock();
+			var instText:FlxText = new FlxText(200, 200, 200, inst);
+			instText.color = 0xff000000;
+			add(instText);
+			
 		}
 		
 	}
