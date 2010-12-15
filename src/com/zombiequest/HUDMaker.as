@@ -70,7 +70,6 @@ package com.zombiequest
 			smallBrainCount.size = 10;
 			StartLevelState.overGroup.add(smallBrainCount);
 			
-			
 			statusBox = new FlxSprite(0, 460);
 			statusBox.scrollFactor.x = statusBox.scrollFactor.y = 0;
 			StartLevelState.overGroup.add(statusBox);

@@ -26,6 +26,7 @@ package com.zombiequest
 		public static var enemyFactory:EnemyFactory;
 		public static var playerBrainCount:Number = 0;
 		public static var minionBrainCount:Number = 0;
+		public static var playClock:Number = 0;
 		private var level:Map;
 		public static var hudManager:HUDMaker;
 		private var currentPower:PowerEffect;
@@ -116,6 +117,7 @@ package com.zombiequest
 			enemyCollideGroup.update();
 			minionGroup.update();
 			hudManager.update();
+			playClock += FlxG.elapsed;
 		}
 		
 		protected function onAddSprite(obj:Object, layer:FlxGroup, level:Map, properties:Array):Object
@@ -346,6 +348,14 @@ package com.zombiequest
 			
 			/* Render Over */	
 			overGroup.render();
+		}
+		
+		public static function generateClock():String
+		{	var sec:Number = playClock;
+			var h:Number=Math.floor(sec/3600);
+			var m:Number=Math.floor((sec%3600)/60);
+			var s:Number=Math.floor((sec%3600)%60);
+			return(h==0?"":(h<10?"0"+h.toString()+":":h.toString()+":"))+(m<10?"0"+m.toString():m.toString())+":"+(s<10?"0"+s.toString():s.toString());
 		}
 	}
 
