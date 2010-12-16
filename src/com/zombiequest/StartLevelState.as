@@ -90,8 +90,7 @@ package com.zombiequest
 		
 		override public function update():void
 		{
-			FlxU.collide(level.hitTilemaps, enemyCollideGroup);
-			FlxU.collide(level.hitTilemaps, innocentGroup);
+			FlxU.collide(level.hitTilemaps, collideGroup);
 			FlxU.collide(level.hitTilemaps, player);
 		
 			collideGroup.collide();
