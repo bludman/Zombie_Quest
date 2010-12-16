@@ -60,6 +60,7 @@ package com.zombiequest
 			//Instantiate objects
 			playerBrainCount = 0;
 			minionBrainCount = 0;
+			playClock = 0;
 			player = new Player(640,480);
 			bulletGroup = new FlxGroup();
 			enemyGroup = new FlxGroup();
@@ -130,6 +131,8 @@ package com.zombiequest
 		
 		protected function gotTheCoin(...rest):void
 		{
+			//hah - this never happens.  there is no winning.
+			//just losing and losing.
 			FlxG.state = new EndState("You Won, fuck yeah!!");
 		}
 		
