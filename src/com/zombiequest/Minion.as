@@ -5,9 +5,9 @@ package com.zombiequest
 	 * @author Team Zombie Quest
 	 */
 	import org.flixel.*;
-	public class Minion extends FlxSprite
+	public class Minion extends WalkingSprite
 	{
-		private var speed:Number = 80;	//made the minions kinda slow because they are not a super zombie like you
+		private var speed:Number = 90;	//made the minions kinda slow because they are not a super zombie like you
 		private var attackRange:Number = 40;
 		private var sentryFollowRange:Number = 200;
 		private var attackFollowRange:Number = 320; //NOT Diagonal distance of map
@@ -135,9 +135,7 @@ package com.zombiequest
 				
 				//Just follow the player
 				if (MathU.dist(pX - x, pY - y) > 40){
-					angle = FlxU.getAngle(pX - x, pY - y);
-					velocity.x = speed * Math.cos(MathU.degToRad(angle));
-					velocity.y = speed * Math.sin(MathU.degToRad(angle));
+					goToLocation(pX, pY, speed);
 					if(!attacking)	//make sure the attacking anim is done
 						play("walk");
 				}
@@ -156,10 +154,8 @@ package com.zombiequest
 					play("idle");
 			} 
 			else if (state == ATTACKING)
-			{
-				angle = FlxU.getAngle(chaseTarget.x - x, chaseTarget.y - y);
-				velocity.x = speed * Math.cos(MathU.degToRad(angle));
-				velocity.y = speed * Math.sin(MathU.degToRad(angle));
+			{				
+				goToLocation(chaseTarget.x, chaseTarget.y, speed);
 				if(!attacking)	//make sure the attacking anim is done
 					play("walk");
 				if(MathU.dist(chaseTarget.x - x, chaseTarget.y - y) < attackRange){
@@ -254,7 +250,7 @@ package com.zombiequest
 			{
 				state = DEFENDING;
 			}
-		}	
+		}
 		
 		public override function kill():void
 		{

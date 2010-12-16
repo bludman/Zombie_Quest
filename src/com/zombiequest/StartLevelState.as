@@ -27,7 +27,7 @@ package com.zombiequest
 		public static var playerBrainCount:Number = 0;
 		public static var minionBrainCount:Number = 0;
 		public static var playClock:Number = 0;
-		private var level:Map;
+		public static var level:Map;
 		public static var hudManager:HUDMaker;
 		private var currentPower:PowerEffect;
 		private const attackTimeout:Number = 0.5;
@@ -90,7 +90,8 @@ package com.zombiequest
 		
 		override public function update():void
 		{
-			FlxU.collide(level.hitTilemaps, collideGroup);
+			FlxU.collide(level.hitTilemaps, enemyCollideGroup);
+			FlxU.collide(level.hitTilemaps, innocentGroup);
 			FlxU.collide(level.hitTilemaps, player);
 		
 			collideGroup.collide();
