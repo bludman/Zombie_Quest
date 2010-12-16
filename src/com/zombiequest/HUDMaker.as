@@ -18,6 +18,8 @@ package com.zombiequest
 		private var smallBrain:FlxSprite;
 		private var smallBrainCount:FlxText;
 		
+		private var clock:FlxText;
+		
 		private var statusText:FlxText;
 		private var statusBox:FlxSprite;
 		private var timer:FlxText;
@@ -70,6 +72,11 @@ package com.zombiequest
 			smallBrainCount.size = 10;
 			StartLevelState.overGroup.add(smallBrainCount);
 			
+			clock = new FlxText(320, 4, 40);
+			clock.color = 0x00ffffff;
+			clock.scrollFactor.x = clock.scrollFactor.y = 0;
+			StartLevelState.overGroup.add(clock);
+			
 			statusBox = new FlxSprite(0, 460);
 			statusBox.scrollFactor.x = statusBox.scrollFactor.y = 0;
 			StartLevelState.overGroup.add(statusBox);
@@ -98,6 +105,7 @@ package com.zombiequest
 			//Just updating the brain counter for now
 			bigBrainCount.text = "x " + StartLevelState.playerBrainCount;
 			smallBrainCount.text = "x " + StartLevelState.minionBrainCount;
+			clock.text = StartLevelState.generateClock();
 		}
 	}
 }

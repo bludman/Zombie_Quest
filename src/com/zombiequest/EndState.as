@@ -34,15 +34,15 @@ package com.zombiequest
 		{
 			var inst:String = "You ate " + StartLevelState.playerBrainCount; 
 			if (StartLevelState.playerBrainCount == 1)
-				inst += " Brain\n";
+				inst += " brain.\n";
 			else
-				inst += " Brains\n"
+				inst += " brains.\n"
 
 			inst += "Your minions ate " +  StartLevelState.minionBrainCount;
 			if (StartLevelState.minionBrainCount == 1)
-				inst += " Brain\n";
+				inst += " brain.\n";
 			else
-				inst += " Brains\n"
+				inst += " brains.\n"
 				
 			inst += "Your total survival time was " + StartLevelState.generateClock();
 			var instText:FlxText = new FlxText(200, 200, 200, inst);
