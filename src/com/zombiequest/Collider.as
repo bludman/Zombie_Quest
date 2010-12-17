@@ -8,23 +8,33 @@ package com.zombiequest
 	 */
 	public class Collider extends FlxSprite 
 	{		
-		var tX:Number = 0;
-		var tY:Number = 0;
+		[Embed(source="../../../assets/png/roadblock.png")]
+		private static var ImgBlock:Class;
 		
-		public function Collider(X:Number = 0, Y:Number = 0, Width:Number = 0, Height:Number = 0, Angle:Number = 0) 
+		private var tX:Number = 0;
+		private var tY:Number = 0;
+		
+		public function Collider(X:Number = 0, Y:Number = 0, Width:Number = 0, Height:Number = 0, Angle:Number = 0, rBlock:Boolean = false) 
 		{
 			tX = X;
 			tY = Y;
 			super(X, Y);
-			createGraphic(Width, Height, 0x88ffffff);
+			if(rBlock)
+				loadGraphic(ImgBlock);
+			else
+			{
+				width = Width;
+				height = Height;
+				createGraphic(Width, Height, 0x00ffffff);
+			}			
 			angle = Angle;
 		}
 		
 		public override function update():void
 		{
-			super.update();
 			x = tX;
 			y = tY;
+			super.update();
 		}
 
 	}

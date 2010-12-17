@@ -22,7 +22,7 @@ package com.zombiequest
 		private var defendAfterAttack:Boolean = false;
 		private static var id:Number = 0;
 		public var pid:Number;
-		public const MAX_HEALTH:Number = 100;
+		public const MAX_HEALTH:Number = 300;
 		
 		private const RANDOM_POSITION_TIME:Number = 2;
 		private var randomPositionTimer:Number = 0;
@@ -211,7 +211,7 @@ package com.zombiequest
 		private function distributeHealth(health:Number):void
 		{
 			var minions:Array = StartLevelState.minionGroup.members;
-			var dist:Number = health / (minions.length+1);
+			var dist:Number = health / (minions.length);
 			for (var i:Number = 0; i < minions.length; i++)
 			{
 				Minion(minions[i]).health += dist;
@@ -220,7 +220,7 @@ package com.zombiequest
 					health = MAX_HEALTH;
 				}
 			}
-			player.health += dist;	//player gets
+			player.health += health/2;	//player gets
 		}
 		/**
 		 * 

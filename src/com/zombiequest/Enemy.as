@@ -8,7 +8,7 @@ package com.zombiequest
 	 */
 	public class Enemy extends WalkingSprite 
 	{
-		protected const speed:Number = 75;
+		protected var speed:Number = 75;
 		protected static var retreatRange:Number = 100;
 		protected static var holdRange:Number = 200;//2*retreatRange+200;
 		protected static var attackRange:Number = 250;//2*attackRange;

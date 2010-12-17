@@ -17,7 +17,7 @@
 		private var speed:Number = origSpeed;
 		private var attackDistance:Number = 10;
 		private var attackRange:FlxSprite = new FlxSprite(0,0);
-		public var damage:Number = 25;
+		public var damage:Number = 50;
 		private var attacking:Boolean = false;
 		
 		[Embed(source="../../../assets/sound/zombie_attack1.mp3")]

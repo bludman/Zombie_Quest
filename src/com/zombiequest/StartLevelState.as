@@ -98,14 +98,13 @@ package com.zombiequest
 		
 		override public function update():void
 		{
-			//FlxU.collide(level.hitTilemaps, collideGroup);
-			//FlxU.collide(level.hitTilemaps, player);
+			FlxU.collide(mapCollider, collideGroup);
+			FlxU.collide(mapCollider, enemyCollideGroup);
+			FlxU.collide(mapCollider, player);
 			
 			collideGroup.collide();
-			collideGroup.collide(mapCollider);
 			player.collide(enemyCollideGroup);
 			player.collide(innocentGroup);
-			player.collide(mapCollider);
 			
 			FlxU.overlap(player, bulletGroup, zombieGotShot);
 			FlxU.overlap(minionGroup, bulletGroup, zombieGotShot);
@@ -239,7 +238,7 @@ package com.zombiequest
 			for (var i:Number = 0; i < bullets.length; i++)
 			{
 				var bullet:Bullet = bullets[i] as Bullet;
-				if (level.hitTilemaps.collide(bullet)) {
+				if (mapCollider.collide(bullet)) {
 					bullet.kill();
 				}
 			}
@@ -341,9 +340,8 @@ package com.zombiequest
 			for each (var e:Enemy in enemyGroup.members)
 			{
 				e.glowing = false
-				var ePos:FlxPoint = e.getScreenXY(ePos);
 				
-				if (ePos.x >= 640 || ePos.y >= 480 || ePos.x <= 0 || ePos.y <= 0)
+				if (!e.onScreen())
 					continue;
 				
 				var newAngle:Number = Math.abs(FlxU.getAngle(e.x-player.x, e.y-player.y) - player.angle);
