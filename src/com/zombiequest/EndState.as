@@ -44,7 +44,8 @@ package com.zombiequest
 			else
 				inst += " brains.\n"
 				
-			inst += "Your total survival time was " + StartLevelState.generateClock();
+			inst += "Your total survival time was " + StartLevelState.generateClock() + "\n";
+			inst += "Your score is " + StartLevelState.calculateScore();
 			var instText:FlxText = new FlxText(200, 200, 200, inst);
 			instText.color = 0xff000000;
 			add(instText);
