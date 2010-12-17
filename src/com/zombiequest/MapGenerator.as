@@ -8,7 +8,7 @@ package com.zombiequest
 	 */
 	public class MapGenerator 
 	{		
-		[Embed(source = "../../../assets/png/level10.png")]
+		[Embed(source = "../../../assets/png/level12.png")]
 		protected static var Background:Class;
 		
 		public function MapGenerator() 
@@ -47,34 +47,16 @@ package com.zombiequest
 			var car1Collider:Collider = new Collider(829, 50, 137, 48);
 			StartLevelState.mapCollider.add(car1Collider);
 			
-			var car2Collider:Collider = new Collider(375, 242, 87, 128);
+			var car2Collider:Collider = new Collider(373, 210, 69, 144);
 			StartLevelState.mapCollider.add(car2Collider);
 			
-			var busCollider1:Collider = new Collider(450, 180, 100, 100);
-			StartLevelState.mapCollider.add(busCollider1);
+			var busCollider:Collider = new Collider(570, 300, 400, 100);
+			StartLevelState.mapCollider.add(busCollider);
 			
-			var busCollider2:Collider = new Collider(490, 210, 100, 100);
-			StartLevelState.mapCollider.add(busCollider2);
-			
-			var busCollider3:Collider = new Collider(530, 240, 100, 100);
-			StartLevelState.mapCollider.add(busCollider3);
-			
-			var busCollider4:Collider = new Collider(570, 270, 100, 100);
-			StartLevelState.mapCollider.add(busCollider4);
-			
-			var busCollider5:Collider = new Collider(610, 300, 100, 100);
-			StartLevelState.mapCollider.add(busCollider5);
-			
-			var busCollider6:Collider = new Collider(650, 330, 100, 100);
-			StartLevelState.mapCollider.add(busCollider6);
-			
-			var busCollider7:Collider = new Collider(690, 370, 100, 100);
-			StartLevelState.mapCollider.add(busCollider7);
-			
-			var car3Collider:Collider = new Collider(720, 470, 100, 120);
+			var car3Collider:Collider = new Collider(780, 484, 70, 130);
 			StartLevelState.mapCollider.add(car3Collider);
 			
-			var car4Collider:Collider = new Collider(14, 180, 139, 138);
+			var car4Collider:Collider = new Collider(33, 180, 70, 138);
 			StartLevelState.mapCollider.add(car4Collider);
 			
 			var car5Collider:Collider = new Collider(0, 586, 100, 87);
@@ -88,6 +70,13 @@ package com.zombiequest
 			
 			var car8Collider:Collider = new Collider(1187, 182, 75, 122);
 			StartLevelState.mapCollider.add(car8Collider);
+			
+			var car9Collider:Collider = new Collider(1165, 727, 95, 118);
+			StartLevelState.mapCollider.add(car9Collider);
+			
+			var roadBlock1:Collider = new Collider(530, 520, 1, 1, 0, true);
+			StartLevelState.mapCollider.add(roadBlock1);
+			roadBlock1.facing = FlxSprite.LEFT;
 		}
 	}
 }

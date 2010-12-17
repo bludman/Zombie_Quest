@@ -17,7 +17,7 @@ package com.zombiequest
 		
 		/* wave variables */
 		private var waveAmount:Number = 5; //enemy spawn amount
-		private var waveDuration:Number = 120;	//in seconds
+		private var waveDuration:Number = 60;	//in seconds
 		
 		public function EnemyFactory(minionGroup:FlxGroup, player:Player) 
 		{
@@ -34,7 +34,7 @@ package com.zombiequest
 				waveTimeElapsed += FlxG.elapsed;	//total time elapsed during wave
 				updateTimeElapsed += FlxG.elapsed;	//time since the last spawn
 				
-				if(updateTimeElapsed > 1) 	//it's time to spawn more
+				if(updateTimeElapsed > 2) 	//it's time to spawn more
 				{
 					/* amount is the max number of enemies on screen at a time. */
 					var amount:Number = Math.min(waveAmount, waveTimeElapsed/4);	//It's a wave
@@ -79,11 +79,11 @@ package com.zombiequest
 		}
 		
 		
-		public function startWave(amount:Number = 0, duration:Number = 120):void
+		public function startWave(amount:Number = 0, duration:Number = 60):void
 		{
 			player.health = Player.maxHealth;
 			if(amount == 0)
-				waveAmount = waveAmount+1;
+				waveAmount = waveAmount+2;
 			else
 				waveAmount = amount;
 			waveDuration = duration;
