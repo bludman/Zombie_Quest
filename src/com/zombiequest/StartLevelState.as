@@ -100,12 +100,13 @@ package com.zombiequest
 		{
 			//FlxU.collide(level.hitTilemaps, collideGroup);
 			//FlxU.collide(level.hitTilemaps, player);
-		
-			mapCollider.collide(collideGroup);
-			mapCollider.collide(player);
+			
 			collideGroup.collide();
+			collideGroup.collide(mapCollider);
 			player.collide(enemyCollideGroup);
 			player.collide(innocentGroup);
+			player.collide(mapCollider);
+			
 			FlxU.overlap(player, bulletGroup, zombieGotShot);
 			FlxU.overlap(minionGroup, bulletGroup, zombieGotShot);
 			overlapBullets();
@@ -129,6 +130,7 @@ package com.zombiequest
 			minionGroup.update();
 			hudManager.update();
 			mapGroup.update();
+			mapCollider.update();
 			playClock += FlxG.elapsed;
 			
 			selectedMinion = nextMinion();
@@ -400,6 +402,7 @@ package com.zombiequest
 		override public function render():void
 		{	
 			mapGroup.render();
+			mapCollider.render();
 			
 			super.render();	
 			
