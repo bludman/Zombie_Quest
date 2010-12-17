@@ -12,6 +12,8 @@ package com.zombiequest
 		private var inside:FlxSprite;
 		private var frame:FlxSprite;
 		
+		private var tray:FlxSprite;
+		
 		private var bigBrain:FlxSprite;
 		private var bigBrainCount:FlxText;
 		
@@ -36,7 +38,7 @@ package com.zombiequest
 		[Embed(source="../../../assets/png/Brain40x27.png")]
 		private static var BigBrain:Class;
 		
-		[Embed(source="../../../assets/png/Clock27x27_2.png")]
+		[Embed(source="../../../assets/png/Clock27x27_3.png")]
 		private static var ClockImg:Class;
 		
 		public function HUDMaker()
@@ -45,6 +47,12 @@ package com.zombiequest
 			frame.createGraphic(HEALTHBARSIZE+2,12); //White frame for the health bar
 			frame.scrollFactor.x = frame.scrollFactor.y = 0;
 			StartLevelState.overGroup.add(frame);
+			
+			tray = new FlxSprite(0, 0);
+			tray.createGraphic(640, 29, 0xff000000);
+			tray.alpha = .5;
+			tray.scrollFactor.x = tray.scrollFactor.y = 0;
+			StartLevelState.overGroup.add(tray);
 			 
 			inside = new FlxSprite(5,5);
 			inside.createGraphic(HEALTHBARSIZE,10,0xff000000); //Black interior, 48 pixels wide
