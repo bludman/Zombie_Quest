@@ -17,7 +17,7 @@ package com.zombiequest
 		public override function create():void
 		{
 			button = new FlxButton(50, 50, loadStartLevel);
-			var buttonText:FlxText = new FlxText(0, 0, 100, "Start Over:");
+			var buttonText:FlxText = new FlxText(0, 0, 100, "Start Over");
 			text.color = buttonText.color = 0x00000000;
 			button.loadText(buttonText);
 			add(button);

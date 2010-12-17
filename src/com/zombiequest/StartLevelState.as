@@ -1,4 +1,4 @@
-package com.zombiequest 
+  package com.zombiequest 
 {
 	import adobe.utils.CustomActions;
 	
@@ -273,7 +273,7 @@ package com.zombiequest
 			if (player.health <= 0) {
 				player.kill();
 				hudManager.setHealth(0);
-				FlxG.state = new EndState("You Lost!");
+				FlxG.state = new EndState("You Died!");
 			}
 			hudManager.setHealth(player.health);
 		}
