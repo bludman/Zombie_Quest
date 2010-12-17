@@ -60,11 +60,11 @@ package com.zombiequest
 			var rand:Number = Math.random()*100;
 			
 			
-			if(rand <= waveAmount)
+			if(rand <= waveAmount/5)
 			{
 				enemy = new CowardlyEnemy(x, y, player, minionGroup, hasPowerup);
 			}
-			else if (rand >= 66)
+			else if (rand >= 33)
 			{
 				enemy = new FearlessEnemy(x, y, player, minionGroup, hasPowerup);
 			}

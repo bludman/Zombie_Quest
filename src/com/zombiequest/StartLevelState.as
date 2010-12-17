@@ -99,7 +99,6 @@ package com.zombiequest
 		override public function update():void
 		{
 			FlxU.collide(mapCollider, collideGroup);
-			FlxU.collide(mapCollider, enemyCollideGroup);
 			FlxU.collide(mapCollider, player);
 			
 			collideGroup.collide();
