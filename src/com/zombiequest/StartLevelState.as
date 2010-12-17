@@ -385,6 +385,13 @@ package com.zombiequest
 			return displayClock;
 		}
 		
+		public static function calculateScore():String
+		{	
+			var score:Number = (200 * playerBrainCount) + (minionBrainCount * 100) + (Math.floor(playClock) * 10);
+			
+			return score.toString(); 
+		}
+		
 		/* This must be done to render the HUD above all else */
 		override public function render():void
 		{	

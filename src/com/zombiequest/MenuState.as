@@ -10,11 +10,25 @@ package com.zombiequest
 	public class MenuState extends FlxState 
 	{
 		private var _startButton:FlxButton;
+		
+		[Embed(source = "../../../assets/png/cop_frame.png")]
+		private var REnemy:Class;
+		private var enemy1:FlxSprite; 
+		
+		[Embed(source = "../../../assets/png/cop2_frame.png")]
+		private var FEnemy:Class;
+		private var enemy2:FlxSprite;
+		
+		[Embed(source = "../../../assets/png/cop3_frame.png")]
+		private var CEnemy:Class;
+		private var enemy3:FlxSprite;
+		
 		override public function create():void
 		{
 			bgColor = 0xFFD3D3D3;
 			createButtons();
 			createInstructions();
+			createEnemyKey();
 			FlxG.mouse.show();
 			super.create();
 		}
@@ -43,6 +57,21 @@ package com.zombiequest
 			instText.color = 0xff000000;
 			add(instText);
 			
+		}
+		
+		private function createEnemyKey():void
+		{	
+			enemy1 = new FlxSprite(190, 250);
+			enemy1.loadGraphic(REnemy);
+			add(enemy1);
+			
+			enemy2 = new FlxSprite(190, 280);
+			enemy2.loadGraphic(FEnemy);
+			add(enemy2);
+			
+			enemy3 = new FlxSprite(190, 310);
+			enemy3.loadGraphic(CEnemy);
+			add(enemy3);
 		}
 		
 		private function loadStartLevel():void

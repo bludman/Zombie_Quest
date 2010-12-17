@@ -20,6 +20,8 @@ package com.zombiequest
 		
 		private var clock:FlxText;
 		
+		private var score:FlxText;
+		
 		private var statusText:FlxText;
 		private var statusBox:FlxSprite;
 		private var timer:FlxText;
@@ -50,18 +52,18 @@ package com.zombiequest
 			healthBar.scale.x = HEALTHBARSIZE; //Fill up the health bar all the way
 			StartLevelState.overGroup.add(healthBar);
 			
-			bigBrain = new FlxSprite(514,4);
+			bigBrain = new FlxSprite(514,2);
 			bigBrain.loadGraphic(BigBrain, false, false, 38, 31);
 			bigBrain.scrollFactor.x = bigBrain.scrollFactor.y = 0;
 			bigBrain.origin.x = bigBrain.origin.y = 0;
 			StartLevelState.overGroup.add(bigBrain);
 			
-			bigBrainCount = new FlxText(552, 12, 64);
+			bigBrainCount = new FlxText(552, 10, 64);
 			bigBrainCount.scrollFactor.x = bigBrainCount.scrollFactor.y = 0;
 			bigBrainCount.size = 10;
 			StartLevelState.overGroup.add(bigBrainCount);
 			
-			smallBrain = new FlxSprite(582,8);
+			smallBrain = new FlxSprite(582,6);
 			smallBrain.loadGraphic(SmallBrain, false, false, 27, 22);
 			smallBrain.scrollFactor.x = smallBrain.scrollFactor.y = 0;
 			smallBrain.origin.x = smallBrain.origin.y = 0;
@@ -72,10 +74,17 @@ package com.zombiequest
 			smallBrainCount.size = 10;
 			StartLevelState.overGroup.add(smallBrainCount);
 			
-			clock = new FlxText(320, 4, 40);
+			clock = new FlxText(250, 2, 100);
 			clock.color = 0x00ffffff;
 			clock.scrollFactor.x = clock.scrollFactor.y = 0;
+			clock.size = 14;
 			StartLevelState.overGroup.add(clock);
+			
+			score = new FlxText(380, 2, 200)
+			score.color = 0x00ffffff;
+			score.scrollFactor.x = score.scrollFactor.y = 0;
+			score.size = 14;
+			StartLevelState.overGroup.add(score);
 			
 			statusBox = new FlxSprite(0, 460);
 			statusBox.scrollFactor.x = statusBox.scrollFactor.y = 0;
@@ -113,6 +122,7 @@ package com.zombiequest
 			bigBrainCount.text = "x " + StartLevelState.playerBrainCount;
 			smallBrainCount.text = "x " + StartLevelState.minionBrainCount;
 			clock.text = StartLevelState.generateClock();
+			score.text = "Score: " + StartLevelState.calculateScore();
 		}
 	}
 }
