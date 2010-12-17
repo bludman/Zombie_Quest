@@ -8,7 +8,7 @@ package com.zombiequest
 	 */
 	public class MapGenerator 
 	{		
-		[Embed(source = "../../../assets/png/level7.png")]
+		[Embed(source = "../../../assets/png/level10.png")]
 		protected static var Background:Class;
 		
 		public function MapGenerator() 
