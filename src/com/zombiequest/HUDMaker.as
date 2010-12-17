@@ -49,7 +49,7 @@ package com.zombiequest
 			StartLevelState.overGroup.add(frame);
 			
 			tray = new FlxSprite(0, 0);
-			tray.createGraphic(640, 29, 0xff000000);
+			tray.createGraphic(640, 29 , 0xff000000);
 			tray.alpha = .5;
 			tray.scrollFactor.x = tray.scrollFactor.y = 0;
 			StartLevelState.overGroup.add(tray);
