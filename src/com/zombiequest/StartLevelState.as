@@ -26,6 +26,7 @@ package com.zombiequest
 		public static var minionFactory:MinionFactory;
 		public static var enemyFactory:EnemyFactory;
 		public static var mapMaker:MapGenerator;
+		public static var mapCollider:FlxGroup;
 		public static var playerBrainCount:Number = 0;
 		public static var minionBrainCount:Number = 0;
 		public static var playClock:Number = 0;
@@ -72,6 +73,7 @@ package com.zombiequest
 			innocentGroup = new FlxGroup();
 			minionGroup = new FlxGroup();
 			collideGroup = new FlxGroup();
+			mapCollider = new FlxGroup();
 			level = new Level_Group1(true, onAddSprite);
 			minionFactory = new MinionFactory(player);
 			enemyFactory = new EnemyFactory(minionGroup, player);
@@ -96,9 +98,11 @@ package com.zombiequest
 		
 		override public function update():void
 		{
-			FlxU.collide(level.hitTilemaps, collideGroup);
-			FlxU.collide(level.hitTilemaps, player);
+			//FlxU.collide(level.hitTilemaps, collideGroup);
+			//FlxU.collide(level.hitTilemaps, player);
 		
+			mapCollider.collide(collideGroup);
+			mapCollider.collide(player);
 			collideGroup.collide();
 			player.collide(enemyCollideGroup);
 			player.collide(innocentGroup);

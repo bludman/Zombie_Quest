@@ -103,7 +103,7 @@ package com.zombiequest
 			
 			return returnMe;
 		}
-		
+			
 		/**
 		 * Hold position
 		 */
@@ -123,7 +123,10 @@ package com.zombiequest
 //			var secretAngle:Number = 180 + FlxU.getAngle(target.x - this.x, target.y - this.y);
 //			this.angle = secretAngle;
 //			collideArea.angle = this.angle;
-			goToLocation(target.x, target.y, speed);
+			angle = 180 + FlxU.getAngle(target.x - x, target.y - y);
+			velocity.x = speed * Math.cos(MathU.degToRad(angle));
+			velocity.y = speed * Math.sin(MathU.degToRad(angle));
+			//goToLocation(target.x, target.y, speed);
 			collideArea.velocity.x = velocity.x;
 			collideArea.velocity.y = velocity.y
 			collideArea.angle = angle;

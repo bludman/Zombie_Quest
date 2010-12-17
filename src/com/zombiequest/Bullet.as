@@ -12,7 +12,8 @@ package com.zombiequest
 		private var speed:Number = 200;
 		public function Bullet(p:FlxPoint, angle:Number)
 		{
-			super(p.x, p.y, ImgBullet);
+			super(p.x, p.y);
+			loadRotatedGraphic(ImgBullet, 32, -1, false, false);
 			this.angle = angle;
 		}
 		public override function update():void
