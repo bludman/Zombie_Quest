@@ -104,10 +104,10 @@ package com.zombiequest
 			/**
 			 * Wave Status
 			 */
-			waveMessage = new FlxText(0,0,400,'Wave Ended');
-			waveMessage.scrollFactor.x = waveMessage.scrollFactor.y = 0;
-			waveMessage.size = 36;
-			StartLevelState.overGroup.add(waveMessage);
+			//waveMessage = new FlxText(200,180,400,'Wave Ended');
+			//waveMessage.scrollFactor.x = waveMessage.scrollFactor.y = 0;
+			//waveMessage.size = 36;
+			//StartLevelState.overGroup.add(waveMessage);
 		}
 		
 		public function setHealth(amount:Number):void
