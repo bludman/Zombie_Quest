@@ -57,7 +57,7 @@
 			addAnimation("walk", [0, 1, 0, 2], 6);
 			addAnimation("idle", [0]);
 			addAnimation("attack", [3, 4, 0], 7, false);
-			attackRange.createGraphic(width, height-10, 0x88ffffff);
+			attackRange.createGraphic(width, height-10, 0x00ffffff); //change the 00 to show
 			StartLevelState.overGroup.add(attackRange);
 			calcFrame();
 		}		

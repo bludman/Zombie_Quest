@@ -19,6 +19,7 @@ package com.zombiequest
 		private var chasing:Boolean = false;
 		private var attacking:Boolean = false;
 		private var chaseTarget:FlxSprite;
+		private var defendAfterAttack:Boolean = false;
 		private static var id:Number = 0;
 		public var pid:Number;
 		public const MAX_HEALTH:Number = 200;
@@ -143,7 +144,8 @@ package com.zombiequest
 				{
 					if(!attacking)	//make sure the attacking anim is done
 						play("idle");
-					findTarget(playerFollowRadius);
+					findTarget(playerFollowRadius/2);
+					defendAfterAttack = true;
 				}
 			}
 			else if (state == SENTRY)
@@ -163,7 +165,10 @@ package com.zombiequest
 				}
 				if (chaseTarget.dead)
 				{
-					findTarget();
+					if(defendAfterAttack)
+						state = DEFENDING;
+					else
+						findTarget();
 				}				
 			}
 			
@@ -221,6 +226,7 @@ package com.zombiequest
 		 */ 
 		public function findTarget(limit:Number = -1, theTarget:FlxSprite = null):void
 		{
+			defendAfterAttack = false;
 			state = ATTACKING;
 			chaseTarget = theTarget;
 			if(chaseTarget != null)

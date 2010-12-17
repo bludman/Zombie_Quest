@@ -25,6 +25,7 @@ package com.zombiequest
 		public static var collideGroup:FlxGroup;
 		public static var minionFactory:MinionFactory;
 		public static var enemyFactory:EnemyFactory;
+		public static var mapMaker:MapGenerator;
 		public static var playerBrainCount:Number = 0;
 		public static var minionBrainCount:Number = 0;
 		public static var playClock:Number = 0;
@@ -56,6 +57,7 @@ package com.zombiequest
 		
 		override public function create():void
 		{
+			mapGroup = new FlxGroup();
 			underGroup = new FlxGroup();
 			overGroup = new FlxGroup();
 			
@@ -73,6 +75,7 @@ package com.zombiequest
 			level = new Level_Group1(true, onAddSprite);
 			minionFactory = new MinionFactory(player);
 			enemyFactory = new EnemyFactory(minionGroup, player);
+			mapMaker = new MapGenerator();
 			
 			add(bulletGroup);
 			collideGroup.add(enemyCollideGroup);
@@ -121,6 +124,7 @@ package com.zombiequest
 			enemyCollideGroup.update();
 			minionGroup.update();
 			hudManager.update();
+			mapGroup.update();
 			playClock += FlxG.elapsed;
 			
 			selectedMinion = nextMinion();
@@ -364,19 +368,17 @@ package com.zombiequest
 		 */
 		protected function nextMinion():Minion
 		{
-			var minions:Array = minionGroup.members;
 			var closest:Number = 2000; // greater than the length of the map
 			var candidate:Minion = null;
-			for (var i:Number = 0; i < minions.length; i++)
+			for each (var min:Minion in minionGroup.members)
 			{
-				var minion:Minion = minions[i] as Minion;
-				if (minion.state == Minion.DEFENDING && !minion.dead)
+				if (min.state == Minion.DEFENDING && !min.dead)
 				{
-					var dist:Number = MathU.dist(player.x - minion.x, player.y - minion.y);
+					var dist:Number = MathU.dist(player.x - min.x, player.y - min.y);
 					if (dist < closest)
 					{
 						closest = dist;
-						candidate = minion;
+						candidate = min;
 					}
 				}
 			}
@@ -397,6 +399,8 @@ package com.zombiequest
 		/* This must be done to render the HUD above all else */
 		override public function render():void
 		{	
+			mapGroup.render();
+			
 			super.render();	
 			
 			/* Render Under */

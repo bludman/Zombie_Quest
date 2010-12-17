@@ -64,7 +64,7 @@ package com.zombiequest
 			lastShot = (Math.random() * 2);
 			this.hasPowerup = hasPowerup;
 			//createHealthbar();
-			loadGraphics()
+			loadGraphics(ImgEnemy)
 			collideArea.width = 20;
 			collideArea.height = 20;
 			collideArea.x = x + collideOffset.x;
@@ -73,9 +73,9 @@ package com.zombiequest
 			calcFrame();
 		}
 		
-		protected function loadGraphics():void
+		protected function loadGraphics(img:Class):void
 		{			
-			loadGraphic(ImgEnemy, true, true, 42, 42);
+			loadGraphic(img, true, true, 42, 42);
 			addAnimation("walk", [0, 1, 2, 1, 0, 3, 4], 10);
 			addAnimation("shoot", [5], 1);
 			addAnimation("walk-glow", [6, 7, 8, 7, 6, 9, 10], 10);
@@ -367,9 +367,9 @@ package com.zombiequest
 			collideArea.kill();
 			
 			if(Math.random() > 0.5)
-				FlxG.play(dieSound1,.6,false);
+				FlxG.play(dieSound1,.5,false);
 			else
-				FlxG.play(dieSound2,.6,false);				
+				FlxG.play(dieSound2,.5,false);				
 		}
 		
 		protected function updateCollide():void
@@ -407,7 +407,7 @@ package com.zombiequest
 					hitSound = hitSound1;
 				else
 					hitSound = hitSound2;
-				FlxG.play(hitSound,.55,false);
+				FlxG.play(hitSound,.4,false);
 			}
 		}
 		
