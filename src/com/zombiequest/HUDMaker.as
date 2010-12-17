@@ -93,7 +93,7 @@ package com.zombiequest
 			/**
 			 * Wave Status
 			 */
-						
+			
 		}
 		
 		public function setHealth(amount:Number):void
