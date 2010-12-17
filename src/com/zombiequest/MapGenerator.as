@@ -20,7 +20,7 @@ package com.zombiequest
 		
 	    private function makeColliders():void
 		{
-			var topCollider:Collider = new Collider(0, 0, 1280, 11);
+			var topCollider:Collider = new Collider(0, -10, 1280, 11);
 			StartLevelState.mapCollider.add(topCollider);
 		}
 	}
