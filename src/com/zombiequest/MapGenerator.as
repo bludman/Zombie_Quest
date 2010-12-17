@@ -74,9 +74,44 @@ package com.zombiequest
 			var car9Collider:Collider = new Collider(1165, 727, 95, 118);
 			StartLevelState.mapCollider.add(car9Collider);
 			
-			var roadBlock1:Collider = new Collider(530, 520, 1, 1, 0, true);
+			var roadBlock1:Collider = new Collider(530, 520, 1, 1, 0, 1);
 			StartLevelState.mapCollider.add(roadBlock1);
-			roadBlock1.facing = FlxSprite.LEFT;
-		}
+			
+			var roadBlock2:Collider = new Collider(184, 377, 1, 1, 0, 2);
+			StartLevelState.mapCollider.add(roadBlock2);
+			
+			var roadBlock3:Collider = new Collider(178, 558, 1, 1, 0, 2);
+			StartLevelState.mapCollider.add(roadBlock3);
+			
+			var roadBlock4:Collider = new Collider(650, 793, 1, 1, 0, 1);
+			StartLevelState.mapCollider.add(roadBlock4);
+			
+			var roadBlock5:Collider = new Collider(632, 718, 1, 1, 0, 2);
+			StartLevelState.mapCollider.add(roadBlock5);
+			
+			var roadBlock6:Collider = new Collider(1100, 357, 1, 1, 0, 2);
+			StartLevelState.mapCollider.add(roadBlock6);
+			
+			var roadBlock7:Collider = new Collider(1128, 555, 1, 1, 0, 2);
+			StartLevelState.mapCollider.add(roadBlock7);
+			
+			var roadBlock8:Collider = new Collider(1244, 476, 1, 1, 0, 2);
+			StartLevelState.mapCollider.add(roadBlock8);
+			
+			var roadBlock9:Collider = new Collider(1056, 505, 1, 1, 0, 1);
+			StartLevelState.mapCollider.add(roadBlock9);
+			
+			var roadBlock10:Collider = new Collider(724, 946, 1, 1, 0, 1);
+			StartLevelState.mapCollider.add(roadBlock10);
+			
+			var roadBlock11:Collider = new Collider(457, 87, 1, 1, 0, 1);
+			StartLevelState.mapCollider.add(roadBlock11);
+			
+			var roadBlock12:Collider = new Collider(681, 76, 1, 1, 0, 1);
+			StartLevelState.mapCollider.add(roadBlock12);
+			
+			var roadBlock13:Collider = new Collider(629, 98, 1, 1, 0, 2);
+			StartLevelState.mapCollider.add(roadBlock13);
+		}		
 	}
 }

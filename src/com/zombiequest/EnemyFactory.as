@@ -119,22 +119,22 @@ package com.zombiequest
 		
 		public function spawnUp(hasPowerup:Boolean = false):void
 		{
-			getEnemy(640, 70, hasPowerup);
+			getEnemy(640, 20, hasPowerup);
 		}
 		
 		public function spawnDown(hasPowerup:Boolean = false):void
 		{
-			getEnemy(640, 920, hasPowerup);
+			getEnemy(640, 1024-20, hasPowerup);
 		}
 		
 		public function spawnLeft(hasPowerup:Boolean = false):void
 		{
-			getEnemy(64, 512, hasPowerup);
+			getEnemy(20, 512, hasPowerup);
 		}
 		
 		public function spawnRight(hasPowerup:Boolean = false):void
 		{
-			getEnemy(1170, 512, hasPowerup);
+			getEnemy(1280-20, 512, hasPowerup);
 		}
 	}
 	
