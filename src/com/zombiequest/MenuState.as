@@ -53,8 +53,9 @@ package com.zombiequest
 			inst += "A - Send minions to attack\n";
 			inst += "S - Call minions to follow you\n";
 			inst += "Space - Attack";
-			var instText:FlxText = new FlxText(200, 200, 200, inst);
+			var instText:FlxText = new FlxText(200, 150, 400, inst);
 			instText.color = 0xff000000;
+			instText.size = 14;
 			add(instText);
 			
 		}
@@ -72,6 +73,27 @@ package com.zombiequest
 			enemy3 = new FlxSprite(190, 310);
 			enemy3.loadGraphic(CEnemy);
 			add(enemy3);
+			
+			var key1:String = " - Regular Cop";
+			var key2:String = " - Fearless Cop"
+			var key3:String = " - Cowardly Cop";
+			
+			var keyText1:FlxText = new FlxText(230, 261, 200, key1);
+			keyText1.color = 0xff000000;
+			keyText1.size = 14;
+			add(keyText1);
+			
+			var keyText2:FlxText = new FlxText(230, 291, 200, key2);
+			keyText2.color = 0xff000000;
+			keyText2.size = 14;
+			add(keyText2);
+			
+			var keyText3:FlxText = new FlxText(230, 321, 200, key3);
+			keyText3.color = 0xff000000;
+			keyText3.size = 14;
+			add(keyText3);
+			
+			
 		}
 		
 		private function loadStartLevel():void
