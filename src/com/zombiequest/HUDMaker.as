@@ -28,6 +28,8 @@ package com.zombiequest
 		private var timerOffset:Number = 25;
 		
 		private var waveMessage:FlxText;
+		private var endOfWave:FlxGroup;
+		private var waveMsgTimer:Number = 5;
 		
 		[Embed(source="../../../assets/png/full_brain_big.png")]
 		private static var BigBrain:Class;
@@ -104,10 +106,13 @@ package com.zombiequest
 			/**
 			 * Wave Status
 			 */
-			//waveMessage = new FlxText(200,180,400,'Wave Ended');
-			//waveMessage.scrollFactor.x = waveMessage.scrollFactor.y = 0;
-			//waveMessage.size = 36;
-			//StartLevelState.overGroup.add(waveMessage);
+			endOfWave = new FlxGroup;
+			waveMessage = new FlxText(200,180,400,'Wave Ended');
+			waveMessage.scrollFactor.x = waveMessage.scrollFactor.y = 0;
+			waveMessage.size = 36;
+			endOfWave.add(waveMessage);
+			StartLevelState.overGroup.add(endOfWave);
+			endOfWave.visible = false;
 		}
 		
 		public function setHealth(amount:Number):void
@@ -128,6 +133,21 @@ package com.zombiequest
 			smallBrainCount.text = "x " + StartLevelState.minionBrainCount;
 			clock.text = StartLevelState.generateClock();
 			score.text = "Score: " + StartLevelState.calculateScore();
+			if(waveMsgTimer <= 0)
+			{
+				endOfWave.visible=false;
+				StartLevelState.enemyFactory.startWave();
+				waveMsgTimer = 5;
+			}				
+			else if(endOfWave.visible == true)
+			{
+				waveMsgTimer -= FlxG.elapsed;
+			}				
+		}
+		
+		public function showMsg():void
+		{
+			endOfWave.visible = true;
 		}
 	}
 }

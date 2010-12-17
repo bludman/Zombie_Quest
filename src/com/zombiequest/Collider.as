@@ -8,8 +8,8 @@ package com.zombiequest
 	 */
 	public class Collider extends FlxSprite 
 	{		
-		var tX:Number = 0;
-		var tY:Number = 0;
+		private var tX:Number = 0;
+		private var tY:Number = 0;
 		
 		public function Collider(X:Number = 0, Y:Number = 0, Width:Number = 0, Height:Number = 0, Angle:Number = 0) 
 		{

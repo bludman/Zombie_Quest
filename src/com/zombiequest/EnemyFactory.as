@@ -16,14 +16,14 @@ package com.zombiequest
 		private var updateTimeElapsed:Number = 0;
 		
 		/* wave variables */
-		private var waveAmount:Number = 20; //enemy spawn amount
+		private var waveAmount:Number = 5; //enemy spawn amount
 		private var waveDuration:Number = 120;	//in seconds
 		
 		public function EnemyFactory(minionGroup:FlxGroup, player:Player) 
 		{
 			this.minionGroup = minionGroup;
 			this.player = player;
-			startWave();
+			startWave(5);
 		}
 		
 		public function update():void
@@ -46,6 +46,7 @@ package com.zombiequest
 					if(waveTimeElapsed > waveDuration) 
 					{
 						waveOn = false;
+						StartLevelState.hudManager.showMsg();
 					}
 					
 					updateTimeElapsed=0;
@@ -56,19 +57,20 @@ package com.zombiequest
 		public function getEnemy(x:Number, y:Number, hasPowerup:Boolean = false):void
 		{
 			var enemy:Enemy;
-			var rand:Number = Math.random();
+			var rand:Number = Math.random()*100;
 			
-			if (rand > .33 && rand < .66)
+			
+			if(rand <= waveAmount)
 			{
-				enemy = new Enemy(x, y, player, minionGroup, hasPowerup);
+				enemy = new CowardlyEnemy(x, y, player, minionGroup, hasPowerup);
 			}
-			else if (rand >= .66)
+			else if (rand >= 66)
 			{
 				enemy = new FearlessEnemy(x, y, player, minionGroup, hasPowerup);
 			}
-			else 
+			else
 			{
-				enemy = new CowardlyEnemy(x, y, player, minionGroup, hasPowerup);
+				enemy = new Enemy(x, y, player, minionGroup, hasPowerup);
 			}
 			StartLevelState.enemyGroup.add(enemy);
 			StartLevelState.enemyCollideGroup.add(enemy.collideArea);
@@ -77,8 +79,14 @@ package com.zombiequest
 		}
 		
 		
-		public function startWave():void
+		public function startWave(amount:Number = 0, duration:Number = 120):void
 		{
+			player.health = Player.maxHealth;
+			if(amount == 0)
+				waveAmount = waveAmount+1;
+			else
+				waveAmount = amount;
+			waveDuration = duration;
 			waveOn = true;
 			waveTimeElapsed = 0;
 			updateTimeElapsed = 0;
