@@ -95,9 +95,6 @@ package com.zombiequest
 			var roadBlock7:Collider = new Collider(1128, 555, 1, 1, 0, 2);
 			StartLevelState.mapCollider.add(roadBlock7);
 			
-			var roadBlock8:Collider = new Collider(1244, 476, 1, 1, 0, 2);
-			StartLevelState.mapCollider.add(roadBlock8);
-			
 			var roadBlock9:Collider = new Collider(1056, 505, 1, 1, 0, 1);
 			StartLevelState.mapCollider.add(roadBlock9);
 			
