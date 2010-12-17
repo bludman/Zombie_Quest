@@ -24,10 +24,10 @@ package com.zombiequest
 			//	angletime = 1;
 				colliding = false;				
 			//}
-			for each (var tile:FlxTilemap in StartLevelState.level.hitTilemaps.members)
-			{
+			//for each (var tile:FlxTilemap in StartLevelState.level.hitTilemaps.members)
+			//{
 				
-			}
+			//}
 			
 			if (!colliding)
 			{

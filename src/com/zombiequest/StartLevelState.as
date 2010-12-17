@@ -15,6 +15,7 @@ package com.zombiequest
 	{		
 		//public const maxHealth:Number = 500;
 		private var player:Player;
+		private var selectedMinion:Minion = null;
 		private var coin:Coin;
 		public static var enemyGroup:FlxGroup;
 		public static var enemyCollideGroup:FlxGroup;
@@ -33,6 +34,7 @@ package com.zombiequest
 		private const attackTimeout:Number = 0.5;
 		
 		/* Sprite layers */
+		public static var mapGroup:FlxGroup;	//for the map
 		public static var underGroup:FlxGroup;	//for blood splats
 		public static var overGroup:FlxGroup;	//for HUD
 		
@@ -106,7 +108,8 @@ package com.zombiequest
 			zombieDecay();
 			updateHealthBar();
 			updateWaveStatus();
-			flashPlayer();
+			aimedEnemy();
+			//flashPlayer();
 			super.update();
 			
 			/* Update Others */
@@ -119,6 +122,8 @@ package com.zombiequest
 			minionGroup.update();
 			hudManager.update();
 			playClock += FlxG.elapsed;
+			
+			selectedMinion = nextMinion();
 		}
 		
 		protected function onAddSprite(obj:Object, layer:FlxGroup, level:Map, properties:Array):Object
@@ -294,21 +299,66 @@ package com.zombiequest
 		{
 			if (FlxG.keys.justPressed("A")) 
 			{
-				var minions:Array = minionGroup.members;
-				for (var i:Number = 0; i < minions.length; i++)
+				if(selectedMinion!=null)
 				{
-					Minion(minions[i]).findTarget();
+					var nextEnemy:Enemy = aimedEnemy();
+					selectedMinion.findTarget(-1, nextEnemy);
 				}
+					
+				/*
+				minions = minionGroup.members;
+				for each (var m:Minion in minions)
+				{
+					m.findTarget();
+				}
+				*/
 			}
 			else if (FlxG.keys.justPressed("S"))
 			{
-				minions = minionGroup.members;
-				for (i = 0; i < minions.length; i++)
+				for each (var m1:Minion in minionGroup.members)
 				{
-					Minion(minions[i]).state = Minion.DEFENDING;
+					m1.findTarget();
+				}
+			}
+			else if (FlxG.keys.justPressed("D"))
+			{
+				for each (var m2:Minion in minionGroup.members)
+				{
+					m2.state = Minion.DEFENDING;
 				}
 			}
 		}
+		
+		/**
+		 * Finds an enemy that is in the viewport at the lowest angle
+		 */
+		protected function aimedEnemy():Enemy
+		{
+			var selected:Enemy = null;
+			if(minionGroup.countLiving() <= 0)
+				return selected;
+			
+			var angle:Number = 361;
+			for each (var e:Enemy in enemyGroup.members)
+			{
+				e.glowing = false
+				var ePos:FlxPoint = e.getScreenXY(ePos);
+				
+				if (ePos.x >= 640 || ePos.y >= 480 || ePos.x <= 0 || ePos.y <= 0)
+					continue;
+				
+				var newAngle:Number = Math.abs(FlxU.getAngle(e.x-player.x, e.y-player.y) - player.angle);
+				if(newAngle < angle)
+				{
+					angle = newAngle;
+					selected = e;
+				}
+			}
+			if(selectedMinion != null)
+				selected.glowing = true;
+			return selected;
+		}		
+		
 		/**
 		 * Finds the next minion with the DEFENDING state
 		 */

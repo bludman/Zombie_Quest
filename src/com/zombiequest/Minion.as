@@ -164,8 +164,7 @@ package com.zombiequest
 				if (chaseTarget.dead)
 				{
 					findTarget();
-				}
-				
+				}				
 			}
 			
 			if(attacking && finished)
@@ -220,16 +219,20 @@ package com.zombiequest
 		 * @param	limit: minimum distance for an enemy to be to start following it.
 		 * 			Call with negative number for no limit
 		 */ 
-		public function findTarget(limit:Number = -1):void
+		public function findTarget(limit:Number = -1, theTarget:FlxSprite = null):void
 		{
-			//Go attack the closest target
 			state = ATTACKING;
+			chaseTarget = theTarget;
+			if(chaseTarget != null)
+				return;
+			
+			//Go attack the closest target
 			var targets:Array = StartLevelState.enemyGroup.members;
 			var closest:Number = attackFollowRange;
 			if (limit >= 0) {
 				closest = limit;
 			}
-			chaseTarget = null;
+
 			targets = targets.concat(StartLevelState.innocentGroup.members);
 			for (var i:Number = 0; i < targets.length; i++)
 			{

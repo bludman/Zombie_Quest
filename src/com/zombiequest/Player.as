@@ -16,7 +16,7 @@
 		public static var maxHealth:Number = 300;
 		private var speed:Number = origSpeed;
 		private var attackDistance:Number = 10;
-		private var attackRange:FlxSprite = new FlxSprite(0, 0);
+		private var attackRange:FlxSprite = new FlxSprite(0,0);
 		public var damage:Number = 25;
 		private var attacking:Boolean = false;
 		
@@ -57,8 +57,8 @@
 			addAnimation("walk", [0, 1, 0, 2], 6);
 			addAnimation("idle", [0]);
 			addAnimation("attack", [3, 4, 0], 7, false);
-			attackRange.height = this.height;
-			attackRange.width = this.width;
+			attackRange.createGraphic(width, height-10, 0x88ffffff);
+			StartLevelState.overGroup.add(attackRange);
 			calcFrame();
 		}		
 		override public function update():void
@@ -66,7 +66,31 @@
 			velocity.x = 0;
 			velocity.y = 0;
 			
+			if(FlxG.keys.LEFT){
+				angle -= FlxG.elapsed*300;
+				if(angle <= -180){
+					angle += 360;
+				}
+			}
+			else if(FlxG.keys.RIGHT){
+				angle += FlxG.elapsed*300;
+				if(angle >= 180){
+					angle -= 360;
+				}
+			}
+			
+			if (FlxG.keys.UP)
+			{
+				velocity.x = speed * Math.cos(MathU.degToRad(angle));
+				velocity.y = speed * Math.sin(MathU.degToRad(angle));
+			}
+			else if(FlxG.keys.DOWN)
+			{
+				velocity.x = -speed * Math.cos(MathU.degToRad(angle));
+				velocity.y = -speed * Math.sin(MathU.degToRad(angle));
+			}
 			//walking up-left, up-right, etc.
+			/*
 			if (FlxG.keys.UP)
 			{
 				if(FlxG.keys.LEFT){
@@ -111,7 +135,7 @@
 			else if (FlxG.keys.RIGHT) {
 				angle = 0;
 				velocity.x = speed;
-			}
+			}*/
 			
 			if(FlxG.keys.justPressed("SPACE"))
 			{
@@ -141,8 +165,8 @@
 		private function updateOverlap():void
 		{
 			attackRange.angle = this.angle;
-			attackRange.x = x + 10 * Math.cos(MathU.degToRad(angle));
-			attackRange.y = y + 10 * Math.sin(MathU.degToRad(angle));
+			attackRange.x = x + 20 * Math.cos(MathU.degToRad(angle));
+			attackRange.y = y + 20 * Math.sin(MathU.degToRad(angle));
 		}
 		
 		public function set setSpeed(s:Number):void {

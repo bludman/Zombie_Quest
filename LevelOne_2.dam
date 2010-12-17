@@ -1,37 +1,37 @@
 <?xml version="1.0" encoding="utf-8"?>
 <project>
-  <version>1.1.9</version>
+  <version>1.2.0</version>
   <bgColor>0x000000</bgColor>
   <spriteEntries>
-    <tileEntry name="Innocent" idx="1" className="Innocent" image="assets/png/oldinnocent.png" offsetX="0" offsetY="0" width="23" height="23" anchorX="0" anchorY="0" boundsX="0" boundsY="0" boundsWidth="23" boundsHeight="23" constructor="new Innocent(%xpos%, %ypos%, %prop:angle%)" exports="true" canScale="true" canRotate="true">
+    <tileEntry name="Innocent" idx="1" className="Innocent" image="assets/png/oldinnocent.png" offsetX="0" offsetY="0" width="23" height="23" anchorX="0" anchorY="0" boundsX="0" boundsY="0" boundsWidth="23" boundsHeight="23" constructor="new Innocent(%xpos%, %ypos%, %prop:angle%)" creation="" exports="true" canScale="true" canRotate="true">
       <properties>
         <type typeof="Int" name="angle" value="0"/>
       </properties>
     </tileEntry>
-    <tileEntry name="Player" idx="2" className="Player" image="assets/jpeg/PlayerTopDown.jpg" offsetX="0" offsetY="0" width="20" height="20" anchorX="0" anchorY="0" boundsX="0" boundsY="0" boundsWidth="20" boundsHeight="20" constructor="new Player(%xpos%, %ypos%)" exports="true" canScale="true" canRotate="true"/>
-    <sprite name="enemyNoPowerup" idx="3" className="Enemy" image="assets/png/temp_person.png" width="32" height="32" preview="4" anchorX="0" anchorY="0" boundsX="0" boundsY="0" boundsWidth="32" boundsHeight="32" constructor="new Enemy(%xpos%, %ypos%, false)" exports="true" canScale="true" canRotate="true"/>
-    <sprite name="enemyPowerup" idx="4" className="Enemy" image="assets/png/temp_person.png" width="32" height="32" preview="1" anchorX="0" anchorY="0" boundsX="0" boundsY="0" boundsWidth="32" boundsHeight="32" constructor="new Enemy(%xpos%, %ypos%, true)" exports="true" canScale="true" canRotate="true"/>
-    <sprite name="Coin" idx="5" className="Coin" image="assets/png/coin.png" width="16" height="16" preview="3" anchorX="0" anchorY="0" boundsX="0" boundsY="0" boundsWidth="16" boundsHeight="16" constructor="" exports="true" canScale="true" canRotate="true"/>
+    <tileEntry name="Player" idx="2" className="Player" image="assets/jpeg/PlayerTopDown.jpg" offsetX="0" offsetY="0" width="20" height="20" anchorX="0" anchorY="0" boundsX="0" boundsY="0" boundsWidth="20" boundsHeight="20" constructor="new Player(%xpos%, %ypos%)" creation="" exports="true" canScale="true" canRotate="true"/>
+    <sprite name="enemyNoPowerup" idx="3" className="Enemy" image="assets/png/temp_person.png" width="32" height="32" preview="4" anchorX="0" anchorY="0" boundsX="0" boundsY="0" boundsWidth="32" boundsHeight="32" constructor="new Enemy(%xpos%, %ypos%, false)" creation="" exports="true" canScale="true" canRotate="true"/>
+    <sprite name="enemyPowerup" idx="4" className="Enemy" image="assets/png/temp_person.png" width="32" height="32" preview="1" anchorX="0" anchorY="0" boundsX="0" boundsY="0" boundsWidth="32" boundsHeight="32" constructor="new Enemy(%xpos%, %ypos%, true)" creation="" exports="true" canScale="true" canRotate="true"/>
+    <sprite name="Coin" idx="5" className="Coin" image="assets/png/coin.png" width="16" height="16" preview="3" anchorX="0" anchorY="0" boundsX="0" boundsY="0" boundsWidth="16" boundsHeight="16" constructor="" creation="" exports="true" canScale="true" canRotate="true"/>
   </spriteEntries>
   <layers>
     <group name="Group1" xScroll="1" yScroll="1" visible="true" open="true" locked="false" exports="true">
       <maplayer name="bg" xScroll="1" yScroll="1" x="0" y="0" width="20" height="16" tileset="assets/jpeg/temp_tiles.jpg" tileWidth="64" tileHeight="64" visible="true" hasHits="false" drawIdx="1" collideIdx="1" eraseIdx="0" locked="false" exports="true">
-        <row>0,0,0,0,0,0,0,0,0,10,10,0,0,0,0,0,0,0,0,0</row>
-        <row>0,10,10,10,10,10,10,10,11,10,10,10,10,10,10,10,10,10,10,0</row>
-        <row>0,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,0</row>
-        <row>0,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,0</row>
-        <row>0,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,0</row>
-        <row>0,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,0</row>
-        <row>0,11,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,11,0</row>
-        <row>10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,11,10</row>
-        <row>10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,11,10</row>
-        <row>0,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,11,0</row>
-        <row>0,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,11,0</row>
-        <row>0,11,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,11,0</row>
-        <row>0,11,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,11,0</row>
-        <row>0,11,10,10,10,10,10,11,11,11,11,11,10,10,10,10,10,10,11,0</row>
-        <row>0,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,0</row>
-        <row>0,0,0,0,0,0,0,0,0,11,11,0,0,0,0,0,0,0,0,0</row>
+        <row>0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0</row>
+        <row>0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0</row>
+        <row>0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0</row>
+        <row>0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0</row>
+        <row>0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0</row>
+        <row>0,0,0,0,0,0,0,0,0,0,0,0,10,0,0,0,0,0,0,0</row>
+        <row>0,0,0,0,0,0,0,10,10,0,0,10,0,0,0,0,0,0,0,0</row>
+        <row>0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0</row>
+        <row>0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0</row>
+        <row>0,0,0,0,0,0,0,0,0,0,0,10,10,0,0,0,0,0,11,0</row>
+        <row>0,0,0,0,0,0,0,10,0,0,0,10,0,0,0,0,0,0,0,0</row>
+        <row>0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0</row>
+        <row>0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0</row>
+        <row>0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0</row>
+        <row>0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,11,0</row>
+        <row>0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0</row>
       </maplayer>
       <maplayer name="Map1" xScroll="1" yScroll="1" x="0" y="0" width="20" height="16" tileset="assets/jpeg/temp_tiles.jpg" tileWidth="64" tileHeight="64" visible="true" hasHits="true" drawIdx="1" collideIdx="1" eraseIdx="0" locked="false" exports="true">
         <row>16,16,16,16,16,16,16,16,17,0,0,16,16,16,16,16,16,16,16,16</row>

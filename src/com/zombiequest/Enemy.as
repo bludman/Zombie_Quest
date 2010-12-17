@@ -6,7 +6,7 @@ package com.zombiequest
 	 * ...
 	 * @author Team Zombie Quest
 	 */
-	public class Enemy extends FlxSprite 
+	public class Enemy extends WalkingSprite 
 	{
 		protected const speed:Number = 75;
 		protected static var retreatRange:Number = 100;
@@ -14,8 +14,7 @@ package com.zombiequest
 		protected static var attackRange:Number = 250;//2*attackRange;
 		protected static var followRange:Number = 30000;//2*followRange+200;
 		
-		public static const healthRegen:Number = 40;
-		
+		public static const healthRegen:Number = 40;		
 		
 		/** Distance rings between target and enemy */
 		protected static const DISTANCE_RETREAT:Number = 0;
@@ -29,6 +28,7 @@ package com.zombiequest
 		protected var following:Boolean = false;
 		public var shooting:Boolean = false;
 		protected var retreating:Boolean = false;
+		public var glowing:Boolean = false;
 		
 		
 		protected var healthbar:FlxSprite;
@@ -64,16 +64,23 @@ package com.zombiequest
 			lastShot = (Math.random() * 2);
 			this.hasPowerup = hasPowerup;
 			//createHealthbar();
-			loadGraphic(ImgEnemy, true, true, 42, 42);
-			addAnimation("walk", [0, 1, 2, 1, 0, 3, 4], 10);
-			addAnimation("shoot", [5], 1);
-			play("walk");
+			loadGraphics()
 			collideArea.width = 20;
 			collideArea.height = 20;
 			collideArea.x = x + collideOffset.x;
 			collideArea.y = y + collideOffset.y;
 			collideArea.visible = false;
 			calcFrame();
+		}
+		
+		protected function loadGraphics():void
+		{			
+			loadGraphic(ImgEnemy, true, true, 42, 42);
+			addAnimation("walk", [0, 1, 2, 1, 0, 3, 4], 10);
+			addAnimation("shoot", [5], 1);
+			addAnimation("walk-glow", [6, 7, 8, 7, 6, 9, 10], 10);
+			addAnimation("shoot-glow", [11], 1);
+			play("walk");
 		}
 		
 		public function pickTarget():FlxObject
@@ -116,11 +123,10 @@ package com.zombiequest
 //			var secretAngle:Number = 180 + FlxU.getAngle(target.x - this.x, target.y - this.y);
 //			this.angle = secretAngle;
 //			collideArea.angle = this.angle;
-			
-			this.angle = 180 + FlxU.getAngle(target.x - this.x, target.y - this.y);
-			collideArea.angle = this.angle;
-			collideArea.velocity.x = speed * Math.cos(MathU.degToRad(this.angle));
-			collideArea.velocity.y = speed * Math.sin(MathU.degToRad(this.angle));
+			goToLocation(target.x, target.y, speed);
+			collideArea.velocity.x = velocity.x;
+			collideArea.velocity.y = velocity.y
+			collideArea.angle = angle;
 			shooting = false;
 			following = true;
 			retreating = true;
@@ -130,11 +136,11 @@ package com.zombiequest
 		 * Chase a target
 		 */
 		protected function chase(target:FlxObject,attack:Boolean = false):void
-		{
-			this.angle = FlxU.getAngle(target.x - this.x, target.y - this.y);
+		{	
+			goToLocation(target.x, target.y, speed);
+			collideArea.velocity.x = velocity.x;
+			collideArea.velocity.y = velocity.y;
 			collideArea.angle = angle;
-			collideArea.velocity.x = speed * Math.cos(MathU.degToRad(this.angle));
-			collideArea.velocity.y = speed * Math.sin(MathU.degToRad(this.angle));
 			shooting = attack;
 			following = true;
 		}
@@ -314,10 +320,7 @@ package com.zombiequest
 				angle = FlxU.getAngle(target.x - x, target.y - y);
 			}
 			else {
-				if (currentAnim != "walk")
-				{
-					play("walk");
-				}
+				play("walk");
 				if (!following) {
 					_curFrame = 1;
 				}
@@ -394,12 +397,6 @@ package com.zombiequest
 			}
 		}
 		
-		override public function play(name:String, force:Boolean = false):void
-		{
-			super.play(name, force);
-			currentAnim = name;
-		}
-		
 		public function playHitSound(probability:Number = 1):void
 		{
 			if(Math.random() < probability) 
@@ -412,6 +409,16 @@ package com.zombiequest
 					hitSound = hitSound2;
 				FlxG.play(hitSound,.55,false);
 			}
+		}
+		
+		override public function play(AnimName:String, Force:Boolean = false):void 
+		{
+			currentAnim = AnimName;
+			if (glowing) 
+			{
+				AnimName = AnimName + "-glow";
+			}
+			super.play(AnimName, Force);
 		}
 	}
 
