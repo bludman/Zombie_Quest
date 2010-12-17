@@ -110,10 +110,15 @@ package com.zombiequest
 					wakeSound = moanSound3;
 				FlxG.play(wakeSound,.33,false);
 			}
+			flicker(2);
 		}
 		
 		public override function update():void
-		{
+		{			
+			super.update();	
+			if(flickering())
+				return;
+			
 			var dist:Number;
 			velocity.x = 0;
 			velocity.y = 0;
@@ -174,8 +179,6 @@ package com.zombiequest
 			
 			if(attacking && finished)
 				attacking = false;
-			
-			super.update();
 		}
 		private function attack():void
 		{

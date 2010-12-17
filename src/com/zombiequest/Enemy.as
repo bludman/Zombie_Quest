@@ -38,7 +38,7 @@ package com.zombiequest
 		public var shotTimeout:Number = 1.5;
 		protected var currentAnim:String = "";
 		public var hasPowerup:Boolean = false;
-		public var collideArea:FlxSprite = new FlxSprite(0, 0);
+		public var collideArea:FlxObject = new FlxObject(0, 0);
 		protected var collideOffset:FlxPoint = new FlxSprite(10, 10);
 		protected const newSize:Number = 42 / 96;
 		[Embed(source = "../../../assets/png/cop.png")]

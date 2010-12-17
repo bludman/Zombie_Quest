@@ -13,8 +13,13 @@ package com.zombiequest
 		
 		public function MapGenerator() 
 		{
-			var bG:FlxSprite = new FlxSprite(0, 0, Background);
-			StartLevelState.mapGroup.add(bG);
-		}		
+			//var bG:FlxSprite = new FlxSprite(0, 0, Background);
+			//StartLevelState.mapGroup.add(bG);
+		}
+		
+	    private function makeColliders()
+		{
+			
+		}
 	}
 }

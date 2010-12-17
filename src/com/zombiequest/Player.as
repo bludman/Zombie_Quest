@@ -66,6 +66,7 @@
 			velocity.x = 0;
 			velocity.y = 0;
 			
+			/*
 			if(FlxG.keys.LEFT){
 				angle -= FlxG.elapsed*300;
 				if(angle <= -180){
@@ -89,8 +90,9 @@
 				velocity.x = -speed * Math.cos(MathU.degToRad(angle));
 				velocity.y = -speed * Math.sin(MathU.degToRad(angle));
 			}
+			*/
 			//walking up-left, up-right, etc.
-			/*
+			
 			if (FlxG.keys.UP)
 			{
 				if(FlxG.keys.LEFT){
@@ -135,7 +137,7 @@
 			else if (FlxG.keys.RIGHT) {
 				angle = 0;
 				velocity.x = speed;
-			}*/
+			}
 			
 			if(FlxG.keys.justPressed("SPACE"))
 			{

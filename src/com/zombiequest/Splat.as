@@ -9,7 +9,7 @@ package com.zombiequest
 	public class Splat extends FlxSprite 
 	{
 		
-		private var timeLeft:Number = 3.75;
+		private var timeLeft:Number = 3;
 		
 		[Embed(source="../../../assets/png/blood.png")]
 		private static var ImgBlood:Class;
@@ -56,7 +56,7 @@ package com.zombiequest
 			}				
 			
 			loadGraphic(img, true, true, size, size);
-			addAnimation("splat", [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14], 4, false);
+			addAnimation("splat", [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14], 5, false);
 			play("splat");
 			facing = Math.round(Math.random() * 3);
 		}		

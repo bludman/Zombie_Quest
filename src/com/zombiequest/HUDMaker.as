@@ -25,6 +25,8 @@ package com.zombiequest
 		private var timer:FlxText;
 		private var timerOffset:Number = 25;
 		
+		private var waveMessage:FlxText;
+		
 		[Embed(source="../../../assets/png/full_brain_big.png")]
 		private static var BigBrain:Class;
 		
@@ -93,7 +95,10 @@ package com.zombiequest
 			/**
 			 * Wave Status
 			 */
-			
+			waveMessage = new FlxText(0,0,400,'Wave Ended');
+			waveMessage.scrollFactor.x = waveMessage.scrollFactor.y = 0;
+			waveMessage.size = 36;
+			StartLevelState.overGroup.add(waveMessage);
 		}
 		
 		public function setHealth(amount:Number):void
