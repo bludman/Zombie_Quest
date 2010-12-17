@@ -20,5 +20,10 @@
 			<type>2</type>
 			<location>/Users/daniel/Desktop/release</location>
 		</link>
+		<link>
+			<name>bin-release1</name>
+			<type>2</type>
+			<location>/Users/daniel/Desktop/zombie</location>
+		</link>
 	</linkedResources>
 </projectDescription>

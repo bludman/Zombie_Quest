@@ -37,7 +37,7 @@ package com.zombiequest
 				if(updateTimeElapsed > 2) 	//it's time to spawn more
 				{
 					/* amount is the max number of enemies on screen at a time. */
-					var amount:Number = Math.min(waveAmount, waveTimeElapsed/4);	//It's a wave
+					var amount:Number = waveAmount/*Math.min(waveAmount, waveTimeElapsed/4)*/;	//It's a wave
 					/* Spawn enemies */
 					if(StartLevelState.enemyGroup.countLiving() , amount)
 						spawnAll(amount/100);
@@ -83,7 +83,7 @@ package com.zombiequest
 		{
 			player.health = Player.maxHealth;
 			if(amount == 0)
-				waveAmount = waveAmount+2;
+				waveAmount = waveAmount+5;
 			else
 				waveAmount = amount;
 			waveDuration = duration;
