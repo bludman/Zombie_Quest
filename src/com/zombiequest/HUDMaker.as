@@ -18,7 +18,8 @@ package com.zombiequest
 		private var smallBrain:FlxSprite;
 		private var smallBrainCount:FlxText;
 		
-		private var clock:FlxText;
+		private var clockText:FlxText;
+		private var clockImg:FlxSprite;
 		
 		private var score:FlxText;
 		
@@ -29,11 +30,11 @@ package com.zombiequest
 		
 		private var waveMessage:FlxText;
 		
-		[Embed(source="../../../assets/png/full_brain_big.png")]
+		[Embed(source="../../../assets/png/Brain40x27.png")]
 		private static var BigBrain:Class;
 		
-		[Embed(source="../../../assets/png/full_brain_small.png")]
-		private static var SmallBrain:Class;
+		[Embed(source="../../../assets/png/Clock27x27_2.png")]
+		private static var ClockImg:Class;
 		
 		public function HUDMaker()
 		{
@@ -54,35 +55,30 @@ package com.zombiequest
 			healthBar.scale.x = HEALTHBARSIZE; //Fill up the health bar all the way
 			StartLevelState.overGroup.add(healthBar);
 			
-			bigBrain = new FlxSprite(514,2);
-			bigBrain.loadGraphic(BigBrain, false, false, 38, 31);
+			clockImg = new FlxSprite(240, -1);
+			clockImg.loadGraphic(ClockImg, false, false, 27, 27);
+			clockImg.scrollFactor.x = clockImg.scrollFactor.y = 0;
+			clockImg.origin.x = clockImg.origin.y = 0;
+			StartLevelState.overGroup.add(clockImg);
+			
+			clockText = new FlxText(277, 2, 100);
+			clockText.color = 0x00ffffff;
+			clockText.scrollFactor.x = clockText.scrollFactor.y = 0;
+			clockText.size = 14;
+			StartLevelState.overGroup.add(clockText);
+			
+			bigBrain = new FlxSprite(370, -1);
+			bigBrain.loadGraphic(BigBrain, false, false, 40, 27);
 			bigBrain.scrollFactor.x = bigBrain.scrollFactor.y = 0;
 			bigBrain.origin.x = bigBrain.origin.y = 0;
 			StartLevelState.overGroup.add(bigBrain);
 			
-			bigBrainCount = new FlxText(552, 10, 64);
+			bigBrainCount = new FlxText(415, 2, 100);
 			bigBrainCount.scrollFactor.x = bigBrainCount.scrollFactor.y = 0;
-			bigBrainCount.size = 10;
+			bigBrainCount.size = 14;
 			StartLevelState.overGroup.add(bigBrainCount);
 			
-			smallBrain = new FlxSprite(582,6);
-			smallBrain.loadGraphic(SmallBrain, false, false, 27, 22);
-			smallBrain.scrollFactor.x = smallBrain.scrollFactor.y = 0;
-			smallBrain.origin.x = smallBrain.origin.y = 0;
-			StartLevelState.overGroup.add(smallBrain);
-			
-			smallBrainCount = new FlxText(608, 10, 64);
-			smallBrainCount.scrollFactor.x = smallBrainCount.scrollFactor.y = 0;
-			smallBrainCount.size = 10;
-			StartLevelState.overGroup.add(smallBrainCount);
-			
-			clock = new FlxText(250, 2, 100);
-			clock.color = 0x00ffffff;
-			clock.scrollFactor.x = clock.scrollFactor.y = 0;
-			clock.size = 14;
-			StartLevelState.overGroup.add(clock);
-			
-			score = new FlxText(380, 2, 200)
+			score = new FlxText(500, 2, 140)
 			score.color = 0x00ffffff;
 			score.scrollFactor.x = score.scrollFactor.y = 0;
 			score.size = 14;
@@ -118,15 +114,14 @@ package com.zombiequest
 		
 		public function flicker():void
 		{
-			healthBar.flicker(.5);
+			//healthBar.flicker(.5);
 		}
 		
 		public function update():void
 		{
 			//Just updating the brain counter for now
-			bigBrainCount.text = "x " + StartLevelState.playerBrainCount;
-			smallBrainCount.text = "x " + StartLevelState.minionBrainCount;
-			clock.text = StartLevelState.generateClock();
+			bigBrainCount.text = "x " + (StartLevelState.playerBrainCount + StartLevelState.minionBrainCount);
+			clockText.text = StartLevelState.generateClock();
 			score.text = "Score: " + StartLevelState.calculateScore();
 		}
 	}

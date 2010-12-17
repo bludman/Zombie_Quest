@@ -76,7 +76,7 @@ package com.zombiequest
 			
 			var key1:String = " - Regular Cop";
 			var key2:String = " - Fearless Cop"
-			var key3:String = " - Cowardly Cop";
+			var key3:String = " - Cautious Cop";
 			
 			var keyText1:FlxText = new FlxText(230, 261, 200, key1);
 			keyText1.color = 0xff000000;
