@@ -90,6 +90,10 @@ package com.zombiequest
 			timer.scrollFactor.x = timer.scrollFactor.y = 0;
 			StartLevelState.overGroup.add(timer);
 			
+			/**
+			 * Wave Status
+			 */
+						
 		}
 		
 		public function setHealth(amount:Number):void
@@ -98,7 +102,10 @@ package com.zombiequest
 			healthBar.scale.x = amount/(Player.maxHealth/HEALTHBARSIZE);
 		}
 		
-		
+		public function flicker():void
+		{
+			healthBar.flicker(.5);
+		}
 		
 		public function update():void
 		{

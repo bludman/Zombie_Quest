@@ -82,7 +82,7 @@ package com.zombiequest
 			waveOn = true;
 			waveTimeElapsed = 0;
 			updateTimeElapsed = 0;
-			spawnAll(1);
+			spawnAll(.5);
 		}
 		
 		public function spawnAll(chance:Number, hasPowerup:Boolean = false):void

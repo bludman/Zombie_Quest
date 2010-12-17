@@ -184,21 +184,10 @@ package com.zombiequest
 				Minion(p).playHurtSound();
 			}
 			if(p is Player)
-			{
-				flashPlayer(.1);
+			{				
+				hudManager.flicker();
 				Player(p).playHurtSound();
 			}
-		}
-		
-		protected function flashPlayer(time:Number = 0):void
-		{
-			if(time > 0)
-			{
-				flashTimer = time;
-			}		
-			
-			if(flashTimer > 0)
-				flashTimer -= FlxG.elapsed;
 		}
 		
 		protected function zombieDecay():void
@@ -358,7 +347,7 @@ package com.zombiequest
 					selected = e;
 				}
 			}
-			if(selectedMinion != null)
+			if(selectedMinion != null && selected != null)
 				selected.glowing = true;
 			return selected;
 		}		
