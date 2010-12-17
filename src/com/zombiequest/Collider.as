@@ -34,15 +34,9 @@ package com.zombiequest
 				width = Width;
 				height = Height;
 				createGraphic(Width, Height, 0x00ffffff);
-			}			
+			}
+			fixed = true;
 			angle = Angle;
-		}
-		
-		public override function update():void
-		{
-			x = tX;
-			y = tY;
-			super.update();
 		}
 
 	}
